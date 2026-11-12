@@ -1,0 +1,25 @@
+name: steam-discounts
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Core scientific packages (pinned to major.minor)
+  - python>=3.11,<3.14
+  - numpy>=2.0
+  - pandas>=2.0
+  - matplotlib>=3.9
+  - scipy>=1.14
+  - scikit-learn>=1.5
+  - pyarrow>=14
+  # Data collection (pipeline/ and collector/; not run on GitHub)
+  - requests>=2.31
+  # Development tools
+  - jupyterlab
+  - ipykernel
+  - nbconvert
+  - pytest
+  - ruff
+  - pre-commit
+  - pip
+  - pip:
+      - nbmake
