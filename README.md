@@ -1,4 +1,4 @@
-[![Run Notebook](https://github.com/JasperBurkey/steam-discounts/actions/workflows/run-notebook.yml/badge.svg)](https://github.com/JasperBurkey/steam-discounts/actions/workflows/run-notebook.yml)
+[![Run Notebook](https://github.com/YOUR-GITHUB-USERNAME/YOUR-REPO-NAME/actions/workflows/run-notebook.yml/badge.svg)](https://github.com/YOUR-GITHUB-USERNAME/YOUR-REPO-NAME/actions/workflows/run-notebook.yml)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 ## Should Games Go on Sale? Measuring the Impact of Steam Discounts
