@@ -11,7 +11,7 @@ import json
 
 import numpy as np
 import pandas as pd
-from core import read_table
+from core import latest_run, read_table
 
 r = read_table("search_ranks", days=7)
 if r is None or r.empty:
@@ -32,10 +32,11 @@ print(
 )
 
 # each game's tags in the latest store snapshot (Steam's top 20 tags)
-items = read_table("store_items", days=3)
+# The whole most recent store snapshot. (Each batch of 100 games carries its own timestamp,
+# so filtering on the latest captured_at would keep only the final batch.)
+items = latest_run("store_items")
 snap_tags = {}
 if items is not None and not items.empty:
-    items = items[items["captured_at"] == items["captured_at"].max()]
     tagids = items["tagids"] if "tagids" in items else pd.Series([None] * len(items))
     for appid, tj, tid in zip(items["appid"], items["tags"], tagids):
         s = set()
@@ -48,6 +49,7 @@ if items is not None and not items.empty:
                 int(x[0]) if isinstance(x, list) else int(x)
                 for x in (v or [])
                 if x is not None
+                and not (isinstance(x, list) and (not x or x[0] is None))
             }
         snap_tags[int(appid)] = s
 

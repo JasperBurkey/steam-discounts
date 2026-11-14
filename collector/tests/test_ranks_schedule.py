@@ -66,7 +66,8 @@ if not {redundant}:
     tag_games = tag_games[::-1]
 tags = [dict(glob[i], list="tag", tagid=7, rank=k + 1) for k, i in enumerate(tag_games)]
 core.write_table("search_ranks", glob + tags, P.SEARCH_RANKS, "r1", when=now)
-items = [dict(captured_at=now, appid=i, tags=json.dumps([[7, 100]] if i % 3 == 0 else [[9, 100]]),
+import datetime as dt
+items = [dict(captured_at=now + dt.timedelta(seconds=i // 100), appid=i, tags=json.dumps([[7, 100]] if i % 3 == 0 else [[9, 100]]),
               tagids=json.dumps([7] if i % 3 == 0 else [9])) for i in range(300)]
 core.write_table("store_items", items, dict(captured_at=P.T_, appid=P.I_, tags=P.S_, tagids=P.S_), "r1", when=now)
 """
