@@ -19,10 +19,9 @@ No API keys, no raw Steam IDs, nothing from .env.
 import json
 import zipfile
 
+import config
 import numpy as np
 import pandas as pd
-
-import config
 
 OUT = config.DATA / "for_claude"
 ZIP = config.DATA / "for_claude.zip"

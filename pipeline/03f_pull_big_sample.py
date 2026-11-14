@@ -17,9 +17,8 @@ import importlib
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-import pandas as pd
-
 import config
+import pandas as pd
 from common import hash_id
 
 P = importlib.import_module("03_pull_reviews")
