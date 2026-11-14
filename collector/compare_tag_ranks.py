@@ -12,7 +12,6 @@ import json
 import numpy as np
 import pandas as pd
 from core import read_table
-from scipy import stats
 
 r = read_table("search_ranks", days=7)
 if r is None or r.empty:
@@ -60,7 +59,7 @@ for tagid, t in tags.groupby("tagid"):
     g_order = [grank[a] for a in in_g]
     same_order = all(x < y for x, y in zip(g_order, g_order[1:]))
     rho = (
-        stats.spearmanr(range(len(g_order)), g_order).statistic
+        pd.Series(g_order).rank().corr(pd.Series(range(len(g_order))).rank())
         if len(g_order) > 2
         else np.nan
     )
