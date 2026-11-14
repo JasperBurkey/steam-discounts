@@ -266,11 +266,12 @@ def plr(df, y_col, d_col, extra=(), weight_col=None, repeats=None, diag=None):
     return median_combine(ests, ses)
 
 
-def aipw(df, y_cols, weight_col=None, repeats=None, diag=None):
+def aipw(df, y_cols, weight_col=None, repeats=None, diag=None, extra=()):
     """Doubly robust ATT, ATE and ATU for `discounted`, for several outcomes at once (the
     propensity model is shared). Returns {outcome: {estimand: (est, se)}}, plus the
-    averaged ATE scores and propensities for downstream use (heterogeneity, policy)."""
-    x = features(df)
+    averaged ATE scores and propensities for downstream use (heterogeneity, policy).
+    `extra` adds outcome-specific pre-event controls (e.g. chart position before a sale)."""
+    x = features(df, extra)
     d, g, w = (
         df["discounted"].to_numpy(int),
         df["app_id"].to_numpy(),

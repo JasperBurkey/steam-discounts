@@ -1,0 +1,5 @@
+sample,discounted only,proxy,corr,n
+large + very large,True,r_during,0.14928950927701296,7178
+large + very large,True,y_during,0.22216194388251492,7178
+charted before the sale,True,r_during,0.2279182346304278,798
+charted before the sale,True,y_during,0.3976871689171107,798
