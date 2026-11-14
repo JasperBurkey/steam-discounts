@@ -7,6 +7,7 @@ Enum fields are stored as strings exactly as Steam sends them (usually integers)
 
 import hashlib
 import json
+import re
 from datetime import datetime, timezone
 
 S_, I_, F_, B_, T_ = "string", "Int64", "Float64", "boolean", "datetime"
@@ -546,3 +547,123 @@ CATEGORIES = {
     "display_name": S_,
 }
 TIERS = {"captured_at": T_, "appid": I_, "tier": S_, "review_count": I_, "reason": S_}
+
+
+# ---------------------------------------------------------------- search ranks (top sellers)
+SEARCH_RANKS = {
+    "captured_at": T_,
+    "list": S_,
+    "tagid": I_,
+    "rank": I_,
+    "itemkey": S_,
+    "appid": I_,
+    "packageid": I_,
+    "bundleid": I_,
+    "name": S_,
+    "price_final_cents": I_,
+    "discount_pct": I_,
+    "page_start": I_,
+    "total_count": I_,
+}
+
+# Rows are <a ...> elements with class "search_result_row" (either quote style, any attribute order).
+_ROW_SPLIT = re.compile(r"""(?=<a\b[^>]*class=["'][^"']*search_result_row)""")
+_ATTR = {
+    k: re.compile(r"""data-ds-%s=["']([^"']*)["']""" % k)
+    for k in ("itemkey", "appid", "packageid", "bundleid")
+}
+_NAME = re.compile(
+    r"""<span[^>]*class=["'][^"']*title[^"']*["'][^>]*>(.*?)</span>""", re.S
+)
+_FINAL = re.compile(r"""data-price-final=["'](\d+)["']""")
+_DISC = re.compile(r"""data-discount=["'](\d+)["']""")
+_LOGO_ID = re.compile(r"steam/(apps|subs|bundles)/(\d+)")
+# Fallback: product links in page order, when rows are not marked as expected.
+_HREF = re.compile(
+    r"""<a\b[^>]*href=["']https?://store\.steampowered\.com/(app|sub|bundle)/(\d+)"""
+)
+_KIND = {"app": "App", "sub": "Sub", "bundle": "Bundle"}
+
+
+def _first_int(s):
+    """First integer in a value like '730' or '1,2,3' (bundles list every app)."""
+    m = re.match(r"\s*(\d+)", s or "")
+    return int(m.group(1)) if m else None
+
+
+def search_rank_rows(body, now, list_name, tagid, start):
+    """Rows from one page of store.steampowered.com/search/results.
+
+    Handles both response formats: infinite=1 (results_html) and json=1 (items).
+    Ranks are page_start + position on the page (1-based)."""
+    rows = []
+    body = body if isinstance(body, dict) else {}
+    total = _int(body.get("total_count"))
+    if body.get("results_html"):
+        html = body["results_html"]
+        parts = [x for x in _ROW_SPLIT.split(html) if "search_result_row" in x[:600]]
+        if not parts:
+            marks, seen = [], set()
+            for m in _HREF.finditer(html):
+                key = (m.group(1), m.group(2))
+                if key not in seen:
+                    seen.add(key)
+                    marks.append(m.start())
+            parts = [
+                html[s : (marks[i + 1] if i + 1 < len(marks) else len(html))]
+                for i, s in enumerate(marks)
+            ]
+        for i, part in enumerate(parts):
+            attrs = {
+                k: (rx.search(part).group(1) if rx.search(part) else None)
+                for k, rx in _ATTR.items()
+            }
+            href = _HREF.search(part)
+            if not attrs["itemkey"] and href:
+                kind, num = href.group(1), href.group(2)
+                attrs["itemkey"] = f"{_KIND[kind]}_{num}"
+                field = {"app": "appid", "sub": "packageid", "bundle": "bundleid"}[kind]
+                attrs[field] = attrs[field] or num
+            name = _NAME.search(part)
+            final, disc = _FINAL.search(part), _DISC.search(part)
+            rows.append(
+                {
+                    "captured_at": now,
+                    "list": list_name,
+                    "tagid": tagid,
+                    "rank": start + i + 1,
+                    "itemkey": attrs["itemkey"],
+                    "appid": _first_int(attrs["appid"]),
+                    "packageid": _first_int(attrs["packageid"]),
+                    "bundleid": _first_int(attrs["bundleid"]),
+                    "name": re.sub(r"<[^>]+>", "", name.group(1)).strip()
+                    if name
+                    else None,
+                    "price_final_cents": int(final.group(1)) if final else None,
+                    "discount_pct": int(disc.group(1)) if disc else None,
+                    "page_start": start,
+                    "total_count": total,
+                }
+            )
+    elif body.get("items"):
+        for i, it in enumerate(body["items"]):
+            m = _LOGO_ID.search(it.get("logo") or "")
+            kind, num = (m.group(1), int(m.group(2))) if m else (None, None)
+            rows.append(
+                {
+                    "captured_at": now,
+                    "list": list_name,
+                    "tagid": tagid,
+                    "rank": start + i + 1,
+                    "itemkey": f"{kind}_{num}" if m else None,
+                    "appid": num if kind == "apps" else None,
+                    "packageid": num if kind == "subs" else None,
+                    "bundleid": num if kind == "bundles" else None,
+                    "name": it.get("name"),
+                    "price_final_cents": None,
+                    "discount_pct": None,
+                    "page_start": start,
+                    "total_count": total,
+                }
+            )
+    return rows

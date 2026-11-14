@@ -14,8 +14,17 @@ import pandas as pd
 files = sorted(config.REVIEWS_DIR.glob("*.parquet"))
 if not files:
     raise SystemExit("No review files yet. Run 03_pull_reviews.py first.")
-rv = pd.concat((pd.read_parquet(f) for f in files), ignore_index=True)
+frames = [pd.read_parquet(f) for f in files]
+n_empty = sum(len(x) == 0 for x in frames)
+# Games with no reviews since the start date have empty files; they contribute nothing,
+# and including them would turn every column into a generic "object" type.
+rv = pd.concat([x for x in frames if len(x)], ignore_index=True)
 rv = rv.drop_duplicates("review_id")
+rv["app_id"] = rv["app_id"].astype(int)
+# Count positive and negative reviews explicitly, so the counts are always integers.
+vote = rv["voted_up"].astype("boolean")
+rv["is_pos"] = (vote == True).fillna(False).astype(int)  # noqa: E712
+rv["is_neg"] = (vote == False).fillna(False).astype(int)  # noqa: E712
 rv["day"] = (
     pd.to_datetime(rv["created_ts"], unit="s", utc=True)
     .dt.tz_convert(config.TZ)
@@ -25,10 +34,13 @@ rv["day"] = (
 
 daily = (
     rv.groupby(["app_id", "day"])
-    .agg(reviews=("review_id", "size"), positive=("voted_up", "sum"))
+    .agg(
+        reviews=("review_id", "size"),
+        positive=("is_pos", "sum"),
+        negative=("is_neg", "sum"),
+    )
     .reset_index()
 )
-daily["negative"] = daily["reviews"] - daily["positive"]
 
 # The last day is usually only partly covered (the pull ran mid-day), so drop it.
 last_day = daily["day"].max() - pd.Timedelta(days=1)
@@ -42,6 +54,9 @@ for app_id, g in daily.groupby("app_id"):
 panel = pd.concat(parts, ignore_index=True)[
     ["app_id", "day", "reviews", "positive", "negative"]
 ]
+panel = panel.astype(
+    {"app_id": "int64", "reviews": "int64", "positive": "int64", "negative": "int64"}
+)
 panel.to_parquet(config.PANEL_PARQUET, index=False)
 
 print(
@@ -51,5 +66,8 @@ print(
 print(
     f"Median reviews per game-day: {panel['reviews'].median():.1f}; "
     f"share of zero days: {(panel['reviews'] == 0).mean():.0%}"
+)
+print(
+    f"{n_empty} games had no reviews since {config.REVIEW_HISTORY_START} (empty files, skipped)"
 )
 print(f"Wrote {config.PANEL_PARQUET}")

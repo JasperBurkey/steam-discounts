@@ -23,8 +23,38 @@ def load_daily():
 def analysis_sample(events):
     """Rows used for the main estimates, with the outcomes they need present."""
     keep = events["analysis_sample"]
-    cols = ["y_during", "y_after", "y_pre_week", "pre_trend"]
+    cols = ["y_during", "r_during", "y_after", "y_pre_week", "pre_trend"]
     return events[keep].dropna(subset=cols).reset_index(drop=True)
+
+
+def long_sample(main_df):
+    """Game-events with six weeks of follow-up (needed for the net outcomes)."""
+    return main_df.dropna(subset=["y_net", "r_net"]).reset_index(drop=True)
+
+
+def check_columns(events):
+    """The notebook needs events built by the current pipeline (batch 5b onward)."""
+    need = ["r_net", "r_net_lag", "lvl_during", "depth_bin", "base_rate", "band"]
+    missing = [c for c in need if c not in events]
+    if missing:
+        raise ValueError(
+            f"data/events.parquet lacks {missing}: "
+            "rebuild it with pipeline/04b_build_events.py"
+        )
+
+
+def band_summary(events):
+    """Game-events and games per size band, with each band's sampling weight."""
+    a = analysis_sample(events)
+    order = ["small", "mid", "large", "very_large"]
+    s = a.groupby("band").agg(
+        game_events=("app_id", "size"),
+        games=("app_id", "nunique"),
+        discounted_pct=("discounted", "mean"),
+        weight=("weight", "first"),
+    )
+    s["discounted_pct"] = (100 * s["discounted_pct"]).round(0)
+    return s.reindex([b for b in order if b in s.index])
 
 
 def exclusion_table(events):

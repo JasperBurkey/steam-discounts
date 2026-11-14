@@ -74,3 +74,26 @@ first time they are seen and whenever they change.
 - `review_pct_positive` is an integer, so for large games the positive count is approximate.
   Day-to-day changes in `review_count` are exact.
 - Steam's undocumented endpoints can change. Check `python collect.py health` and the alerts.
+
+## search_ranks (jobs `ranks` daily 17:00 UTC; `ranks_sale` 05/11/23 UTC during sales)
+
+Steam's **Global Top Sellers** ranking from the store search (`filter=globaltopsellers`,
+games only), the ordering SteamDB shows. Ranks are Steam's revenue ordering for recent
+sales (game, DLC and in-game purchases); amounts are not published. One row per item per
+list per snapshot.
+
+| Column | Meaning |
+| --- | --- |
+| captured_at | When the ranking was recorded (UTC) |
+| list | `global` (the whole ranking, about 7,300 games) or `tag` (top `RANKS_TAG_DEPTH` within one tag) |
+| tagid | The tag for `tag` lists (names in `tag_names`); empty for `global` |
+| rank | Position in that list, 1 = top seller |
+| itemkey | Steam's item key: `App_<id>`, `Sub_<id>` (package) or `Bundle_<id>` |
+| appid, packageid, bundleid | IDs parsed from the row (bundles: first app listed) |
+| name | Title as shown |
+| price_final_cents, discount_pct | Price and discount shown in the search row (US store), when present |
+| page_start, total_count | Paging offset of the request, and how many items Steam said match |
+
+Notes: games below Steam's sales threshold are not ranked at all (treat absence as "below
+the cutoff"). Steam's search occasionally drops or repeats items between pages; repeats keep
+their first rank. Ranks are relative: one item rising pushes others down.

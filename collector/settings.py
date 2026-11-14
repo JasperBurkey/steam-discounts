@@ -62,6 +62,22 @@ CCU_C_ROTATION = 7
 
 # ---------- Budget and politeness ----------
 DAILY_STEAM_API_BUDGET = 90_000  # Steam's terms allow 100,000 calls/day; keep headroom
+# --- Top-seller ranks (job "ranks"): Steam store search, Global Top Sellers ---
+RANKS_GLOBAL_DEPTH = (
+    10_000  # places in the overall ranking (games only; Steam's list is ~7,300)
+)
+RANKS_TAG_DEPTH = 500  # places within each tag's ranking (0 = skip tag rankings)
+RANKS_PAGE = 100  # results per request (Steam's maximum)
+RANKS_CATEGORY = "998"  # 998 = games; DLC, software and soundtracks excluded
+SAVE_RAW_RANKS = False  # raw pages are large HTML; the parsed table keeps what matters
+# Seasonal sales (from 3 days before to 3 days after), for the extra ranking snapshots.
+# Add new sales as Valve announces them (YYYY-MM-DD, inclusive).
+RANKS_SALE_PERIODS = [
+    ("2026-12-14", "2027-01-07"),  # Winter Sale 2026: Dec 17 - Jan 4
+    ("2027-03-15", "2027-03-28"),  # Spring Sale 2027: Mar 18 - 25
+    ("2027-06-21", "2027-07-11"),  # Summer Sale 2027: Jun 24 - Jul 8
+]
+
 REQS_PER_SEC = {  # per process
     "api.steampowered.com": 2.0,
     "store.steampowered.com": 0.5,
@@ -76,6 +92,9 @@ TWITCH_MAX_PAGES = 100  # 100 streams per page -> top 10,000 live streams
 # Steam sales and price changes go live at 10:00 Pacific (17:00 or 18:00 UTC), so the
 # daily price snapshot runs at 20:00 UTC, safely after any same-day change.
 SLOTS = {
+    "ranks": {"hours": [17]},  # global + tag lists: ~110 min; global only: ~6 min
+    # Extra global-only ranking snapshots every 6 hours during seasonal sales (with 17:00 above)
+    "ranks_sale": {"hours": [5, 11, 23], "periods": RANKS_SALE_PERIODS},
     # fast group
     "featured": {"hours": [0, 6, 12, 18]},
     "twitch": {"hours": [0, 6, 12, 18]},
@@ -94,8 +113,8 @@ SLOTS = {
 # A job whose slot passed while the machine was off runs at the next hourly check, and its
 # log records how late it ran. Every row also carries its exact captured_at time.
 GROUPS = {
-    "fast": ["featured", "twitch", "charts", "topsellers"],
-    "daily": ["universe", "items", "regional", "weekly"],
+    "fast": ["featured", "twitch", "charts", "topsellers", "ranks_sale"],
+    "daily": ["ranks", "universe", "items", "regional", "weekly"],
     "ccu": ["ccu_a", "ccu_b", "ccu_c"],
 }
 STALE_LOCK_HOURS = 20

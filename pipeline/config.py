@@ -97,6 +97,35 @@ OVERLAP_TRIM = (
     0.1,
     0.9,
 )  # propensity range for the overlap-trimmed estimate (Crump et al.)
+
+# --- Estimation (dml_core.py, 07_dml.py) ---
+LEARNER = os.environ.get(
+    "LEARNER", "ensemble"
+)  # "ensemble": LASSO + random forest + boosting (Athey-Imbens 2.7)
+# "boost": boosting only (much faster; for quick checks)
+CF_REPEATS = int(
+    os.environ.get("CF_REPEATS", 3)
+)  # cross-fitting repetitions for the main estimates (median reported)
+FOLDS = 5  # cross-fitting folds, split by game
+CLIP = 0.02  # propensity scores kept within [CLIP, 1 - CLIP]
+SEED = 0
+# Main outcomes: reviews and the revenue proxy, during the sale and net of the weeks around it.
+# Headline: ATT on the net revenue proxy (decided in advance; see the analysis plan).
+MAIN_OUTCOMES = {
+    "y_during": "Reviews, during the sale",
+    "r_during": "Revenue proxy, during the sale",
+    "y_net": "Reviews, net (7 days before to 4 weeks after)",
+    "r_net": "Revenue proxy, net (7 days before to 4 weeks after)",
+}
+HEADLINE_OUTCOME = "r_net"
+
+# --- Heterogeneity (08) and discount depth (09) ---
+HET_SPLITS = int(
+    os.environ.get("HET_SPLITS", 25)
+)  # game-level sample splits for BLP/GATES/CLAN
+HET_TREES = int(os.environ.get("HET_TREES", 200))  # trees in each honest forest
+BUSY_MIN = 1.0  # main heterogeneity sample: >= 1 review/day before the sale (little compression)
+DEPTH_ARMS = ["none", "1-33%", "34-60%", "61%+"]
 MIN_AGE_DAYS = 60  # skip events in a game's first two months (launch dynamics)
 
 # --- Event study (05_event_study.py) ---

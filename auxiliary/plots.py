@@ -1,6 +1,7 @@
 """Figures for the notebook."""
 
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def plot_event_study(curve, n):
@@ -55,5 +56,30 @@ def plot_overlap(propensity, discounted):
     ax.set_xlabel("Estimated probability of discounting (propensity score)")
     ax.set_title("Overlap: where both groups appear, they can be compared")
     ax.legend()
+    fig.tight_layout()
+    return fig
+
+
+def plot_gates(gates, sample="busier games"):
+    """Average effect by fifth of the predicted effect (GATES), one panel per outcome."""
+    t = gates[
+        (gates["sample"] == sample) & (gates["quintile"].astype(str) != "top - bottom")
+    ]
+    outcomes = list(t["outcome"].unique())
+    fig, axes = plt.subplots(1, len(outcomes), figsize=(5.5 * len(outcomes), 3.8))
+    for ax, lab in zip(np.atleast_1d(axes), outcomes):
+        s = t[t["outcome"] == lab]
+        ax.errorbar(
+            s["quintile"].astype(int),
+            s["effect"],
+            yerr=1.96 * s["se"],
+            fmt="o",
+            capsize=4,
+        )
+        ax.axhline(0, color="black", lw=0.8)
+        ax.set_xticks(range(1, 6))
+        ax.set_xlabel("Fifth of predicted effect (1 = smallest)")
+        ax.set_title(lab)
+    np.atleast_1d(axes)[0].set_ylabel("Average effect (log scale)")
     fig.tight_layout()
     return fig

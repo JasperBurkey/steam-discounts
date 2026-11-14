@@ -7,16 +7,20 @@ Project by Jasper Burkey for *Impact-Driven Business Decisions* (University of W
 
 Four times a year, Valve runs a Steam-wide sale and every game publisher decides whether to discount and how deep. The notebook [project.ipynb](project.ipynb) measures what that decision buys: how much a discount raises demand during the sale, whether the gain lasts or is borrowed from later weeks, and for which games it pays off. It compares discounted with non-discounted games within the same seasonal sale, adjusts for each game's pre-sale history with double machine learning, and reports anticipation, net effects, robustness checks and heterogeneity tests.
 
+### What the project finds
+
+With the thesis settings: discounting raises review activity by about 28% during the sale for games that discount, but on a review-based revenue proxy costs about 6% of net revenue (95% CI −8% to −3%). Effects are similar across game sizes; games that discount rarely gain the most; and for the games that use them, deep discounts bring no more activity than shallow ones but cost 11–30% of net revenue, while shallow discounts roughly break even. See [project.ipynb](project.ipynb) for the analyses and their limitations.
+
 ### Repository structure
 
 | Folder | What it holds | Runs on GitHub? |
 | --- | --- | --- |
-| `project.ipynb` | The analysis and its reasoning, step by step | Yes, on every push |
-| `auxiliary/` | Helper code the notebook uses (data, event study, double ML, plots) | Yes |
-| `data/` | `events.parquet` and `events_daily.parquet`: the derived event data the notebook analyzes | — |
-| `pipeline/` | Scripts that build the event data from Steam and IsThereAnyDeal (sample, reviews, prices, events) | No: needs API keys and days of downloading |
-| `collector/` | The daily Steam store collector (prices, player counts, rankings, front page) | No: runs on a schedule |
-| `tests/` | Smoke tests for the helper code | Yes |
+| `project.ipynb` | The analysis and its reasoning, step by step | Yes, on every push (quick settings) |
+| `auxiliary/` | Notebook helpers; `estimates.py` calls the pipeline's own estimators | Yes |
+| `data/` | `events.parquet` and `events_daily.parquet`: the derived event data | — |
+| `pipeline/` | Builds the data (sample, reviews, prices, events) and runs the full analyses (`07_dml.py`, `08_heterogeneity.py`, `09_discount_depth.py`); estimation code in `dml_core.py` and `hetero.py` | No: needs API keys and days of downloading |
+| `collector/` | The daily Steam store collector (prices, player counts, top-seller rankings, front page) | No: runs on a schedule |
+| `tests/` | Smoke tests for the notebook helpers | Yes |
 
 ### Reproducing the results
 
@@ -27,7 +31,11 @@ pytest tests/ -v
 pytest --nbmake --nbmake-timeout=3600 project.ipynb
 ```
 
-The notebook needs only `data/`. To rebuild `data/` from scratch, follow [pipeline/README.md](pipeline/README.md): it draws the sample, downloads reviews and prices, and runs `04b_build_events.py`, whose outputs are copied into `data/`.
+The notebook needs only `data/`. GitHub Actions runs it with quick settings (`LEARNER=boost`, `CF_REPEATS=1`, `HET_SPLITS=5`, `HET_TREES=50`), whose estimates are close to the thesis results. To reproduce the thesis results exactly, run it with the defaults (`LEARNER=ensemble`, `CF_REPEATS=3`, `HET_SPLITS=25`, `HET_TREES=200`), which takes roughly an hour. To rebuild `data/` from scratch, follow [pipeline/README.md](pipeline/README.md).
+
+### Data and privacy
+
+All inputs are public: Steam's store and review APIs and IsThereAnyDeal's price histories. Raw reviews are not included; reviewer IDs are one-way hashed in the pipeline. API keys live in `.env` files, excluded by `.gitignore`. Third-party data are not redistributed beyond the derived event-level variables in `data/`.
 
 ### Project history
 

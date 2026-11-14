@@ -13,6 +13,7 @@ from core import (
     iso,
     latest_run,
     read_json,
+    read_table,
     utcnow,
     write_json,
     write_table,
@@ -481,6 +482,92 @@ def job_featured(http, run_id):
     return {"rows": write_table("featured", rows, P.FEATURED, run_id)}
 
 
+# ---------------------------------------------------------------- top-seller ranks
+def _search_page(http, start, count, tagid=None):
+    """One page of Steam's store search, sorted as Global Top Sellers (games only)."""
+    params = {
+        "filter": "globaltopsellers",
+        "category1": S.RANKS_CATEGORY,
+        "ignore_preferences": 1,
+        "infinite": 1,
+        "start": start,
+        "count": count,
+        "cc": S.BASE_COUNTRY,
+        "l": "english",
+    }
+    if tagid is not None:
+        params["tags"] = tagid
+    return http.get(f"{STORE}/search/results/", params, save_raw=S.SAVE_RAW_RANKS)
+
+
+def _rank_list(http, now, list_name, depth, tagid=None):
+    """Page through one ranking until `depth` places or the end of the list. Duplicates
+    (an item that moved between pages while paging) keep their first, higher rank."""
+    rows, seen, start, failed = [], set(), 0, 0
+    while start < depth:
+        body, status = _search_page(http, start, S.RANKS_PAGE, tagid)
+        if status != 200:
+            failed += 1
+            break
+        page = P.search_rank_rows(body, now, list_name, tagid, start)
+        if not page:
+            break
+        for r in page:
+            if r["itemkey"] and r["itemkey"] not in seen:
+                seen.add(r["itemkey"])
+                rows.append(r)
+        total = page[0]["total_count"] or 0
+        start += S.RANKS_PAGE
+        if total and start >= total:
+            break
+    return rows, failed
+
+
+def _tag_ids():
+    tags = read_table("tag_names", days=21)
+    if tags is None or tags.empty:
+        return []
+    return sorted(int(t) for t in tags["tagid"].dropna().unique())
+
+
+def _ranks(http, run_id, with_tags):
+    now = utcnow()
+    print("ranks: global list...", flush=True)
+    rows, failed = _rank_list(http, now, "global", S.RANKS_GLOBAL_DEPTH)
+    n_global = len(rows)
+    print(f"ranks: global list done, {n_global:,} games", flush=True)
+    tags = _tag_ids() if with_tags else []
+    for i, tagid in enumerate(tags, 1):
+        r, f = _rank_list(http, now, "tag", S.RANKS_TAG_DEPTH, tagid)
+        rows += r
+        failed += f
+        if i % 25 == 0 or i == len(tags):
+            print(
+                f"ranks: {i}/{len(tags)} tag lists, {len(rows):,} rows so far",
+                flush=True,
+            )
+    written = write_table("search_ranks", rows, P.SEARCH_RANKS, run_id, when=now)
+    return {
+        "rows": written,
+        "global_ranked": n_global,
+        "tags": len(tags),
+        "failed_lists": failed,
+        "warning": None if n_global >= 1000 else "global list shorter than expected",
+    }
+
+
+def job_ranks(http, run_id):
+    """Daily Global Top Sellers ranking: the whole ranking (up to RANKS_GLOBAL_DEPTH games)
+    and the top RANKS_TAG_DEPTH within each Steam tag. Ranks are Steam's revenue ordering;
+    amounts are not published."""
+    return _ranks(http, run_id, with_tags=S.RANKS_TAG_DEPTH > 0)
+
+
+def job_ranks_sale(http, run_id):
+    """Extra global-only ranking snapshot during seasonal sales (~6 minutes)."""
+    return _ranks(http, run_id, with_tags=False)
+
+
 # ---------------------------------------------------------------- twitch
 def _twitch_token(http):
     tok = read_json(S.STATE / "twitch_token.json", {})
@@ -653,5 +740,7 @@ JOBS = {
     "topsellers": job_topsellers,
     "featured": job_featured,
     "twitch": job_twitch,
+    "ranks": job_ranks,
+    "ranks_sale": job_ranks_sale,
     "weekly": job_weekly,
 }

@@ -10,6 +10,14 @@ on:
 jobs:
   run-notebook:
     runs-on: ubuntu-latest
+    # Quick estimation settings, so the notebook finishes in reasonable time on GitHub's
+    # runners. The thesis results use LEARNER=ensemble, CF_REPEATS=3, HET_SPLITS=25,
+    # HET_TREES=200 (see README).
+    env:
+      LEARNER: boost
+      CF_REPEATS: "1"
+      HET_SPLITS: "5"
+      HET_TREES: "50"
 
     steps:
       - name: Checkout repository

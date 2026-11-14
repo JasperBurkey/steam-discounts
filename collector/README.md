@@ -144,3 +144,20 @@ ccu = pd.read_parquet("data/tables/ccu", filters=[("date", ">=", "2026-12-01")])
 `python -m unittest discover -s tests -v` runs every job against a fake Steam server and
 checks batching, tiers, budget trimming, schemas, text dedupe, capsule dedupe and scheduling.
 It does not contact Steam; the self-test does that.
+
+## Top-seller rankings (jobs `ranks` and `ranks_sale`)
+
+Daily at 17:00 UTC (in the `daily` group), `ranks` records Steam's Global Top Sellers
+ranking: the whole games-only ranking (about 7,300 games) and the top 500 games within each
+tag. About 1,300 requests on store.steampowered.com (not the Web API budget), roughly 110
+minutes. Table: `search_ranks`. Settings: `RANKS_GLOBAL_DEPTH`, `RANKS_TAG_DEPTH`.
+
+During seasonal sales (`RANKS_SALE_PERIODS`, from 3 days before to 3 days after), `ranks_sale`
+adds global-only snapshots at 05:00, 11:00 and 23:00 UTC (~6 minutes each), so the ranking
+is recorded every 6 hours. Add new sales to `RANKS_SALE_PERIODS` as Valve announces them;
+the health check ignores `ranks_sale` outside those periods.
+
+Checks: `python check_ranks.py` tests parsing, depth and stability against Steam's live
+pages. `python compare_tag_ranks.py` tests whether the tag lists are just the global ranking
+filtered by tag; if its verdict says so, set `RANKS_TAG_DEPTH = 0` to cut the daily job to
+about 6 minutes.

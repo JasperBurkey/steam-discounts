@@ -38,12 +38,22 @@ PERIOD_H = {
 
 
 # ---------------------------------------------------------------- scheduling
+def in_periods(cfg, t):
+    """True if the job has no date limits, or t falls inside one of its periods (inclusive)."""
+    if "periods" not in cfg:
+        return True
+    d = t.date().isoformat()
+    return any(start <= d <= end for start, end in cfg["periods"])
+
+
 def latest_slot(job, now):
     cfg = S.SLOTS[job]
     t = now.replace(minute=0, second=0, microsecond=0)
     for _ in range(24 * 8):
-        if t.hour in cfg["hours"] and (
-            "weekday" not in cfg or t.weekday() == cfg["weekday"]
+        if (
+            t.hour in cfg["hours"]
+            and ("weekday" not in cfg or t.weekday() == cfg["weekday"])
+            and in_periods(cfg, t)
         ):
             return t
         t -= timedelta(hours=1)
@@ -166,6 +176,8 @@ def cmd_health(args, quiet=False):
     for job, period in PERIOD_H.items():
         if job == "twitch" and not (S.TWITCH_CLIENT_ID and S.TWITCH_CLIENT_SECRET):
             continue
+        if not in_periods(S.SLOTS[job], now):
+            continue  # date-limited job (e.g. sale periods only) outside its periods
         ok = runs.get(job, {}).get("ok")
         if not ok:
             continue  # never run yet: not an alert until the first success
@@ -300,6 +312,19 @@ def cmd_selftest(args):
             else f"HTTP {st}, no ranks",
         )
 
+    def t_ranks():
+        from jobs import _search_page
+
+        body, st = _search_page(http, 0, 50)
+        rr = P.search_rank_rows(body, now, "global", None, 0) if st == 200 else []
+        check(
+            "Store search: Global Top Sellers",
+            len(rr) >= 25 and rr[0]["appid"] is not None,
+            f"{len(rr)} ranks; #1 {rr[0]['name']} (app {rr[0]['appid']})"
+            if rr
+            else f"HTTP {st}, nothing parsed",
+        )
+
     def t_concurrent():
         body, st = http.get(
             "https://api.steampowered.com/ISteamChartsService/GetGamesByConcurrentPlayers/v1/",
@@ -409,7 +434,11 @@ def cmd_selftest(args):
             ("GetWeeklyTopSellers", t_topsellers),
             ("GetTagList", t_tags),
         ]
-    tests += [("featuredcategories", t_featured), ("capsule image download", t_capsule)]
+    tests += [
+        ("featuredcategories", t_featured),
+        ("capsule image download", t_capsule),
+        ("Store search: Global Top Sellers", t_ranks),
+    ]
     if S.TWITCH_CLIENT_ID and S.TWITCH_CLIENT_SECRET:
         tests.append(("Twitch streams", t_twitch))
     else:

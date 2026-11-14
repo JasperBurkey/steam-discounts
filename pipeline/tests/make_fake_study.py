@@ -30,6 +30,7 @@ MARKER.write_text("data/ holds fake test data; safe to overwrite or delete.")
 
 rng = np.random.default_rng(3)
 days = pd.date_range("2022-12-31", "2026-11-10", freq="D")
+days_max = days[-1]
 sales = pd.read_csv(config.SALES_CSV, parse_dates=["start", "end"])
 sales = sales[sales["end"] < pd.Timestamp("2026-10-20")]
 n = 300
@@ -87,7 +88,53 @@ for i in range(n):
             }
         )
     )
-pd.concat(panel_rows).to_parquet(config.PANEL_PARQUET, index=False)
+# The busiest fifth of games become "counted" games (window totals only, like the real
+# pull's largest games); the rest stay "paged". The sample file gives bands and weights.
+import importlib  # noqa: E402
+
+WINDOWS = importlib.import_module("03_pull_reviews").WINDOWS
+panel = pd.concat(panel_rows)
+busy = set(10_000 + np.argsort(lam)[-n // 5 :])
+config.COUNTS_DIR.mkdir(parents=True, exist_ok=True)
+for f in config.COUNTS_DIR.glob("*.parquet"):
+    f.unlink()
+for app in busy:
+    g = panel[panel["app_id"] == app].set_index("day")
+    rows = []
+    for s in sales.itertuples():
+        nd = (s.end - s.start).days
+        for w, f in WINDOWS.items():
+            a, b = f(nd)
+            days = pd.date_range(
+                s.start + pd.Timedelta(days=a), s.start + pd.Timedelta(days=b)
+            )
+            if days[-1] > days_max:
+                continue
+            col = "positive" if w == "POS" else "reviews"
+            rows.append(
+                {
+                    "app_id": app,
+                    "sale": s.sale,
+                    "window": w,
+                    "rel_start": a,
+                    "rel_end": b,
+                    "reviews": int(g.loc[days, col].sum()),
+                }
+            )
+    pd.DataFrame(rows).to_parquet(config.COUNTS_DIR / f"{app}.parquet", index=False)
+panel[~panel["app_id"].isin(busy)].to_parquet(config.PANEL_PARQUET, index=False)
+band = [
+    "large" if 10_000 + i in busy else ("mid" if lam[i] > 1 else "small")
+    for i in range(n)
+]
+pd.DataFrame(
+    {
+        "app_id": 10_000 + np.arange(n),
+        "band": band,
+        "weight": [{"small": 10.0, "mid": 4.0, "large": 1.0}[b] for b in band],
+        "mid_sized": [b == "mid" for b in band],
+    }
+).to_csv(config.STUDY_SAMPLE_CSV, index=False)
 ph = pd.DataFrame(price_rows)
 ph["ts"] = pd.to_datetime(ph["ts"], utc=True)
 ph.sort_values(["app_id", "ts"]).to_parquet(config.PRICE_HISTORY_PARQUET, index=False)
@@ -100,6 +147,10 @@ pd.DataFrame(
         "appid": 10_000 + np.arange(n),
         "steam_release_date": pd.Timestamp("2022-12-31", tz="UTC")
         - pd.to_timedelta(age0, unit="D"),
+        "publishers": [f'["Publisher {i % 40}"]' for i in range(n)],
     }
 ).to_parquet(snap / "run1.parquet", index=False)
+pd.DataFrame({"app_id": 10_000 + np.arange(n), "lam": lam}).to_csv(
+    config.DATA / "fake_truth.csv", index=False
+)
 print("Fake study data written. Set COLLECTOR_DATA to", config.DATA / "fake_collector")
