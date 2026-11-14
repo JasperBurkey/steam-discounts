@@ -1,0 +1,61 @@
+Rival discount status: 29,769 eligible games x 15 sales; discounted share per sale 82%  [17s]
+Rival sets built  [68s]
+Analysis: 33,124 game-events with every exposure and its lag (4,901 holdouts, 28,223 discounted)  [72s]
+  main estimates for holdouts done  [163s]
+  main estimates for discounted done  [473s]
+  placebo draws 10/40  [528s]
+  placebo draws 20/40  [572s]
+  placebo draws 30/40  [613s]
+  placebo draws 40/40  [652s]
+
+Exposure variation (share of rivals discounting):
+definition  mean  sd_within_sale  corr_with_lag
+  audience 0.850           0.129          0.765
+      tags 0.825           0.132          0.754
+tag_kmeans 0.817           0.049          0.824
+ tag_topic 0.816           0.041          0.775
+
+Main: effect on reviews during the sale of ALL rivals discounting vs. none (log scale)
+test     sample       term  estimate (se)     n  games
+main   holdouts   audience +0.175 (0.091)  4901   1105
+main   holdouts       tags +0.030 (0.097)  4901   1105
+main   holdouts tag_kmeans +0.557 (0.890)  4901   1105
+main   holdouts  tag_topic +1.291 (1.051)  4901   1105
+main discounted   audience -0.026 (0.050) 28223   3341
+main discounted       tags -0.025 (0.044) 28223   3341
+main discounted tag_kmeans +0.547 (0.543) 28223   3341
+main discounted  tag_topic +0.505 (0.561) 28223   3341
+
+1. Placebo (holdouts): real estimate vs. random 20-game rival sets
+definition  estimate  placebo_mean  placebo_sd  placebo_p
+  audience     0.186         0.019       0.106      0.075
+      tags     0.028         0.019       0.106      0.775
+
+2. Gradient (holdouts): rank bands in one model
+    test   sample           term  estimate (se)    n  games
+gradient holdouts   audience_1-5 +0.036 (0.047) 4879   1100
+gradient holdouts  audience_6-20 +0.180 (0.085) 4879   1100
+gradient holdouts audience_21-50 -0.081 (0.119) 4879   1100
+gradient holdouts       tags_1-5 +0.031 (0.049) 4880   1100
+gradient holdouts      tags_6-20 +0.012 (0.092) 4880   1100
+gradient holdouts     tags_21-50 -0.018 (0.119) 4880   1100
+
+3. Head-to-head (holdouts): all definitions in one model
+        test   sample       term  estimate (se)    n  games
+head_to_head holdouts   audience +0.141 (0.098) 4901   1105
+head_to_head holdouts       tags -0.040 (0.102) 4901   1105
+head_to_head holdouts tag_kmeans +0.456 (0.907) 4901   1105
+head_to_head holdouts  tag_topic +1.066 (1.079) 4901   1105
+
+4. Out-of-sample (holdouts): by period
+            test   sample       term  estimate (se)    n  games
+period 2023-2024 holdouts   audience +0.315 (0.134) 2242    789
+period 2023-2024 holdouts       tags -0.031 (0.143) 2242    789
+period 2023-2024 holdouts tag_kmeans +0.754 (1.148) 2242    789
+period 2023-2024 holdouts  tag_topic +1.114 (1.539) 2242    789
+period 2025-2026 holdouts   audience +0.113 (0.128) 2659    809
+period 2025-2026 holdouts       tags +0.165 (0.148) 2659    809
+period 2025-2026 holdouts tag_kmeans -1.980 (1.682) 2659    809
+period 2025-2026 holdouts  tag_topic +1.009 (1.536) 2659    809
+
+Done in 16 minutes. Outputs in /home/claude/repo/pipeline/output/spillovers
