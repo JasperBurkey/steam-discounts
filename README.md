@@ -29,6 +29,11 @@ pytest --nbmake --nbmake-timeout=3600 project.ipynb
 
 The notebook needs only `data/`. To rebuild `data/` from scratch, follow [pipeline/README.md](pipeline/README.md): it draws the sample, downloads reviews and prices, and runs `04b_build_events.py`, whose outputs are copied into `data/`.
 
+### Project history
+
+- **MVP (tag [`mvp`](https://github.com/JasperBurkey/steam-discounts/tree/mvp)):** a feasibility version on 500 randomly sampled mid-sized games, with a first double machine learning analysis of reviews.
+- **Full sample (current):** 3,850 games stratified by size, a revenue proxy, heterogeneity and discount-depth analyses.
+
 ### Data and privacy
 
 All inputs are public: Steam's store and review APIs and IsThereAnyDeal's price histories. Raw reviews are not included; reviewer IDs are one-way hashed in the pipeline and never stored in plain form. API keys live in `.env` files, which are excluded by `.gitignore`. Third-party data are not redistributed beyond the derived event-level variables in `data/`.
