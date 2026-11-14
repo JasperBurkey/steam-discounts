@@ -17,8 +17,12 @@ SP = importlib.import_module("12_spillovers")
 
 class Exposure(unittest.TestCase):
     def test_share_among_known_rivals_and_rank_band(self):
-        status = pd.DataFrame({"S1": [1, 0, np.nan, 1], "S2": [0, 0, 1, 1]}, index=[10, 11, 12, 13])
-        rivals = pd.DataFrame({"app_id": [1, 1, 1, 1], "rival": [10, 11, 12, 13], "rank": [1, 2, 3, 4]})
+        status = pd.DataFrame(
+            {"S1": [1, 0, np.nan, 1], "S2": [0, 0, 1, 1]}, index=[10, 11, 12, 13]
+        )
+        rivals = pd.DataFrame(
+            {"app_id": [1, 1, 1, 1], "rival": [10, 11, 12, 13], "rank": [1, 2, 3, 4]}
+        )
         e = SP.exposure(rivals, status).set_index("sale")["x"]
         self.assertAlmostEqual(e["S1"], 2 / 3)  # unknown rival 12 is left out
         self.assertAlmostEqual(e["S2"], 2 / 4)
@@ -30,7 +34,9 @@ class Recovery(unittest.TestCase):
     def test_plr_multi_recovers_planted_spillover(self):
         rng = np.random.default_rng(0)
         n = 3000
-        df = pd.DataFrame({"app_id": np.arange(n) // 3, "sale": rng.choice(["A", "B"], n)})
+        df = pd.DataFrame(
+            {"app_id": np.arange(n) // 3, "sale": rng.choice(["A", "B"], n)}
+        )
         conf = rng.normal(size=n)
         df["x_real"] = np.clip(0.8 + 0.1 * conf + rng.normal(0, 0.1, n), 0, 1)
         df["x_fake"] = np.clip(0.8 + 0.1 * rng.normal(size=n), 0, 1)
