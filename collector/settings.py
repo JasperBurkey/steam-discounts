@@ -69,7 +69,9 @@ DAILY_STEAM_API_BUDGET = 90_000  # Steam's terms allow 100,000 calls/day; keep h
 RANKS_GLOBAL_DEPTH = (
     10_000  # places in the overall ranking (games only; Steam's list is ~7,300)
 )
-RANKS_TAG_DEPTH = 0  # tag rankings skipped: ~97% rebuild from the global list + tags (0 = skip)
+RANKS_TAG_DEPTH = (
+    0  # tag rankings skipped: ~97% rebuild from the global list + tags (0 = skip)
+)
 RANKS_PAGE = 100  # results per request (Steam's maximum)
 RANKS_CATEGORY = "998"  # 998 = games; DLC, software and soundtracks excluded
 SAVE_RAW_RANKS = False  # raw pages are large HTML; the parsed table keeps what matters
