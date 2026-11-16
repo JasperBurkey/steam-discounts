@@ -59,6 +59,9 @@ TIER_B_MIN_REVIEWS = 50
 NEW_RELEASE_DAYS = 90  # recent releases with >= NEW_MIN_REVIEWS go to tier A
 NEW_MIN_REVIEWS = 10
 CCU_C_ROTATION = 7
+# Thesis study panel: the 3,850 sampled games, at fixed UTC hours every day so time of day
+# never changes between days. Every 4 hours always; every 2 hours during seasonal sales.
+STUDY_APPS = HERE / "study_apps.csv"
 
 # ---------- Budget and politeness ----------
 DAILY_STEAM_API_BUDGET = 90_000  # Steam's terms allow 100,000 calls/day; keep headroom
@@ -109,11 +112,23 @@ SLOTS = {
     "ccu_a": {"hours": [4, 16]},
     "ccu_b": {"hours": [6]},
     "ccu_c": {"hours": [6]},
+    # thesis study panel (see STUDY_APPS); about 32 minutes per pass
+    "ccu_study": {"hours": [0, 4, 8, 12, 16, 20]},
+    "ccu_study_sale": {"hours": [2, 6, 10, 14, 18, 22], "periods": RANKS_SALE_PERIODS},
 }
 # A job whose slot passed while the machine was off runs at the next hourly check, and its
 # log records how late it ran. Every row also carries its exact captured_at time.
 GROUPS = {
-    "fast": ["featured", "twitch", "charts", "topsellers", "ranks_sale"],
+    # study panel runs last, so the quick jobs are never delayed behind it
+    "fast": [
+        "featured",
+        "twitch",
+        "charts",
+        "topsellers",
+        "ranks_sale",
+        "ccu_study",
+        "ccu_study_sale",
+    ],
     "daily": ["ranks", "universe", "items", "regional", "weekly"],
     "ccu": ["ccu_a", "ccu_b", "ccu_c"],
 }

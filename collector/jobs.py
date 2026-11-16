@@ -397,14 +397,45 @@ def job_ccu_a(http, run_id):
     return _ccu(http, run_id, a["appid"].astype(int).tolist(), "A")
 
 
+def _study_ids():
+    if not S.STUDY_APPS.exists():
+        return []
+    return pd.read_csv(S.STUDY_APPS)["app_id"].astype(int).tolist()
+
+
+def _study_reserve(now=None):
+    """Calls still needed today for the study panel's remaining slots, so tiers B and C
+    never use up the budget the thesis panel needs."""
+    now = now or utcnow()
+    n = len(_study_ids())
+    runs = 0
+    for job in ("ccu_study", "ccu_study_sale"):
+        cfg = S.SLOTS[job]
+        periods = cfg.get("periods")
+        d = now.date().isoformat()
+        if periods and not any(a <= d <= b for a, b in periods):
+            continue
+        runs += sum(h > now.hour for h in cfg["hours"])
+    return n * runs
+
+
+def job_ccu_study(http, run_id):
+    ids = _study_ids()
+    if not ids:
+        return {"rows": 0, "note": f"no {S.STUDY_APPS.name}"}
+    left = _budget_left()
+    stats = _ccu(http, run_id, ids[:left], "study")
+    stats["trimmed_for_budget"] = max(0, len(ids) - left)
+    return stats
+
+
 def job_ccu_b(http, run_id):
     b = _tier("B")
     if b.empty:
         return {"rows": 0, "note": "no tiers yet"}
     b = b.sort_values("review_count", ascending=False)
-    reserve = (
-        len(_tier("A")) + 2000
-    )  # keep room for the next tier-A run and the store jobs
+    # keep room for the next tier-A run, the store jobs and the study panel
+    reserve = len(_tier("A")) + 2000 + _study_reserve()
     left = _budget_left(reserve)
     ids = b["appid"].astype(int).tolist()
     stats = _ccu(http, run_id, ids[:left], "B")
@@ -418,7 +449,7 @@ def job_ccu_c(http, run_id):
         return {"rows": 0, "note": "no tiers yet"}
     day = (utcnow().date() - pd.Timestamp("2026-01-01").date()).days % S.CCU_C_ROTATION
     ids = [a for a in c["appid"].astype(int) if a % S.CCU_C_ROTATION == day]
-    left = _budget_left(len(_tier("A")) + 2000)
+    left = _budget_left(len(_tier("A")) + 2000 + _study_reserve())
     stats = _ccu(http, run_id, ids[:left], "C")
     stats["trimmed_for_budget"] = max(0, len(ids) - left)
     return stats
@@ -736,6 +767,8 @@ JOBS = {
     "ccu_a": job_ccu_a,
     "ccu_b": job_ccu_b,
     "ccu_c": job_ccu_c,
+    "ccu_study": job_ccu_study,
+    "ccu_study_sale": job_ccu_study,
     "charts": job_charts,
     "topsellers": job_topsellers,
     "featured": job_featured,

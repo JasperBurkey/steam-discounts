@@ -40,7 +40,7 @@ for a given day if it is not captured that day.
 | `universe` | Daily 19:00 UTC | Every game and DLC on the store, `last_modified`, `price_change_number`; delisted apps kept 30 days with `in_current_list = false` | No (delistings, new-app dates) |
 | `tiers` | Daily, with `store_items` | Which player-count tier each game was in and why | Derived, saved for reproducibility |
 | `regional_prices` | Daily 20:00 UTC | Tier A prices in DE, GB, BR, IN, JP, with formatted currency | Partly |
-| `ccu` | Tier A at 04 and 16 UTC; B daily; C weekly in rotation | Concurrent players; `http_status` and `result` separate "zero players" from "no data" | No |
+| `ccu` | Tier A at 04 and 16 UTC; B daily; C weekly in rotation; thesis study panel (`tier` = `study`, games in `study_apps.csv`) every 4 h at 00/04/08/12/16/20 UTC, plus 02/06/.../22 UTC during seasonal sales | Concurrent players; `http_status` and `result` separate "zero players" from "no data" | No |
 | `charts_most_played` | 04 and 16 UTC | Steam's top 100 by daily peak players | No |
 | `charts_concurrent` | 04 and 16 UTC | Steam's top games by current players | No |
 | `topsellers` | Daily | Weekly top sellers (top 500), global plus 6 countries | Possibly (the API takes a past week) but not guaranteed |

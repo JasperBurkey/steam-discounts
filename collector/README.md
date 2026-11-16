@@ -77,6 +77,7 @@ Windows: three Task Scheduler tasks, each "Daily, repeat every 1 hour", running
 | fast | featured and Twitch every 6h; charts 04/16; top sellers 20:00 | a few minutes |
 | daily | universe 19:00; store snapshot and regional prices 20:00; weekly on Wednesdays | about 2 h; weekly a few hours |
 | ccu | tier A 04/16; tiers B and C from 06:00 | tier A 1-2 h; B and C several hours |
+| fast: ccu_study | thesis panel every 4 h (every 2 h during sales) | about 32 min |
 
 The daily price snapshot runs at 20:00 UTC because Steam sales and price changes start at
 10:00 Pacific, so 20:00 UTC always sees that day's prices.
