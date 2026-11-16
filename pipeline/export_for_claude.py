@@ -12,6 +12,7 @@ Writes data/for_claude.zip. Contents, all derived from public data:
                             sampled games: name, tags, release date, publishers, developers
   weekly_topsellers.parquet Steam's weekly revenue charts (03e)
   price_history.parquet     IsThereAnyDeal price histories (03b)
+  news.parquet              news and patch notes for the study games (03g)
   study_sample.csv          the sampled games and their size bands
 No API keys, no raw Steam IDs, nothing from .env.
 """
@@ -146,6 +147,15 @@ def main():
         written.append("weekly_topsellers.parquet")
     else:
         print("weekly_topsellers: not found; run 03e_pull_weekly_topsellers.py")
+
+    news = sorted((config.RAW / "news").glob("*.parquet"))
+    if news:
+        nw = pd.concat([pd.read_parquet(f) for f in news], ignore_index=True)
+        nw.to_parquet(OUT / "news.parquet", index=False)
+        written.append("news.parquet")
+        print(f"news: {len(nw):,} items for {len(news):,} games")
+    else:
+        print("news: not found; run 03g_pull_news.py")
 
     (OUT / "manifest.json").write_text(json.dumps({"files": written}, indent=2))
     with zipfile.ZipFile(ZIP, "w", zipfile.ZIP_STORED) as z:
