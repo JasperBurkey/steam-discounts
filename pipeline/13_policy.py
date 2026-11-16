@@ -28,6 +28,7 @@ Outputs (output/policy/): policy_values.csv, policy_trees.txt, policy_leaves.csv
   policy_assignments.csv, overlap.csv
 """
 
+import os
 import time
 
 import config
@@ -47,6 +48,11 @@ OBJECTIVES = {
 # likely overstates what discounting costs. This sensitivity objective uses the charts' weight
 # (during the sale only; from big games and imprecise, so an illustration).
 CHART_PRICE_WEIGHT = 0.072 / 0.534
+SHORT = {
+    "r_net": "proxy",
+    "r_net_lag": "lag-adjusted",
+    "r_cal_during": "chart-calibrated",
+}
 SIDE = {"y_during": "Reviews, during"}
 POLICY_FEATURES = {
     "pre_rate_28": "reviews/day before the sale",
@@ -236,13 +242,19 @@ def main():
             f"\n=== {sname}: {len(df):,} game-events, {len(np.unique(g)):,} games",
             flush=True,
         )
-        scores = {}
-        for yc in list(OBJECTIVES) + list(SIDE):
-            scores[yc] = M.multiarm(df, yc, "depth_bin", ARMS, "none")[3]
-            print(
-                f"  scores for {yc} done  [{(time.time() - t0) / 60:.0f} min]",
-                flush=True,
-            )
+        cache = OUT / f"scores_{sname.split()[0]}.npz"
+        if os.environ.get("REUSE_SCORES") and cache.exists():
+            scores = dict(np.load(cache))
+            print("  reusing saved scores", flush=True)
+        else:
+            scores = {}
+            for yc in list(OBJECTIVES) + list(SIDE):
+                scores[yc] = M.multiarm(df, yc, "depth_bin", ARMS, "none")[3]
+                print(
+                    f"  scores for {yc} done  [{(time.time() - t0) / 60:.0f} min]",
+                    flush=True,
+                )
+            np.savez(cache, **scores)
         n = np.arange(len(df))
         ok = e >= LOW_PROPENSITY
         ok[n, lab] = True  # the depth actually chosen is always allowed
@@ -251,12 +263,23 @@ def main():
             """Assigned depth where supported; otherwise the depth actually chosen."""
             return np.where(ok[n, a], a, lab)
 
+        # unsupported choices score as the status quo
+        gammas = {
+            yc: np.where(ok, scores[yc], scores[yc][n, lab][:, None])
+            for yc in OBJECTIVES
+        }
+        # rules learned on each objective (out of fold), each evaluated under EVERY objective:
+        # the robustness criterion asks whether one rule beats the status quo under both
+        # revenue measures
+        learned = {}
+        for yc in OBJECTIVES:
+            for pname, a in crossfit_policies(xp, gammas[yc], g, lab).items():
+                learned[f"{pname} [learned on {SHORT[yc]}]"] = a
+
         for yc, olab in OBJECTIVES.items():
             raw = scores[yc]
             sq = raw[n, lab]
-            gamma = np.where(
-                ok, raw, sq[:, None]
-            )  # unsupported choices score as status quo
+            gamma = gammas[yc]
             pol = {
                 "status quo": lab,
                 **{
@@ -265,7 +288,7 @@ def main():
                     )
                     for k, a in enumerate(ARMS)
                 },
-                **crossfit_policies(xp, gamma, g, lab),
+                **learned,
             }
             for pname, a0 in pol.items():
                 a = effective(a0)
