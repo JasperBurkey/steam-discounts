@@ -1,0 +1,85 @@
+sample,objective,policy,share_unsupported_before_fallback
+all game-events,"Revenue proxy, net",status quo,0.0
+all game-events,"Revenue proxy, net",never discount,0.5901830073580278
+all game-events,"Revenue proxy, net",always 1-33%,0.7021256524746872
+all game-events,"Revenue proxy, net",always 34-60%,0.4326143009873593
+all game-events,"Revenue proxy, net",always 61%+,0.45613483428715174
+all game-events,"Revenue proxy, net",best fixed depth [learned on proxy],0.5054084648764229
+all game-events,"Revenue proxy, net","tree, 1 split [learned on proxy]",0.552763977108358
+all game-events,"Revenue proxy, net","tree, 2 levels [learned on proxy]",0.5737375007861141
+all game-events,"Revenue proxy, net",best fixed depth [learned on lag-adjusted],0.5901830073580278
+all game-events,"Revenue proxy, net","tree, 1 split [learned on lag-adjusted]",0.5756556191434501
+all game-events,"Revenue proxy, net","tree, 2 levels [learned on lag-adjusted]",0.5656248034714798
+all game-events,"Revenue proxy, net",best fixed depth [learned on chart-calibrated],0.45613483428715174
+all game-events,"Revenue proxy, net","tree, 1 split [learned on chart-calibrated]",0.5606565624803471
+all game-events,"Revenue proxy, net","tree, 2 levels [learned on chart-calibrated]",0.5033331237029117
+all game-events,"Revenue proxy, net, lag-adjusted",status quo,0.0
+all game-events,"Revenue proxy, net, lag-adjusted",never discount,0.5901830073580278
+all game-events,"Revenue proxy, net, lag-adjusted",always 1-33%,0.7021256524746872
+all game-events,"Revenue proxy, net, lag-adjusted",always 34-60%,0.4326143009873593
+all game-events,"Revenue proxy, net, lag-adjusted",always 61%+,0.45613483428715174
+all game-events,"Revenue proxy, net, lag-adjusted",best fixed depth [learned on proxy],0.5054084648764229
+all game-events,"Revenue proxy, net, lag-adjusted","tree, 1 split [learned on proxy]",0.552763977108358
+all game-events,"Revenue proxy, net, lag-adjusted","tree, 2 levels [learned on proxy]",0.5737375007861141
+all game-events,"Revenue proxy, net, lag-adjusted",best fixed depth [learned on lag-adjusted],0.5901830073580278
+all game-events,"Revenue proxy, net, lag-adjusted","tree, 1 split [learned on lag-adjusted]",0.5756556191434501
+all game-events,"Revenue proxy, net, lag-adjusted","tree, 2 levels [learned on lag-adjusted]",0.5656248034714798
+all game-events,"Revenue proxy, net, lag-adjusted",best fixed depth [learned on chart-calibrated],0.45613483428715174
+all game-events,"Revenue proxy, net, lag-adjusted","tree, 1 split [learned on chart-calibrated]",0.5606565624803471
+all game-events,"Revenue proxy, net, lag-adjusted","tree, 2 levels [learned on chart-calibrated]",0.5033331237029117
+all game-events,"Chart-calibrated revenue, during (sensitivity)",status quo,0.0
+all game-events,"Chart-calibrated revenue, during (sensitivity)",never discount,0.5901830073580278
+all game-events,"Chart-calibrated revenue, during (sensitivity)",always 1-33%,0.7021256524746872
+all game-events,"Chart-calibrated revenue, during (sensitivity)",always 34-60%,0.4326143009873593
+all game-events,"Chart-calibrated revenue, during (sensitivity)",always 61%+,0.45613483428715174
+all game-events,"Chart-calibrated revenue, during (sensitivity)",best fixed depth [learned on proxy],0.5054084648764229
+all game-events,"Chart-calibrated revenue, during (sensitivity)","tree, 1 split [learned on proxy]",0.552763977108358
+all game-events,"Chart-calibrated revenue, during (sensitivity)","tree, 2 levels [learned on proxy]",0.5737375007861141
+all game-events,"Chart-calibrated revenue, during (sensitivity)",best fixed depth [learned on lag-adjusted],0.5901830073580278
+all game-events,"Chart-calibrated revenue, during (sensitivity)","tree, 1 split [learned on lag-adjusted]",0.5756556191434501
+all game-events,"Chart-calibrated revenue, during (sensitivity)","tree, 2 levels [learned on lag-adjusted]",0.5656248034714798
+all game-events,"Chart-calibrated revenue, during (sensitivity)",best fixed depth [learned on chart-calibrated],0.45613483428715174
+all game-events,"Chart-calibrated revenue, during (sensitivity)","tree, 1 split [learned on chart-calibrated]",0.5606565624803471
+all game-events,"Chart-calibrated revenue, during (sensitivity)","tree, 2 levels [learned on chart-calibrated]",0.5033331237029117
+busier games,"Revenue proxy, net",status quo,0.0
+busier games,"Revenue proxy, net",never discount,0.6978073610023493
+busier games,"Revenue proxy, net",always 1-33%,0.6650743931088489
+busier games,"Revenue proxy, net",always 34-60%,0.4752545027407987
+busier games,"Revenue proxy, net",always 61%+,0.44205168363351605
+busier games,"Revenue proxy, net",best fixed depth [learned on proxy],0.45465935787000783
+busier games,"Revenue proxy, net","tree, 1 split [learned on proxy]",0.5483163664839468
+busier games,"Revenue proxy, net","tree, 2 levels [learned on proxy]",0.5314017227877839
+busier games,"Revenue proxy, net",best fixed depth [learned on lag-adjusted],0.6978073610023493
+busier games,"Revenue proxy, net","tree, 1 split [learned on lag-adjusted]",0.6660924040720438
+busier games,"Revenue proxy, net","tree, 2 levels [learned on lag-adjusted]",0.5561472200469851
+busier games,"Revenue proxy, net",best fixed depth [learned on chart-calibrated],0.44205168363351605
+busier games,"Revenue proxy, net","tree, 1 split [learned on chart-calibrated]",0.34784651527016447
+busier games,"Revenue proxy, net","tree, 2 levels [learned on chart-calibrated]",0.32866092404072045
+busier games,"Revenue proxy, net, lag-adjusted",status quo,0.0
+busier games,"Revenue proxy, net, lag-adjusted",never discount,0.6978073610023493
+busier games,"Revenue proxy, net, lag-adjusted",always 1-33%,0.6650743931088489
+busier games,"Revenue proxy, net, lag-adjusted",always 34-60%,0.4752545027407987
+busier games,"Revenue proxy, net, lag-adjusted",always 61%+,0.44205168363351605
+busier games,"Revenue proxy, net, lag-adjusted",best fixed depth [learned on proxy],0.45465935787000783
+busier games,"Revenue proxy, net, lag-adjusted","tree, 1 split [learned on proxy]",0.5483163664839468
+busier games,"Revenue proxy, net, lag-adjusted","tree, 2 levels [learned on proxy]",0.5314017227877839
+busier games,"Revenue proxy, net, lag-adjusted",best fixed depth [learned on lag-adjusted],0.6978073610023493
+busier games,"Revenue proxy, net, lag-adjusted","tree, 1 split [learned on lag-adjusted]",0.6660924040720438
+busier games,"Revenue proxy, net, lag-adjusted","tree, 2 levels [learned on lag-adjusted]",0.5561472200469851
+busier games,"Revenue proxy, net, lag-adjusted",best fixed depth [learned on chart-calibrated],0.44205168363351605
+busier games,"Revenue proxy, net, lag-adjusted","tree, 1 split [learned on chart-calibrated]",0.34784651527016447
+busier games,"Revenue proxy, net, lag-adjusted","tree, 2 levels [learned on chart-calibrated]",0.32866092404072045
+busier games,"Chart-calibrated revenue, during (sensitivity)",status quo,0.0
+busier games,"Chart-calibrated revenue, during (sensitivity)",never discount,0.6978073610023493
+busier games,"Chart-calibrated revenue, during (sensitivity)",always 1-33%,0.6650743931088489
+busier games,"Chart-calibrated revenue, during (sensitivity)",always 34-60%,0.4752545027407987
+busier games,"Chart-calibrated revenue, during (sensitivity)",always 61%+,0.44205168363351605
+busier games,"Chart-calibrated revenue, during (sensitivity)",best fixed depth [learned on proxy],0.45465935787000783
+busier games,"Chart-calibrated revenue, during (sensitivity)","tree, 1 split [learned on proxy]",0.5483163664839468
+busier games,"Chart-calibrated revenue, during (sensitivity)","tree, 2 levels [learned on proxy]",0.5314017227877839
+busier games,"Chart-calibrated revenue, during (sensitivity)",best fixed depth [learned on lag-adjusted],0.6978073610023493
+busier games,"Chart-calibrated revenue, during (sensitivity)","tree, 1 split [learned on lag-adjusted]",0.6660924040720438
+busier games,"Chart-calibrated revenue, during (sensitivity)","tree, 2 levels [learned on lag-adjusted]",0.5561472200469851
+busier games,"Chart-calibrated revenue, during (sensitivity)",best fixed depth [learned on chart-calibrated],0.44205168363351605
+busier games,"Chart-calibrated revenue, during (sensitivity)","tree, 1 split [learned on chart-calibrated]",0.34784651527016447
+busier games,"Chart-calibrated revenue, during (sensitivity)","tree, 2 levels [learned on chart-calibrated]",0.32866092404072045

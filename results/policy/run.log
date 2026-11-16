@@ -1,0 +1,204 @@
+/usr/local/lib/python3.13/site-packages/pandas/core/arraylike.py:402: RuntimeWarning: divide by zero encountered in log
+  result = getattr(ufunc, method)(*inputs, **kwargs)
+
+=== all game-events: 31,802 game-events, 3,390 games
+  scores for r_net done  [3 min]
+  scores for r_net_lag done  [6 min]
+  scores for r_cal_during done  [9 min]
+  scores for y_during done  [12 min]
+  policies done  [13 min]
+
+=== busier games: 12,770 game-events, 1,858 games
+  scores for r_net done  [15 min]
+  scores for r_net_lag done  [16 min]
+  scores for r_cal_during done  [18 min]
+  scores for y_during done  [19 min]
+  policies done  [20 min]
+
+Policy value vs. the status quo (held-out games for learned policies):
+         sample                                      objective                                         policy      gain (se)   reviews (se)  share_none  share_1-33%  share_34-60%  share_61%+  share_kept_for_overlap
+all game-events                             Revenue proxy, net                                     status quo +0.000 (0.000) +0.000 (0.000)        0.15         0.16          0.30        0.39                    0.00
+all game-events                             Revenue proxy, net                                 never discount -0.007 (0.016) -0.091 (0.024)        0.41         0.10          0.19        0.30                    0.59
+all game-events                             Revenue proxy, net                                   always 1-33% +0.008 (0.013) +0.003 (0.018)        0.11         0.30          0.21        0.39                    0.70
+all game-events                             Revenue proxy, net                                  always 34-60% -0.012 (0.020) -0.012 (0.027)        0.08         0.07          0.57        0.28                    0.43
+all game-events                             Revenue proxy, net                                    always 61%+ +0.018 (0.017) +0.060 (0.021)        0.10         0.16          0.20        0.54                    0.46
+all game-events                             Revenue proxy, net            best fixed depth [learned on proxy] -0.002 (0.015) +0.044 (0.019)        0.11         0.19          0.20        0.51                    0.51
+all game-events                             Revenue proxy, net               tree, 1 split [learned on proxy] +0.048 (0.016) +0.062 (0.020)        0.10         0.19          0.20        0.51                    0.55
+all game-events                             Revenue proxy, net              tree, 2 levels [learned on proxy] +0.048 (0.015) +0.062 (0.020)        0.11         0.19          0.21        0.48                    0.57
+all game-events                             Revenue proxy, net     best fixed depth [learned on lag-adjusted] -0.007 (0.016) -0.091 (0.024)        0.41         0.10          0.19        0.30                    0.59
+all game-events                             Revenue proxy, net        tree, 1 split [learned on lag-adjusted] +0.013 (0.015) -0.046 (0.022)        0.29         0.23          0.17        0.30                    0.58
+all game-events                             Revenue proxy, net       tree, 2 levels [learned on lag-adjusted] -0.000 (0.016) -0.043 (0.021)        0.27         0.19          0.18        0.35                    0.57
+all game-events                             Revenue proxy, net best fixed depth [learned on chart-calibrated] +0.018 (0.017) +0.060 (0.021)        0.10         0.16          0.20        0.54                    0.46
+all game-events                             Revenue proxy, net    tree, 1 split [learned on chart-calibrated] +0.016 (0.015) +0.048 (0.020)        0.11         0.20          0.20        0.49                    0.56
+all game-events                             Revenue proxy, net   tree, 2 levels [learned on chart-calibrated] +0.039 (0.016) +0.074 (0.020)        0.12         0.17          0.23        0.48                    0.50
+all game-events               Revenue proxy, net, lag-adjusted                                     status quo +0.000 (0.000) +0.000 (0.000)        0.15         0.16          0.30        0.39                    0.00
+all game-events               Revenue proxy, net, lag-adjusted                                 never discount +0.032 (0.016) -0.091 (0.024)        0.41         0.10          0.19        0.30                    0.59
+all game-events               Revenue proxy, net, lag-adjusted                                   always 1-33% +0.012 (0.014) +0.003 (0.018)        0.11         0.30          0.21        0.39                    0.70
+all game-events               Revenue proxy, net, lag-adjusted                                  always 34-60% -0.015 (0.021) -0.012 (0.027)        0.08         0.07          0.57        0.28                    0.43
+all game-events               Revenue proxy, net, lag-adjusted                                    always 61%+ -0.002 (0.017) +0.060 (0.021)        0.10         0.16          0.20        0.54                    0.46
+all game-events               Revenue proxy, net, lag-adjusted            best fixed depth [learned on proxy] -0.017 (0.016) +0.044 (0.019)        0.11         0.19          0.20        0.51                    0.51
+all game-events               Revenue proxy, net, lag-adjusted               tree, 1 split [learned on proxy] +0.033 (0.016) +0.062 (0.020)        0.10         0.19          0.20        0.51                    0.55
+all game-events               Revenue proxy, net, lag-adjusted              tree, 2 levels [learned on proxy] +0.038 (0.015) +0.062 (0.020)        0.11         0.19          0.21        0.48                    0.57
+all game-events               Revenue proxy, net, lag-adjusted     best fixed depth [learned on lag-adjusted] +0.032 (0.016) -0.091 (0.024)        0.41         0.10          0.19        0.30                    0.59
+all game-events               Revenue proxy, net, lag-adjusted        tree, 1 split [learned on lag-adjusted] +0.042 (0.015) -0.046 (0.022)        0.29         0.23          0.17        0.30                    0.58
+all game-events               Revenue proxy, net, lag-adjusted       tree, 2 levels [learned on lag-adjusted] +0.018 (0.017) -0.043 (0.021)        0.27         0.19          0.18        0.35                    0.57
+all game-events               Revenue proxy, net, lag-adjusted best fixed depth [learned on chart-calibrated] -0.002 (0.017) +0.060 (0.021)        0.10         0.16          0.20        0.54                    0.46
+all game-events               Revenue proxy, net, lag-adjusted    tree, 1 split [learned on chart-calibrated] +0.003 (0.015) +0.048 (0.020)        0.11         0.20          0.20        0.49                    0.56
+all game-events               Revenue proxy, net, lag-adjusted   tree, 2 levels [learned on chart-calibrated] +0.027 (0.016) +0.074 (0.020)        0.12         0.17          0.23        0.48                    0.50
+all game-events Chart-calibrated revenue, during (sensitivity)                                     status quo +0.000 (0.000) +0.000 (0.000)        0.15         0.16          0.30        0.39                    0.00
+all game-events Chart-calibrated revenue, during (sensitivity)                                 never discount -0.064 (0.024) -0.091 (0.024)        0.41         0.10          0.19        0.30                    0.59
+all game-events Chart-calibrated revenue, during (sensitivity)                                   always 1-33% +0.005 (0.018) +0.003 (0.018)        0.11         0.30          0.21        0.39                    0.70
+all game-events Chart-calibrated revenue, during (sensitivity)                                  always 34-60% -0.013 (0.027) -0.012 (0.027)        0.08         0.07          0.57        0.28                    0.43
+all game-events Chart-calibrated revenue, during (sensitivity)                                    always 61%+ +0.045 (0.021) +0.060 (0.021)        0.10         0.16          0.20        0.54                    0.46
+all game-events Chart-calibrated revenue, during (sensitivity)            best fixed depth [learned on proxy] +0.032 (0.019) +0.044 (0.019)        0.11         0.19          0.20        0.51                    0.51
+all game-events Chart-calibrated revenue, during (sensitivity)               tree, 1 split [learned on proxy] +0.050 (0.020) +0.062 (0.020)        0.10         0.19          0.20        0.51                    0.55
+all game-events Chart-calibrated revenue, during (sensitivity)              tree, 2 levels [learned on proxy] +0.053 (0.020) +0.062 (0.020)        0.11         0.19          0.21        0.48                    0.57
+all game-events Chart-calibrated revenue, during (sensitivity)     best fixed depth [learned on lag-adjusted] -0.064 (0.024) -0.091 (0.024)        0.41         0.10          0.19        0.30                    0.59
+all game-events Chart-calibrated revenue, during (sensitivity)        tree, 1 split [learned on lag-adjusted] -0.024 (0.022) -0.046 (0.022)        0.29         0.23          0.17        0.30                    0.58
+all game-events Chart-calibrated revenue, during (sensitivity)       tree, 2 levels [learned on lag-adjusted] -0.028 (0.021) -0.043 (0.021)        0.27         0.19          0.18        0.35                    0.57
+all game-events Chart-calibrated revenue, during (sensitivity) best fixed depth [learned on chart-calibrated] +0.045 (0.021) +0.060 (0.021)        0.10         0.16          0.20        0.54                    0.46
+all game-events Chart-calibrated revenue, during (sensitivity)    tree, 1 split [learned on chart-calibrated] +0.040 (0.020) +0.048 (0.020)        0.11         0.20          0.20        0.49                    0.56
+all game-events Chart-calibrated revenue, during (sensitivity)   tree, 2 levels [learned on chart-calibrated] +0.067 (0.020) +0.074 (0.020)        0.12         0.17          0.23        0.48                    0.50
+   busier games                             Revenue proxy, net                                     status quo +0.000 (0.000) +0.000 (0.000)        0.09         0.19          0.28        0.43                    0.00
+   busier games                             Revenue proxy, net                                 never discount -0.006 (0.011) -0.096 (0.017)        0.30         0.13          0.20        0.37                    0.70
+   busier games                             Revenue proxy, net                                   always 1-33% -0.003 (0.016) -0.025 (0.022)        0.04         0.33          0.19        0.43                    0.67
+   busier games                             Revenue proxy, net                                  always 34-60% +0.004 (0.018) +0.007 (0.022)        0.04         0.09          0.52        0.34                    0.48
+   busier games                             Revenue proxy, net                                    always 61%+ +0.007 (0.018) +0.072 (0.023)        0.06         0.19          0.19        0.56                    0.44
+   busier games                             Revenue proxy, net            best fixed depth [learned on proxy] -0.020 (0.018) +0.015 (0.019)        0.05         0.15          0.32        0.48                    0.45
+   busier games                             Revenue proxy, net               tree, 1 split [learned on proxy] +0.043 (0.016) +0.055 (0.017)        0.06         0.22          0.19        0.52                    0.55
+   busier games                             Revenue proxy, net              tree, 2 levels [learned on proxy] +0.009 (0.013) +0.015 (0.015)        0.06         0.19          0.28        0.47                    0.53
+   busier games                             Revenue proxy, net     best fixed depth [learned on lag-adjusted] -0.006 (0.011) -0.096 (0.017)        0.30         0.13          0.20        0.37                    0.70
+   busier games                             Revenue proxy, net        tree, 1 split [learned on lag-adjusted] -0.004 (0.013) -0.072 (0.018)        0.24         0.18          0.19        0.39                    0.67
+   busier games                             Revenue proxy, net       tree, 2 levels [learned on lag-adjusted] +0.022 (0.010) -0.025 (0.015)        0.21         0.17          0.21        0.41                    0.56
+   busier games                             Revenue proxy, net best fixed depth [learned on chart-calibrated] +0.007 (0.018) +0.072 (0.023)        0.06         0.19          0.19        0.56                    0.44
+   busier games                             Revenue proxy, net    tree, 1 split [learned on chart-calibrated] +0.007 (0.018) +0.068 (0.025)        0.04         0.14          0.29        0.52                    0.35
+   busier games                             Revenue proxy, net   tree, 2 levels [learned on chart-calibrated] +0.005 (0.019) +0.049 (0.026)        0.04         0.18          0.28        0.50                    0.33
+   busier games               Revenue proxy, net, lag-adjusted                                     status quo +0.000 (0.000) +0.000 (0.000)        0.09         0.19          0.28        0.43                    0.00
+   busier games               Revenue proxy, net, lag-adjusted                                 never discount +0.033 (0.011) -0.096 (0.017)        0.30         0.13          0.20        0.37                    0.70
+   busier games               Revenue proxy, net, lag-adjusted                                   always 1-33% +0.002 (0.016) -0.025 (0.022)        0.04         0.33          0.19        0.43                    0.67
+   busier games               Revenue proxy, net, lag-adjusted                                  always 34-60% +0.001 (0.018) +0.007 (0.022)        0.04         0.09          0.52        0.34                    0.48
+   busier games               Revenue proxy, net, lag-adjusted                                    always 61%+ -0.018 (0.018) +0.072 (0.023)        0.06         0.19          0.19        0.56                    0.44
+   busier games               Revenue proxy, net, lag-adjusted            best fixed depth [learned on proxy] -0.036 (0.018) +0.015 (0.019)        0.05         0.15          0.32        0.48                    0.45
+   busier games               Revenue proxy, net, lag-adjusted               tree, 1 split [learned on proxy] +0.026 (0.017) +0.055 (0.017)        0.06         0.22          0.19        0.52                    0.55
+   busier games               Revenue proxy, net, lag-adjusted              tree, 2 levels [learned on proxy] -0.001 (0.014) +0.015 (0.015)        0.06         0.19          0.28        0.47                    0.53
+   busier games               Revenue proxy, net, lag-adjusted     best fixed depth [learned on lag-adjusted] +0.033 (0.011) -0.096 (0.017)        0.30         0.13          0.20        0.37                    0.70
+   busier games               Revenue proxy, net, lag-adjusted        tree, 1 split [learned on lag-adjusted] +0.026 (0.012) -0.072 (0.018)        0.24         0.18          0.19        0.39                    0.67
+   busier games               Revenue proxy, net, lag-adjusted       tree, 2 levels [learned on lag-adjusted] +0.040 (0.011) -0.025 (0.015)        0.21         0.17          0.21        0.41                    0.56
+   busier games               Revenue proxy, net, lag-adjusted best fixed depth [learned on chart-calibrated] -0.018 (0.018) +0.072 (0.023)        0.06         0.19          0.19        0.56                    0.44
+   busier games               Revenue proxy, net, lag-adjusted    tree, 1 split [learned on chart-calibrated] -0.018 (0.019) +0.068 (0.025)        0.04         0.14          0.29        0.52                    0.35
+   busier games               Revenue proxy, net, lag-adjusted   tree, 2 levels [learned on chart-calibrated] -0.015 (0.020) +0.049 (0.026)        0.04         0.18          0.28        0.50                    0.33
+   busier games Chart-calibrated revenue, during (sensitivity)                                     status quo +0.000 (0.000) +0.000 (0.000)        0.09         0.19          0.28        0.43                    0.00
+   busier games Chart-calibrated revenue, during (sensitivity)                                 never discount -0.075 (0.016) -0.096 (0.017)        0.30         0.13          0.20        0.37                    0.70
+   busier games Chart-calibrated revenue, during (sensitivity)                                   always 1-33% -0.020 (0.021) -0.025 (0.022)        0.04         0.33          0.19        0.43                    0.67
+   busier games Chart-calibrated revenue, during (sensitivity)                                  always 34-60% +0.010 (0.021) +0.007 (0.022)        0.04         0.09          0.52        0.34                    0.48
+   busier games Chart-calibrated revenue, during (sensitivity)                                    always 61%+ +0.061 (0.023) +0.072 (0.023)        0.06         0.19          0.19        0.56                    0.44
+   busier games Chart-calibrated revenue, during (sensitivity)            best fixed depth [learned on proxy] +0.010 (0.019) +0.015 (0.019)        0.05         0.15          0.32        0.48                    0.45
+   busier games Chart-calibrated revenue, during (sensitivity)               tree, 1 split [learned on proxy] +0.048 (0.017) +0.055 (0.017)        0.06         0.22          0.19        0.52                    0.55
+   busier games Chart-calibrated revenue, during (sensitivity)              tree, 2 levels [learned on proxy] +0.013 (0.015) +0.015 (0.015)        0.06         0.19          0.28        0.47                    0.53
+   busier games Chart-calibrated revenue, during (sensitivity)     best fixed depth [learned on lag-adjusted] -0.075 (0.016) -0.096 (0.017)        0.30         0.13          0.20        0.37                    0.70
+   busier games Chart-calibrated revenue, during (sensitivity)        tree, 1 split [learned on lag-adjusted] -0.056 (0.018) -0.072 (0.018)        0.24         0.18          0.19        0.39                    0.67
+   busier games Chart-calibrated revenue, during (sensitivity)       tree, 2 levels [learned on lag-adjusted] -0.012 (0.015) -0.025 (0.015)        0.21         0.17          0.21        0.41                    0.56
+   busier games Chart-calibrated revenue, during (sensitivity) best fixed depth [learned on chart-calibrated] +0.061 (0.023) +0.072 (0.023)        0.06         0.19          0.19        0.56                    0.44
+   busier games Chart-calibrated revenue, during (sensitivity)    tree, 1 split [learned on chart-calibrated] +0.058 (0.025) +0.068 (0.025)        0.04         0.14          0.29        0.52                    0.35
+   busier games Chart-calibrated revenue, during (sensitivity)   tree, 2 levels [learned on chart-calibrated] +0.043 (0.026) +0.049 (0.026)        0.04         0.18          0.28        0.50                    0.33
+
+Trees fitted on all data:
+[all game-events] objective: Revenue proxy, net
+if reviews/day before the sale <= 0.4643:
+    if days since last discount <= 31:
+        -> 1-33%
+    else:
+        -> 61%+
+else:
+    if days since last discount <= 16:
+        -> 1-33%
+    else:
+        -> 61%+
+
+[all game-events] objective: Revenue proxy, net, lag-adjusted
+if mean discount depth, last year <= 35:
+    if days since last discount <= 26:
+        -> 1-33%
+    else:
+        -> 61%+
+else:
+    if mean discount depth, last year <= 46.43:
+        -> 1-33%
+    else:
+        -> none
+
+[all game-events] objective: Chart-calibrated revenue, during (sensitivity)
+if regular price (USD) <= 7.99:
+    if days since last discount <= 35:
+        -> 1-33%
+    else:
+        -> 61%+
+else:
+    if reviews/day before the sale <= 0.03571:
+        -> 1-33%
+    else:
+        -> 61%+
+
+[busier games] objective: Revenue proxy, net
+if days since last discount <= 19:
+    if share of last year on discount <= 0.3469:
+        -> 1-33%
+    else:
+        -> 34-60%
+else:
+    if share of last year on discount <= 0.1198:
+        -> 34-60%
+    else:
+        -> 61%+
+
+[busier games] objective: Revenue proxy, net, lag-adjusted
+if days since last discount <= 19:
+    if mean discount depth, last year <= 47.67:
+        -> 1-33%
+    else:
+        -> none
+else:
+    if days since last discount <= 30:
+        -> 61%+
+    else:
+        -> none
+
+[busier games] objective: Chart-calibrated revenue, during (sensitivity)
+if mean discount depth, last year <= 35.62:
+    if reviews/day before the sale <= 24.71:
+        -> 34-60%
+    else:
+        -> 1-33%
+else:
+    if share of last year on discount <= 0.1342:
+        -> 34-60%
+    else:
+        -> 61%+
+
+         sample                                      objective leaf     n  games assigned  share_can_follow  1-33% vs none  1-33% vs none se  share chose 1-33%  34-60% vs none  34-60% vs none se  share chose 34-60%  61%+ vs none  61%+ vs none se  share chose 61%+  share chose none
+all game-events                             Revenue proxy, net   LL  7574   1627    1-33%             0.231          0.000             0.049              0.125          -0.038              0.042               0.314        -0.020            0.045             0.384             0.177
+all game-events                             Revenue proxy, net   LR  8410   1605     61%+             0.553         -0.027             0.038              0.141           0.030              0.032               0.303         0.146            0.042             0.335             0.221
+all game-events                             Revenue proxy, net   RL  3929   1690    1-33%             0.254         -0.296             0.063              0.158          -0.251              0.065               0.320        -0.095            0.064             0.497             0.024
+all game-events                             Revenue proxy, net   RR 11889   2030     61%+             0.533          0.013             0.025              0.203          -0.013              0.024               0.282         0.081            0.028             0.402             0.113
+all game-events               Revenue proxy, net, lag-adjusted   LL  2944   1181    1-33%             0.951         -0.015             0.077              0.649          -0.023              0.079               0.309         0.029            0.085             0.003             0.038
+all game-events               Revenue proxy, net, lag-adjusted   LR  6663   1539     61%+             0.026          0.017             0.033              0.428           0.052              0.037               0.161         0.070            0.057             0.007             0.404
+all game-events               Revenue proxy, net, lag-adjusted   RL  3117   1065    1-33%             0.488         -0.096             0.063              0.081          -0.156              0.055               0.779        -0.113            0.077             0.047             0.093
+all game-events               Revenue proxy, net, lag-adjusted   RR 19078   2249     none             0.335         -0.169             0.027              0.008          -0.272              0.023               0.269        -0.292            0.022             0.642             0.081
+all game-events Chart-calibrated revenue, during (sensitivity)   LL  4574    846    1-33%             0.298         -0.009             0.088              0.174           0.014              0.081               0.343         0.033            0.088             0.305             0.178
+all game-events Chart-calibrated revenue, during (sensitivity)   LR  4056    738     61%+             0.495          0.088             0.057              0.189           0.272              0.056               0.294         0.512            0.092             0.268             0.249
+all game-events Chart-calibrated revenue, during (sensitivity)   RL  3971    654    1-33%             0.270          0.240             0.071              0.124           0.107              0.056               0.298         0.153            0.066             0.340             0.238
+all game-events Chart-calibrated revenue, during (sensitivity)   RR 19201   2429     61%+             0.581          0.073             0.029              0.162           0.163              0.029               0.291         0.385            0.033             0.449             0.098
+   busier games                             Revenue proxy, net   LL  3094   1388    1-33%             0.285         -0.265             0.069              0.178          -0.255              0.071               0.305        -0.099            0.069             0.486             0.030
+   busier games                             Revenue proxy, net   LR   746    372   34-60%             0.509         -0.326             0.062              0.101          -0.229              0.057               0.362        -0.167            0.068             0.534             0.004
+   busier games                             Revenue proxy, net   RL  1752    486   34-60%             0.559          0.013             0.040              0.287           0.128              0.049               0.172         0.183            0.068             0.112             0.428
+   busier games                             Revenue proxy, net   RR  7178   1538     61%+             0.609          0.013             0.027              0.188          -0.044              0.027               0.288         0.062            0.030             0.477             0.047
+   busier games               Revenue proxy, net, lag-adjusted   LL  1329    726    1-33%             0.745         -0.123             0.091              0.467          -0.113              0.091               0.489        -0.043            0.097             0.011             0.033
+   busier games               Revenue proxy, net, lag-adjusted   LR  2511    969     none             0.094         -0.526             0.070              0.002          -0.589              0.073               0.224        -0.601            0.069             0.752             0.021
+   busier games               Revenue proxy, net, lag-adjusted   RL  3566   1393     61%+             0.564         -0.042             0.034              0.180          -0.155              0.038               0.256        -0.205            0.048             0.457             0.107
+   busier games               Revenue proxy, net, lag-adjusted   RR  5364   1382     none             0.480         -0.117             0.033              0.226          -0.199              0.034               0.272        -0.225            0.033             0.371             0.131
+   busier games Chart-calibrated revenue, during (sensitivity)   LL  3012    820   34-60%             0.619          0.211             0.042              0.609           0.431              0.049               0.227         0.775            0.067             0.003             0.161
+   busier games Chart-calibrated revenue, during (sensitivity)   LR   823    255    1-33%             0.945          0.337             0.146              0.634           0.355              0.153               0.182         0.809            0.139             0.000             0.183
+   busier games Chart-calibrated revenue, during (sensitivity)   RL  1112    307   34-60%             0.697          0.191             0.058              0.042           0.318              0.056               0.332         0.470            0.069             0.388             0.237
+   busier games Chart-calibrated revenue, during (sensitivity)   RR  7823   1243     61%+             0.817          0.095             0.039              0.010           0.029              0.039               0.304         0.264            0.043             0.650             0.036
+
+Done in 20 minutes. Outputs in /home/claude/repo/pipeline/output/policy

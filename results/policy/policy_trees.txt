@@ -1,0 +1,71 @@
+[all game-events] objective: Revenue proxy, net
+if reviews/day before the sale <= 0.4643:
+    if days since last discount <= 31:
+        -> 1-33%
+    else:
+        -> 61%+
+else:
+    if days since last discount <= 16:
+        -> 1-33%
+    else:
+        -> 61%+
+
+[all game-events] objective: Revenue proxy, net, lag-adjusted
+if mean discount depth, last year <= 35:
+    if days since last discount <= 26:
+        -> 1-33%
+    else:
+        -> 61%+
+else:
+    if mean discount depth, last year <= 46.43:
+        -> 1-33%
+    else:
+        -> none
+
+[all game-events] objective: Chart-calibrated revenue, during (sensitivity)
+if regular price (USD) <= 7.99:
+    if days since last discount <= 35:
+        -> 1-33%
+    else:
+        -> 61%+
+else:
+    if reviews/day before the sale <= 0.03571:
+        -> 1-33%
+    else:
+        -> 61%+
+
+[busier games] objective: Revenue proxy, net
+if days since last discount <= 19:
+    if share of last year on discount <= 0.3469:
+        -> 1-33%
+    else:
+        -> 34-60%
+else:
+    if share of last year on discount <= 0.1198:
+        -> 34-60%
+    else:
+        -> 61%+
+
+[busier games] objective: Revenue proxy, net, lag-adjusted
+if days since last discount <= 19:
+    if mean discount depth, last year <= 47.67:
+        -> 1-33%
+    else:
+        -> none
+else:
+    if days since last discount <= 30:
+        -> 61%+
+    else:
+        -> none
+
+[busier games] objective: Chart-calibrated revenue, during (sensitivity)
+if mean discount depth, last year <= 35.62:
+    if reviews/day before the sale <= 24.71:
+        -> 34-60%
+    else:
+        -> 1-33%
+else:
+    if share of last year on discount <= 0.1342:
+        -> 34-60%
+    else:
+        -> 61%+
