@@ -1,0 +1,9 @@
+parameter,value
+"mu (log valuation, share of regular price)",0.9572053544811506
+sigma (spread of log valuations),2.944355057145622
+delta (weekly chance of losing interest),0.08314670185215475
+pi (share who know the sale price a week ahead),0.5012786623169964
+phi (review lag: weekly carry-over),0.7158966418430771
+"beta (weekly patience, best fit on the grid)",0.995
+mean review lag (weeks),2.5198457578514635
+"fit loss (sum of squared t-statistics, 8 moments)",24.779428045709093

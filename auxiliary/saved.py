@@ -136,3 +136,46 @@ def policy_tree(sample="all game-events", objective="Revenue proxy, net"):
         if block.startswith(f"[{sample}] objective: {objective}\n"):
             return block
     return ""
+
+
+# ---------------------------------------------------------------- buy-or-wait model
+def _bw(name):
+    return pd.read_csv(RESULTS / "buy_or_wait" / f"{name}.csv")
+
+
+def bw_fit():
+    t = _bw("calibration_fit")
+    t["data (SE)"] = [_fmt(d, s) for d, s in zip(t["data"], t["data_se"])]
+    t["model"] = t["model"].map(lambda x: f"{x:+.3f}")
+    return t[["moment", "targeted", "data (SE)", "model"]]
+
+
+def bw_parameters():
+    return _bw("parameters").round(3)
+
+
+def bw_waiting():
+    return _bw("waiting_test").round(3)
+
+
+def bw_proxy():
+    return _bw("proxy_vs_true").round(3)
+
+
+def bw_schedules(kappa=1.0):
+    s = _bw("schedules")
+    s = s[s["sale-week traffic"] == kappa]
+    return s[["schedule", "purchases vs never (log)", "revenue vs never (log)"]].round(
+        3
+    )
+
+
+def bw_sensitivity():
+    s = _bw("sensitivity")
+    t = s.pivot(index="beta", columns="schedule", values="revenue vs never (log)")
+    t.insert(0, "fit loss", s.groupby("beta")["fit loss"].first())
+    return t.round(3)
+
+
+def bw_figure():
+    return RESULTS / "buy_or_wait" / "model_event_study.png"

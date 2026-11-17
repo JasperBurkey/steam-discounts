@@ -32,6 +32,8 @@ Calibrated, not estimated: no standard errors; an interpretation of the causal e
 Outputs: results/buy_or_wait/
 """
 
+import json
+import os
 import time
 
 import config
@@ -371,7 +373,8 @@ def schedule_revenue(depths, price_by_group, theta, beta, years=6, kappa=1.0):
     q = np.zeros(weeks)
     for t in range(weeks):
         arr = kappa if t % W == 0 else 1.0
-        q[t], mass = step(mass, buy[:, [path[0, t]]].T, delta, arr)
+        qt_, mass = step(mass, buy[:, [path[0, t]]].T, delta, arr)
+        q[t] = qt_[0]
     last = slice(weeks - 52 * len(depths), weeks)  # whole cycles in steady state
     return q[last].sum() / len(depths), (q[last] * p[path[0, last]]).sum() / len(depths)
 
@@ -460,11 +463,29 @@ def main():
 
     # patience is not pinned down a priori: calibrate at each beta, keep the best fit
     grid = {}
-    theta0 = (0.0, 0.9, 0.05, 0.3, 0.4)
-    for b in BETAS:
-        grid[b] = calibrate(P, price, depth_mix, beta=b, theta0=theta0)
-        print(
-            f"  beta {b}: loss {grid[b][1]:.2f}  [{time.time() - t0:.0f}s]", flush=True
+    cache = OUT / "calibration_grid.json"
+    if os.environ.get("REUSE_CALIBRATION") and cache.exists():
+        grid = {
+            float(b): (tuple(v[0]), v[1])
+            for b, v in json.loads(cache.read_text()).items()
+        }
+        print("  reusing saved calibration grid", flush=True)
+    else:
+        theta0 = (0.0, 0.9, 0.05, 0.3, 0.4)
+        for b in BETAS:
+            grid[b] = calibrate(P, price, depth_mix, beta=b, theta0=theta0)
+            print(
+                f"  beta {b}: loss {grid[b][1]:.2f}  [{time.time() - t0:.0f}s]",
+                flush=True,
+            )
+        cache.write_text(
+            json.dumps(
+                {
+                    str(b): [[float(x) for x in th], float(f)]
+                    for b, (th, f) in grid.items()
+                },
+                indent=1,
+            )
         )
     beta = min(grid, key=lambda b: grid[b][1])
     theta, fit = grid[beta]

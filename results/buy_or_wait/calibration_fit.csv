@@ -1,0 +1,11 @@
+moment,targeted,data,data_se,model
+week before the sale,True,-0.06,0.017,-0.07430697959358179
+during the sale,True,0.311,0.023,0.3500378105164816
+weeks 1-2 after,True,0.191,0.024,0.19935415855427657
+weeks 3-4 after,True,0.052,0.024,0.07452068238395833
+weeks 5-6 after,True,0.054,0.024,0.01690788142497771
+"during, 1-33%",True,0.206,0.024,0.142169708423954
+"during, 34-60%",True,0.261,0.026,0.25934454798250933
+"during, 61%+",True,0.61,0.031,0.5041062032644941
+"revenue proxy, during (ATT)",False,-0.535,0.028,-0.627096448426362
+"revenue proxy, net (ATT)",False,-0.072,0.021,-0.04836325148711544
