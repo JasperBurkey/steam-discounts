@@ -1,0 +1,10 @@
+outcome,depth,ATE (all games),ATT (games choosing this depth),ATT se (log)
+"Reviews, during",1-33%,+12%,+31%,0.056
+"Reviews, during",34-60%,+26%,+24%,0.038
+"Reviews, during",61%+,+63%,+30%,0.029
+"Revenue proxy, net",1-33%,-4%,+3%,0.042
+"Revenue proxy, net",34-60%,-4%,-4%,0.03
+"Revenue proxy, net",61%+,+6%,-11%,0.023
+"Revenue proxy, net, lag-adjusted",1-33%,-10%,-3%,0.042
+"Revenue proxy, net, lag-adjusted",34-60%,-16%,-16%,0.035
+"Revenue proxy, net, lag-adjusted",61%+,-15%,-30%,0.025
