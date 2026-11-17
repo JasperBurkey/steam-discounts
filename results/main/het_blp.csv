@@ -1,0 +1,5 @@
+sample,outcome,game-events,ate,het_loading,het_se,het_p_adjusted
+busier games,"Reviews, during the sale",12770,0.318,1.068,0.522,0.029
+overlap region (0.1-0.9),"Reviews, during the sale",1951,0.418,1.341,1.99,0.499
+busier games,"Revenue proxy, net (headline)",12770,-0.061,1.158,0.258,0.0
+overlap region (0.1-0.9),"Revenue proxy, net (headline)",1951,0.046,2.394,1.372,0.027
