@@ -11,6 +11,7 @@ dependencies:
   - scipy>=1.14
   - scikit-learn>=1.5
   - pyarrow>=14
+  - quantecon>=0.7  # buy-or-wait model (pipeline/15_buy_or_wait.py)
   # Data collection (pipeline/ and collector/; not run on GitHub)
   - requests>=2.31
   # Development tools
