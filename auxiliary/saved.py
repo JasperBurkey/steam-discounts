@@ -179,3 +179,23 @@ def bw_sensitivity():
 
 def bw_figure():
     return RESULTS / "buy_or_wait" / "model_event_study.png"
+
+
+# ---------------------------------------------------------------- review-flag checks
+def review_flag_tests(sample="all games (full histories)"):
+    t = pd.read_csv(RESULTS / "review_flags" / "tests.csv")
+    t = t[
+        (t["sample"] == sample)
+        & t["outcome"].isin(["pre_week", "during", "after", "net"])
+    ].copy()
+    t["test"] = t["test"].map(
+        {"placebo": "Not paid on Steam (placebo)", "fast": "Under 2 hours of play"}
+    )
+    t["difference (SE)"] = [
+        _fmt(d, s) for d, s in zip(t["difference"], t["se (conservative)"])
+    ]
+    return (
+        t[["test", "outcome", "series ATT", "benchmark ATT", "difference (SE)"]]
+        .round(3)
+        .reset_index(drop=True)
+    )
