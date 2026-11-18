@@ -1,0 +1,73 @@
+sample,series,outcome,ATT,se,n
+all games (full histories),All reviews,pre_week,-0.05327035929971084,0.019539090857778055,29046
+all games (full histories),All reviews,during,0.2415472663111615,0.02027260513280667,29046
+all games (full histories),All reviews,after,0.09960746011632982,0.019359709636826147,29046
+all games (full histories),All reviews,wk3_4,-0.0021222252263701138,0.02055263706184381,26597
+all games (full histories),All reviews,wk5_6,0.010666271389483187,0.020210453076502637,26597
+all games (full histories),All reviews,net,0.0643186746829136,0.016864069761718628,26597
+all games (full histories),Paid Steam purchases,pre_week,-0.03390779022808005,0.01970202637188661,29046
+all games (full histories),Paid Steam purchases,during,0.27534051940551296,0.020730691351650947,29046
+all games (full histories),Paid Steam purchases,after,0.15062376857514517,0.01939955901431316,29046
+all games (full histories),Paid Steam purchases,wk3_4,0.009201785554532516,0.021224888214655135,26597
+all games (full histories),Paid Steam purchases,wk5_6,0.014957979864402763,0.021447324339066116,26597
+all games (full histories),Paid Steam purchases,net,0.09621309119557445,0.01718206343666612,26597
+all games (full histories),Not paid on Steam (placebo),pre_week,-0.05276504933032037,0.017919795576478062,29046
+all games (full histories),Not paid on Steam (placebo),during,0.006217252379282927,0.017064331409999363,29046
+all games (full histories),Not paid on Steam (placebo),after,-0.03963295679748737,0.021104095433319765,29046
+all games (full histories),Not paid on Steam (placebo),wk3_4,-0.0468552842377568,0.018495713896226902,26597
+all games (full histories),Not paid on Steam (placebo),wk5_6,-0.03365152022754792,0.017835938273506623,26597
+all games (full histories),Not paid on Steam (placebo),net,-0.037090281688400235,0.014864756369336637,26597
+all games (full histories),"Paid, thinned to the placebo share (benchmark)",pre_week,0.024360873086434105,0.01761219913583232,29046
+all games (full histories),"Paid, thinned to the placebo share (benchmark)",during,0.1579513502860617,0.01907452244349527,29046
+all games (full histories),"Paid, thinned to the placebo share (benchmark)",after,0.07497392222474121,0.016947912732939,29046
+all games (full histories),"Paid, thinned to the placebo share (benchmark)",wk3_4,0.0053059323951652965,0.019162190684064943,26597
+all games (full histories),"Paid, thinned to the placebo share (benchmark)",wk5_6,9.46949942038887e-05,0.01965241855483339,26597
+all games (full histories),"Paid, thinned to the placebo share (benchmark)",net,0.06190275317179853,0.015632837025365273,26597
+all games (full histories),Written under 2 hours of play,pre_week,-0.022853823473869828,0.0197127356879949,29046
+all games (full histories),Written under 2 hours of play,during,0.29164032265777995,0.021022162548585206,29046
+all games (full histories),Written under 2 hours of play,after,0.06838539770880878,0.020707644540726287,29046
+all games (full histories),Written under 2 hours of play,wk3_4,-0.008789387783393384,0.022627577232947903,26597
+all games (full histories),Written under 2 hours of play,wk5_6,0.015254872599333523,0.021017003708850096,26597
+all games (full histories),Written under 2 hours of play,net,0.06941628547024559,0.01915679858573558,26597
+all games (full histories),"Paid, thinned to the fast share (benchmark)",pre_week,0.0094446661758825,0.021048884550507383,29046
+all games (full histories),"Paid, thinned to the fast share (benchmark)",during,0.17529542130092435,0.022411693259975555,29046
+all games (full histories),"Paid, thinned to the fast share (benchmark)",after,0.09607826168400369,0.01914716690326055,29046
+all games (full histories),"Paid, thinned to the fast share (benchmark)",wk3_4,0.03141704981094929,0.022643517597192325,26597
+all games (full histories),"Paid, thinned to the fast share (benchmark)",wk5_6,0.019705195033812947,0.020420976767265665,26597
+all games (full histories),"Paid, thinned to the fast share (benchmark)",net,0.06771093607210762,0.017667144190543466,26597
+busier games,All reviews,pre_week,-0.05001633533313809,0.031077614990319104,8128
+busier games,All reviews,during,0.32105495873062245,0.0446275125153732,8128
+busier games,All reviews,after,0.17420464810229774,0.052842371949800404,8128
+busier games,All reviews,wk3_4,-0.005242074744548413,0.04781258624494149,7568
+busier games,All reviews,wk5_6,0.032207690393268755,0.056198412513050806,7568
+busier games,All reviews,net,0.07118316932129434,0.03752738997736828,7568
+busier games,Paid Steam purchases,pre_week,-0.0528602236738246,0.03183605911100503,8128
+busier games,Paid Steam purchases,during,0.3677691687276907,0.0460497879833252,8128
+busier games,Paid Steam purchases,after,0.2213671008700138,0.05313331289118443,8128
+busier games,Paid Steam purchases,wk3_4,0.014963209339954363,0.049403621482973524,7568
+busier games,Paid Steam purchases,wk5_6,0.07649197827129495,0.05755821314258153,7568
+busier games,Paid Steam purchases,net,0.11934878948272105,0.03679284929982618,7568
+busier games,Not paid on Steam (placebo),pre_week,-0.11650472950205494,0.05298074108202877,8128
+busier games,Not paid on Steam (placebo),during,0.09019079704462893,0.053763733255226584,8128
+busier games,Not paid on Steam (placebo),after,-0.02662051789758218,0.06035618330348821,8128
+busier games,Not paid on Steam (placebo),wk3_4,-0.07879799412358271,0.052338632383269766,7568
+busier games,Not paid on Steam (placebo),wk5_6,-0.07821562649861498,0.056401156624414396,7568
+busier games,Not paid on Steam (placebo),net,-0.07356611886765152,0.04471498866826821,7568
+busier games,"Paid, thinned to the placebo share (benchmark)",pre_week,0.09053668028941222,0.05530338785659447,8128
+busier games,"Paid, thinned to the placebo share (benchmark)",during,0.2859339575106659,0.062211805918399726,8128
+busier games,"Paid, thinned to the placebo share (benchmark)",after,0.16146527382377684,0.0533983766293564,8128
+busier games,"Paid, thinned to the placebo share (benchmark)",wk3_4,0.012800579583757271,0.05831732132866555,7568
+busier games,"Paid, thinned to the placebo share (benchmark)",wk5_6,-0.002913338263280988,0.06420726766682185,7568
+busier games,"Paid, thinned to the placebo share (benchmark)",net,0.0892685574381901,0.044150060979187486,7568
+busier games,Written under 2 hours of play,pre_week,0.014258341802484486,0.06178438728015123,8128
+busier games,Written under 2 hours of play,during,0.5676736118448381,0.07087183294743934,8128
+busier games,Written under 2 hours of play,after,0.13875593244145557,0.07784633217025436,8128
+busier games,Written under 2 hours of play,wk3_4,0.051560645119330846,0.07087935570941041,7568
+busier games,Written under 2 hours of play,wk5_6,0.014421960861802913,0.07183059103954166,7568
+busier games,Written under 2 hours of play,net,0.12563418888221592,0.0605253908496902,7568
+busier games,"Paid, thinned to the fast share (benchmark)",pre_week,0.10309136449590207,0.06607703558518802,8128
+busier games,"Paid, thinned to the fast share (benchmark)",during,0.33169743022761566,0.06847579569590674,8128
+busier games,"Paid, thinned to the fast share (benchmark)",after,0.17217767088717514,0.059154929182169975,8128
+busier games,"Paid, thinned to the fast share (benchmark)",wk3_4,0.05513008527142683,0.0687313627173196,7568
+busier games,"Paid, thinned to the fast share (benchmark)",wk5_6,0.015368522020776685,0.06254945003623656,7568
+busier games,"Paid, thinned to the fast share (benchmark)",net,0.12363663340399624,0.049357214948158354,7568
