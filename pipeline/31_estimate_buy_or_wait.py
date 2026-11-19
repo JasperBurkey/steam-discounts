@@ -28,7 +28,9 @@ trick):
   8 - 5 = 3 degrees of freedom.
 
 Counterfactuals (publisher commits to a schedule; buyers' beliefs match it; steady state
-per year; 200 draws of theta from its estimated distribution for 90% intervals):
+per year). The valuation distribution is weakly identified, so intervals are the range of
+each counterfactual over a 90% confidence set: draws from the normal approximation whose
+criterion is within the chi-squared(5) 90% critical value of the minimum.
   schedules       never discount, 1-33% / 34-60% / 61%+ every sale, every other sale, once
                   a year
   welfare         publisher revenue (70% of sales), Valve's share (30%), consumer surplus
@@ -43,19 +45,22 @@ Outputs: results/estimation/
 
 import importlib
 import json
+import os
 import time
+from types import SimpleNamespace
 
 import config
 import numpy as np
 import pandas as pd
 from scipy.optimize import minimize
+from scipy.stats import chi2
 
 B = importlib.import_module("15_buy_or_wait")
 OUT = config.ROOT.parent / "results" / "estimation"
 LAM = 0.05
 LAM_SENS = [0.02, 0.10]
 N_SIM = 300  # price paths per evaluation (common random numbers)
-N_DRAWS = 200
+N_CAND = 1000  # candidate draws for the confidence set
 EULER = 0.5772156649
 VALVE_SHARE = 0.30
 NAMES = ["mu", "sigma", "delta", "pi", "phi"]
@@ -294,15 +299,30 @@ def main():
         B.pack((0.8, 2.5, 0.08, 0.5, 0.7)),
     ]
 
-    # profile over beta
+    # profile over beta (or reuse the saved estimates)
+    cache = OUT / "estimates.json"
     prof = {}
-    for beta in B.BETAS:
-        r = estimate(P, price, mix, beta, LAM, draws, starts_all)
-        prof[beta] = r
-        print(
-            f"  beta {beta}: J {r.fun:.2f}, theta {np.round(B.unpack(r.x), 3)}  "
-            f"[{(time.time() - t0) / 60:.0f} min]",
-            flush=True,
+    if os.environ.get("REUSE_ESTIMATE") and cache.exists():
+        for b, v in json.loads(cache.read_text()).items():
+            prof[float(b)] = SimpleNamespace(x=np.array(v["z"]), fun=v["J"])
+        print("  reusing saved estimates", flush=True)
+    else:
+        for beta in B.BETAS:
+            r = estimate(P, price, mix, beta, LAM, draws, starts_all)
+            prof[beta] = r
+            print(
+                f"  beta {beta}: J {r.fun:.2f}, theta {np.round(B.unpack(r.x), 3)}  "
+                f"[{(time.time() - t0) / 60:.0f} min]",
+                flush=True,
+            )
+        cache.write_text(
+            json.dumps(
+                {
+                    str(b): {"z": list(map(float, r.x)), "J": float(r.fun)}
+                    for b, r in prof.items()
+                },
+                indent=1,
+            )
         )
     beta = min(prof, key=lambda b: prof[b].fun)
     z = prof[beta].x
@@ -311,8 +331,6 @@ def main():
     Vz, Vt, G = theta_cov(z, args)
     se = np.sqrt(np.diag(Vt))
     J = prof[beta].fun
-    from scipy.stats import chi2
-
     par = [
         {"parameter": LABELS[n], "estimate": th[i], "se": se[i]}
         for i, n in enumerate(NAMES)
@@ -365,16 +383,29 @@ def main():
     )
     print(f"lam sensitivity done  [{(time.time() - t0) / 60:.0f} min]", flush=True)
 
-    # counterfactuals with intervals from draws of theta
+    # counterfactuals. The valuation distribution (mu, sigma) is only weakly identified, so
+    # draws from the normal approximation wander into parameter values the data reject.
+    # Intervals instead use the draws whose criterion is within the 90% chi-squared(5)
+    # critical value of the minimum (a confidence set by test inversion).
     rng = np.random.default_rng(config.SEED + 7)
-    zs = rng.multivariate_normal(z, Vz, N_DRAWS)
+    zs = rng.multivariate_normal(z, Vz, N_CAND)
+    crit = chi2.ppf(0.90, len(NAMES))
+    Js = np.array([criterion(zz, *args) for zz in zs])
+    keep = zs[Js <= J + crit]
+    print(
+        f"  confidence set: {len(keep)} of {N_CAND} draws within J_min + {crit:.2f}",
+        flush=True,
+    )
+    pd.DataFrame(
+        [dict(zip(NAMES, B.unpack(zz)), J=j) for zz, j in zip(zs, Js) if j <= J + crit]
+    ).to_csv(OUT / "confidence_set.csv", index=False)
     rows = []
     for kappa in (1.0, 2.0):
         point = counterfactuals(pg, th, beta, LAM, kappa)
-        sims = [counterfactuals(pg, B.unpack(zz), beta, LAM, kappa) for zz in zs]
+        sims = [counterfactuals(pg, B.unpack(zz), beta, LAM, kappa) for zz in keep]
         for name in B.SCHEDULES:
             for key, val in point[name].items():
-                d = np.array([s_[name][key] for s_ in sims])
+                d = np.array([s_[name][key] for s_ in sims] + [val])
                 d = d[np.isfinite(d)]
                 rows.append(
                     {
@@ -382,8 +413,8 @@ def main():
                         "schedule": name,
                         "outcome": key,
                         "estimate": val,
-                        "p05": np.quantile(d, 0.05),
-                        "p95": np.quantile(d, 0.95),
+                        "low": d.min(),
+                        "high": d.max(),
                     }
                 )
         print(
@@ -399,7 +430,7 @@ def main():
             f"\n{f}:\n" + pd.read_csv(OUT / f"{f}.csv").round(4).to_string(index=False)
         )
     cf["est [90%]"] = cf.apply(
-        lambda x: f"{x['estimate']:+.3f} [{x['p05']:+.3f}, {x['p95']:+.3f}]", axis=1
+        lambda x: f"{x['estimate']:+.3f} [{x['low']:+.3f}, {x['high']:+.3f}]", axis=1
     )
     print(
         cf.pivot_table(

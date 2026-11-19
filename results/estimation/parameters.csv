@@ -1,0 +1,10 @@
+parameter,estimate,se,p
+"mu (mean log valuation, share of regular price)",-0.3182767766461727,3.337751296979274,
+sigma (spread of log valuations),3.491343880934681,2.906816053727728,
+delta (weekly chance of losing interest),0.1512950457857879,0.3597348623299246,
+pi (share who know the sale price a week ahead),0.40819536832907644,0.1488429648855847,
+phi (review lag: weekly carry-over),0.6504589684124984,0.13572993447523812,
+mean review lag (weeks),1.8608944576787607,1.110911115406786,
+"beta (weekly patience, profiled)",0.998,,
+"lam (taste-shock scale, fixed)",0.05,,
+J statistic (3 df),24.13629741286386,,2.339558133601649e-05
