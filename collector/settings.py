@@ -97,6 +97,12 @@ REQS_PER_SEC = {  # per process
 USER_AGENT = "UW-econ-research-collector/1.0 (academic, non-commercial)"
 TWITCH_MAX_PAGES = 100  # 100 streams per page -> top 10,000 live streams
 
+# --- Achievement trial (job "achievements"): global achievement % for the study games ---
+# Daily, from a week before the Winter Sale to two weeks after. A sale that brings many new
+# players should lower the share holding each achievement; the trial tests whether that
+# signal is measurable before relying on it. One call per study game per day, no key.
+ACHIEVEMENT_TRIAL = [("2026-11-20", "2027-01-18")]
+
 # ---------- Schedule (UTC hours) ----------
 # Steam sales and price changes go live at 10:00 Pacific (17:00 or 18:00 UTC), so the
 # daily price snapshot runs at 20:00 UTC, safely after any same-day change.
@@ -123,6 +129,8 @@ SLOTS = {
     # hourly price-change check (about 3 calls, plus prices of changed study games)
     "prices_watch": {"hours": list(range(24))},
     "ccu_study_sale": {"hours": [2, 6, 10, 14, 18, 22], "periods": RANKS_SALE_PERIODS},
+    # achievement trial: once a day, between study panel passes (~30 minutes)
+    "achievements": {"hours": [9], "periods": ACHIEVEMENT_TRIAL},
 }
 # A job whose slot passed while the machine was off runs at the next hourly check, and its
 # log records how late it ran. Every row also carries its exact captured_at time.
@@ -137,6 +145,7 @@ GROUPS = {
         "prices_watch",
         "ccu_study",
         "ccu_study_sale",
+        "achievements",
     ],
     "daily": ["ranks", "universe", "items", "regional", "weekly"],
     "ccu": ["ccu_a", "ccu_b", "ccu_c"],

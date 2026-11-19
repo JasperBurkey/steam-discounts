@@ -43,6 +43,7 @@ for a given day if it is not captured that day.
 | `ccu` | Tier A at 04 and 16 UTC; B daily; C weekly in rotation; thesis study panel (`tier` = `study`, games in `study_apps.csv`) every 4 h at 00/04/08/12/16/20 UTC, plus 02/06/.../22 UTC during seasonal sales | Concurrent players; `http_status` and `result` separate "zero players" from "no data" | No |
 | `price_changes` | Hourly | Games whose Steam price-change counter changed since the previous hour (`old_number`, `new_number`, `in_study`). Times every price change in the catalog to the hour | No |
 | `study_prices` | Hourly, for study games whose counter changed; full snapshot of all study games daily at 09:00 UTC | US price, regular price and discount for the thesis study games; `reason` = `changed` or `snapshot` | No (IsThereAnyDeal has history, but not this check) |
+| `achievements` | Daily at 09:00 UTC, Nov 20 2026 - Jan 18 2027 (trial) | Global achievement percentages for the study games: one row per game x achievement (`name`, `percent`, `n_achievements`); a game with none gets one row with `name` null. Trial of an ownership signal: a sale that brings many new players should lower the share holding each achievement | No (Steam reports only current percentages) |
 | `charts_most_played` | 04 and 16 UTC | Steam's top 100 by daily peak players | No |
 | `charts_concurrent` | 04 and 16 UTC | Steam's top games by current players | No |
 | `topsellers` | Daily | Weekly top sellers (top 500), global plus 6 countries | Possibly (the API takes a past week) but not guaranteed |

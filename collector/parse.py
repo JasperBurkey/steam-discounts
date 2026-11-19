@@ -461,6 +461,15 @@ def featured_rows(body, captured_at, endpoint):
 
 
 # ---------------------------------------------------------------- player counts
+ACHIEVEMENTS = {  # one row per game x achievement; a game with none gets one row, name null
+    "captured_at": T_,
+    "appid": I_,
+    "name": S_,
+    "percent": F_,
+    "n_achievements": I_,
+    "http_status": S_,
+}
+
 CCU = {
     "captured_at": T_,
     "appid": I_,

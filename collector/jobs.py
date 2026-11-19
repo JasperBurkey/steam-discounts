@@ -428,6 +428,7 @@ def job_prices_watch(http, run_id):
             for x in failed
         ]
     n_prices = write_table("study_prices", rows, P.STUDY_PRICES, run_id, now)
+    state_path.parent.mkdir(parents=True, exist_ok=True)
     cur.to_parquet(state_path, index=False)  # only after both tables are written
     stats = {
         "rows": n_events + n_prices,
@@ -503,7 +504,7 @@ def _study_reserve(now=None):
     now = now or utcnow()
     n = len(_study_ids())
     runs = 0
-    for job in ("ccu_study", "ccu_study_sale"):
+    for job in ("ccu_study", "ccu_study_sale", "achievements"):
         cfg = S.SLOTS[job]
         periods = cfg.get("periods")
         d = now.date().isoformat()
@@ -521,6 +522,56 @@ def job_ccu_study(http, run_id):
     stats = _ccu(http, run_id, ids[:left], "study")
     stats["trimmed_for_budget"] = max(0, len(ids) - left)
     return stats
+
+
+def job_achievements(http, run_id):
+    """Global achievement percentages for the study games (achievement trial)."""
+    ids = _study_ids()
+    if not ids:
+        return {"rows": 0, "note": f"no {S.STUDY_APPS.name}"}
+    left = _budget_left()
+    rows, with_ach = [], 0
+    for i, appid in enumerate(ids[:left], 1):
+        if i % 1000 == 0:
+            print(
+                f"  achievements {i:,}/{len(ids):,} ({utcnow():%H:%M} UTC)", flush=True
+            )
+        body, status = http.get(
+            f"{API}/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v2/",
+            {"gameid": int(appid)},
+        )
+        ach = ((body or {}).get("achievementpercentages") or {}).get(
+            "achievements"
+        ) or []
+        now = utcnow()
+        if not ach:
+            rows.append(
+                {
+                    "captured_at": now,
+                    "appid": int(appid),
+                    "n_achievements": 0,
+                    "http_status": str(status),
+                }
+            )
+            continue
+        with_ach += 1
+        for a in ach:
+            rows.append(
+                {
+                    "captured_at": now,
+                    "appid": int(appid),
+                    "name": a.get("name"),
+                    "percent": a.get("percent"),
+                    "n_achievements": len(ach),
+                    "http_status": str(status),
+                }
+            )
+    return {
+        "rows": write_table("achievements", rows, P.ACHIEVEMENTS, run_id),
+        "requested": min(len(ids), left),
+        "games_with_achievements": with_ach,
+        "trimmed_for_budget": max(0, len(ids) - left),
+    }
 
 
 def job_ccu_b(http, run_id):
@@ -864,6 +915,7 @@ JOBS = {
     "ccu_study": job_ccu_study,
     "prices_watch": job_prices_watch,
     "ccu_study_sale": job_ccu_study,
+    "achievements": job_achievements,
     "charts": job_charts,
     "topsellers": job_topsellers,
     "featured": job_featured,
