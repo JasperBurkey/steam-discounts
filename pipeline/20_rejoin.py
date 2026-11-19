@@ -114,7 +114,11 @@ def main():
     ]
     rows = []
     for name, sample, d, xs, fe in specs:
-        ctrl = z(CONTROLS) if "app_id" not in fe else z(["pre_rate_60", "pre_trend", "cut"])
+        ctrl = (
+            z(CONTROLS)
+            if "app_id" not in fe
+            else z(["pre_rate_60", "pre_trend", "cut"])
+        )
         r = ols(d, "next_disc", xs + ctrl, fe)
         for v in xs:
             rows.append(
@@ -129,8 +133,15 @@ def main():
                 }
             )
     j = s[s["next_disc"] == 1].dropna(subset=["next_cut"])
-    for sample, fe in [("rejoiners", ["sale"]), ("rejoiners, game FE", ["sale", "app_id"])]:
-        ctrl = z(CONTROLS) if "app_id" not in fe else z(["pre_rate_60", "pre_trend", "cut"])
+    for sample, fe in [
+        ("rejoiners", ["sale"]),
+        ("rejoiners, game FE", ["sale", "app_id"]),
+    ]:
+        ctrl = (
+            z(CONTROLS)
+            if "app_id" not in fe
+            else z(["pre_rate_60", "pre_trend", "cut"])
+        )
         r = ols(j, "next_cut", z(summ) + ctrl, fe)
         for v in z(summ):
             rows.append(
@@ -148,7 +159,11 @@ def main():
     res.to_csv(OUT / "rejoin.csv", index=False)
     res["coef (se)"] = res.apply(lambda x: f"{x['coef']:+.4f} ({x['se']:.4f})", axis=1)
     pd.set_option("display.width", 200)
-    print(res[["outcome", "spec", "sample", "term", "coef (se)", "n"]].to_string(index=False))
+    print(
+        res[["outcome", "spec", "sample", "term", "coef (se)", "n"]].to_string(
+            index=False
+        )
+    )
 
 
 if __name__ == "__main__":
