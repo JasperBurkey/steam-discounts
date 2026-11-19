@@ -1,0 +1,7 @@
+threshold,row,est,se,n
+50,comparison (no label change),-0.1716081300616742,0.15064023564574258,32
+50,upgrade (label: Positive -> Very Positive),-0.12781400518374558,0.06887562663689958,137
+50,"difference (upgrade - comparison), controls: log days since release, log reviews before",0.1656555680696016,0.13488904932666643,169
+500,comparison (no label change),0.032969475139262384,0.09294023212649284,65
+500,upgrade (label: Very Positive -> Overwhelmingly Positive),0.0365918617439959,0.09866970548195918,34
+500,"difference (upgrade - comparison), controls: log days since release, log reviews before",0.2108611629797106,0.1330202630733894,99
