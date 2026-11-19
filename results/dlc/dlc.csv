@@ -1,0 +1,15 @@
+part,sample,outcome,ATT,se,n,treated
+A: DLC spillover,clean: DLC at full price,"DLC reviews, during the sale",0.3097483640140392,0.11339341632678852,2131,1630
+A: DLC spillover,clean: DLC at full price,"DLC reviews, weeks 1-2 after",0.07421727914308597,0.13258882472826417,2131,1630
+A: DLC spillover,clean: DLC at full price,"base-game reviews, during (same sample)",0.4085678361673301,0.10730504452163421,2131,1630
+A: DLC spillover,both discounted vs neither,"DLC reviews, during the sale",0.25997593369370003,0.05773427467812093,4843,4342
+A: DLC spillover,both discounted vs neither,"DLC reviews, weeks 1-2 after",0.12536949868284775,0.06692838231368264,4843,4342
+A: DLC spillover,both discounted vs neither,"base-game reviews, during (same sample)",0.35798716386818147,0.056411043464794496,4843,4342
+B: main results by monetization,no DLC,"reviews, during",0.2372990619431736,0.025782575912132375,19996,16524
+B: main results by monetization,no DLC,"revenue proxy, net",-0.0696293216483808,0.018464650217705006,19996,16524
+B: main results by monetization,has DLC,"reviews, during",0.27588894747816783,0.031984116322522585,11806,10634
+B: main results by monetization,has DLC,"revenue proxy, net",-0.04342593123825965,0.02522892733670515,11806,10634
+B: main results by monetization,in-app purchases,"reviews, during",0.4887261422308507,0.25617362186788417,1004,862
+B: main results by monetization,in-app purchases,"revenue proxy, net",0.10518021551876851,0.2075306635836847,1004,862
+B: main results by monetization,no DLC and no in-app purchases,"reviews, during",0.23081062522042045,0.026047318159684054,19830,16390
+B: main results by monetization,no DLC and no in-app purchases,"revenue proxy, net",-0.07592070014862796,0.018458511113337975,19830,16390
