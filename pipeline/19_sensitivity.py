@@ -23,9 +23,12 @@ Reported for each headline outcome:
                      as that group, or twice as strong.
 
   python 19_sensitivity.py
+  SENS_SAMPLE=trimmed SENS_OUTCOMES=r_net SENS_GROUPS="discount history" python 19_sensitivity.py
+      (run part of the grid; rows are appended to the output files as they finish)
 Outputs: results/sensitivity/
 """
 
+import os
 import time
 
 import config
@@ -124,8 +127,34 @@ def main():
         "all game-events": base,
         "overlap-trimmed (0.1-0.9)": base[(base["_e"] > 0.1) & (base["_e"] < 0.9)],
     }
+    pick = os.environ.get("SENS_SAMPLE")
+    if pick:
+        samples = {k: v for k, v in samples.items() if k.startswith(pick)}
+    outs = os.environ.get("SENS_OUTCOMES")
+    outcomes = {k: v for k, v in OUTCOMES.items() if not outs or k in outs.split(",")}
+    gp = os.environ.get("SENS_GROUPS")
+    groups = {k: v for k, v in GROUPS.items() if not gp or k in gp.split(",")}
+
+    def save():
+        for name, rr in (("robustness_values.csv", rows), ("benchmarks.csv", bench)):
+            if rr:
+                f = OUT / name
+                new = pd.DataFrame(rr)
+                if f.exists():
+                    old = pd.read_csv(f)
+                    keys = ["sample", "outcome"] + (
+                        ["hidden confounder as strong as"]
+                        if "bias bound" in new
+                        else []
+                    )
+                    old = old[
+                        ~old.set_index(keys).index.isin(new.set_index(keys).index)
+                    ]
+                    new = pd.concat([old, new], ignore_index=True)
+                new.to_csv(f, index=False)
+
     for sname, sdf in samples.items():
-        for y, label in OUTCOMES.items():
+        for y, label in outcomes.items():
             df = sdf.dropna(subset=[y]).reset_index(drop=True)
             full = nuisances(df, y)
             S = np.sqrt(full["sigma2"] * full["nu2"])
@@ -149,7 +178,8 @@ def main():
                 f"  {sname} | {label}: ATT {th:+.3f} ({se:.3f}), RV {rv:.3f}, RV_a {rva:.3f}  [{(time.time() - t0) / 60:.0f} min]",
                 flush=True,
             )
-            for gname, cols in GROUPS.items():
+            save()
+            for gname, cols in groups.items():
                 short = nuisances(df, y, drop=cols)
                 cy2 = max(0.0, 1 - full["sigma2"] / short["sigma2"])
                 cd2 = max(0.0, 1 - short["nu2"] / full["nu2"])
@@ -172,9 +202,12 @@ def main():
                     f"    benchmark {gname}: C_Y^2 {cy2:.3f}, C_D^2 {cd2:.3f}  [{(time.time() - t0) / 60:.0f} min]",
                     flush=True,
                 )
-    rows, bench = pd.DataFrame(rows), pd.DataFrame(bench)
-    rows.to_csv(OUT / "robustness_values.csv", index=False)
-    bench.to_csv(OUT / "benchmarks.csv", index=False)
+                save()
+    save()
+    rows, bench = (
+        pd.read_csv(OUT / "robustness_values.csv"),
+        pd.read_csv(OUT / "benchmarks.csv"),
+    )
     pd.set_option("display.width", 220)
     print(rows.round(3).to_string(index=False))
     print(bench.round(3).to_string(index=False))

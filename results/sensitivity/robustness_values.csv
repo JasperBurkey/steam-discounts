@@ -1,0 +1,4 @@
+sample,outcome,ATT,se,n,S,E[alpha^2],RV (to zero),RV (to insignificant),note
+all game-events,"Reviews, during",0.255,0.022,,3.4617020775273017,,0.071,0.059,reconstructed from run log (3-decimal precision)
+all game-events,"Reviews, net",0.083,0.019,,2.551912579321635,,0.032,0.018,reconstructed from run log (3-decimal precision)
+all game-events,"Revenue proxy, net (headline)",-0.061,0.018,,2.4093069542920427,,0.025,0.011,reconstructed from run log (3-decimal precision)
