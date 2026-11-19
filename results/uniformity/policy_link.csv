@@ -1,0 +1,7 @@
+objective,publisher-sales,game-events,rule recommends different depths within the publisher-sale,rule changes the choice,mean gain
+"Chart-calibrated revenue, during (sensitivity)",depths differ,17942,0.23683524504692388,0.10411325381785753,0.038721391027344926
+"Chart-calibrated revenue, during (sensitivity)",all games same depth,2617,0.033739456419868794,0.173098968284295,0.08139617365350531
+"Revenue proxy, net",depths differ,17942,0.23683524504692388,0.10411325381785753,0.032376114074980235
+"Revenue proxy, net",all games same depth,2617,0.033739456419868794,0.173098968284295,0.11440597253378142
+"Revenue proxy, net, lag-adjusted",depths differ,17942,0.23683524504692388,0.10411325381785753,0.029511149234303195
+"Revenue proxy, net, lag-adjusted",all games same depth,2617,0.033739456419868794,0.173098968284295,0.10373077034438373

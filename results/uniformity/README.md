@@ -26,5 +26,9 @@ discounted by others. It is the discount analog of uniform pricing across a chai
 catalogs are rarely fully uniform (33 games is a lot to make identical) but still put 45%
 of their games at a single depth.
 
-policy_link.csv (when present): whether the learned rule would split those uniform
-publisher-sales into different depths, and the gains it finds there.
+**Link to the learned rule** (policy_link.csv; study games, net revenue proxy): in
+publisher-sales where all games got the same depth, the rule changes 17% of choices (10%
+elsewhere) and its mean gain is +0.114 (vs +0.032), but it recommends different depths
+within the same publisher-sale only 3% of the time. The two-level rule is coarse, so it
+says the common depth is often the wrong level, not that it should vary. See
+results/routine_costs/.
