@@ -227,7 +227,14 @@ def main():
             drop=True
         ),
     }
+    if os.environ.get("POLICY_SAMPLE"):  # e.g. POLICY_SAMPLE=all
+        samples = {
+            k: v
+            for k, v in samples.items()
+            if k.startswith(os.environ["POLICY_SAMPLE"])
+        }
     values, leaves, assigns, overlap = [], [], [], []
+    gains = []  # per game-event gain of each learned rule (out of fold), for 26_uniformity
     trees_txt = []
     for sname, df in samples.items():
         g = df["app_id"].to_numpy()
@@ -292,6 +299,21 @@ def main():
             }
             for pname, a0 in pol.items():
                 a = effective(a0)
+                if pname in learned:
+                    gains.append(
+                        pd.DataFrame(
+                            {
+                                "app_id": g,
+                                "sale": df["sale"].to_numpy(),
+                                "sample": sname,
+                                "objective": olab,
+                                "policy": pname,
+                                "assigned": [ARMS[k] for k in a],
+                                "chosen": df["depth_bin"].to_numpy(),
+                                "gain": gamma[n, a] - gamma[n, lab],
+                            }
+                        )
+                    )
                 r = value_rows(gamma, a, g, pname, olab, sname, sq)
                 r["share_kept_for_overlap"] = float((a != a0).mean())
                 # side effect on reviews during the sale, same assignment
@@ -349,6 +371,10 @@ def main():
         print(f"  policies done  [{(time.time() - t0) / 60:.0f} min]", flush=True)
 
     values = pd.DataFrame(values)
+    pd.concat(gains).to_parquet(OUT / "event_gains.parquet", index=False)
+    if os.environ.get("POLICY_SAMPLE"):  # partial run: keep the committed tables
+        print("partial run: wrote event_gains.parquet only")
+        return
     values.to_csv(OUT / "policy_values.csv", index=False)
     pd.DataFrame(leaves).to_csv(OUT / "policy_leaves.csv", index=False)
     pd.concat(assigns).to_csv(OUT / "policy_assignments.csv", index=False)
