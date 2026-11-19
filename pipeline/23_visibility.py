@@ -20,7 +20,9 @@ C. Review labels. Steam's summary label depends on the share positive AND the co
    For games released since review history starts (full cumulative counts), compare the
    review rate in the 28 days after vs before crossing 50 purchaser reviews, for games at
    80%+ (label improves) vs 70-79% (no change): a difference-in-differences on the label.
-   If a better label raises demand, more reviews from a sale have a lasting payoff.
+   The same at 500 reviews: 95%+ moves from "Very Positive" to "Overwhelmingly Positive",
+   80-94% stays "Very Positive". Crossings within 60 days of release are dropped (launch
+   burst). If a better label raises demand, more reviews from a sale have a lasting payoff.
 
   python 23_visibility.py      (LEARNER / CF_REPEATS as in config)
 Outputs: results/visibility/
@@ -132,6 +134,13 @@ def part_b(ev, t0):
     return rows
 
 
+THRESHOLDS = [  # (count, upgrade range, comparison range, label change)
+    (50, (0.80, 1.01), (0.70, 0.80), "Positive -> Very Positive"),
+    (500, (0.95, 1.01), (0.80, 0.95), "Very Positive -> Overwhelmingly Positive"),
+]
+MIN_DAYS_AFTER_RELEASE = 60  # both 28-day windows after the launch burst
+
+
 def part_c(t0):
     rv = pd.read_parquet(
         COMPACT / "reviews_compact.parquet",
@@ -154,85 +163,96 @@ def part_c(t0):
     )
     rows = []
     for a, g in pur.groupby("app_id"):
-        if len(g) < 50:
-            continue
-        cross = int(g["day"].iloc[49])  # day of the 50th purchaser review
-        pos = g["voted_up"].iloc[:50].fillna(False).astype(bool).mean()
-        if cross - 28 < 0 or cross + 28 > last_day:
-            continue
+        rel_day = (rel[a] - day0).days
         dd = all_days[a]
-        c = lambda lo, hi, dd=dd: (  # noqa: E731
-            np.searchsorted(dd, hi, "right") - np.searchsorted(dd, lo, "left")
-        )
-        before = c(cross - 28, cross - 1)
-        after = c(cross + 1, cross + 28)
-        rows.append(
-            dict(
-                app_id=a,
-                pct_pos=pos,
-                cross_day=cross,
-                days_since_release=cross - (rel[a] - day0).days,
-                y=np.log1p(after) - np.log1p(before),
+        for k, up, ctl, _ in THRESHOLDS:
+            if len(g) < k:
+                continue
+            cross = int(g["day"].iloc[k - 1])  # day of the k-th purchaser review
+            pos = g["voted_up"].iloc[:k].fillna(False).astype(bool).mean()
+            since = cross - rel_day
+            if since < MIN_DAYS_AFTER_RELEASE or cross + 28 > last_day:
+                continue
+            grp = (
+                "upgrade"
+                if up[0] <= pos < up[1]
+                else "comparison"
+                if ctl[0] <= pos < ctl[1]
+                else None
             )
-        )
+            if grp is None:
+                continue
+            before = np.searchsorted(dd, cross - 1, "right") - np.searchsorted(
+                dd, cross - 28, "left"
+            )
+            after = np.searchsorted(dd, cross + 28, "right") - np.searchsorted(
+                dd, cross + 1, "left"
+            )
+            rows.append(
+                dict(
+                    app_id=a,
+                    threshold=k,
+                    group=grp,
+                    pct_pos=pos,
+                    days_since_release=since,
+                    before=before,
+                    after=after,
+                    y=np.log1p(after) - np.log1p(before),
+                )
+            )
     c = pd.DataFrame(rows)
-    c["group"] = pd.cut(
-        c["pct_pos"],
-        [0, 0.6999, 0.7999, 1.0001],
-        labels=[
-            "under 70%",
-            "70-79% (no label change)",
-            "80%+ (Positive -> Very Positive)",
-        ],
-    )
     c.to_csv(OUT / "label_crossings.csv", index=False)
     out = []
-    summ = c.groupby("group", observed=True)["y"].agg(["mean", "std", "size"])
-    for k, s in summ.iterrows():
-        out.append(
-            dict(
-                test="C",
-                sample=str(k),
-                outcome="log reviews 28d after - 28d before crossing 50",
-                est=s["mean"],
-                se=s["std"] / np.sqrt(s["size"]),
-                n=int(s["size"]),
+    for k, up, ctl, lab in THRESHOLDS:
+        m = c[c["threshold"] == k].copy()
+        for grp, d in m.groupby("group"):
+            out.append(
+                dict(
+                    threshold=k,
+                    row=f"{grp} ({'label: ' + lab if grp == 'upgrade' else 'no label change'})",
+                    est=d["y"].mean(),
+                    se=d["y"].std() / np.sqrt(len(d)),
+                    n=len(d),
+                )
             )
-        )
-    # DiD, with a local comparison (75-79% vs 80-84%) and a control for time since release
-    for lab, lo_, hi_ in [
-        ("all", (0.70, 0.80), (0.80, 1.01)),
-        ("near 80%", (0.75, 0.80), (0.80, 0.85)),
-    ]:
-        m = c[(c["pct_pos"] >= lo_[0]) & (c["pct_pos"] < hi_[1])].copy()
-        m["T"] = (m["pct_pos"] >= 0.80).astype(float)
+        if m["group"].nunique() < 2:
+            continue
+        m["T"] = (m["group"] == "upgrade").astype(float)
         X = np.column_stack(
-            [np.ones(len(m)), m["T"], np.log1p(m["days_since_release"].clip(lower=0))]
+            [
+                np.ones(len(m)),
+                m["T"],
+                np.log(m["days_since_release"]),
+                np.log1p(m["before"]),
+            ]
         )
         y = m["y"].to_numpy()
         b, *_ = np.linalg.lstsq(X, y, rcond=None)
         u = y - X @ b
         XtX = np.linalg.inv(X.T @ X)
-        V = XtX @ (X.T * u**2) @ X @ XtX
+        V = XtX @ (X.T * u**2) @ X @ XtX * len(y) / (len(y) - X.shape[1])
         out.append(
             dict(
-                test="C",
-                sample=f"label upgrade vs none ({lab})",
-                outcome="difference, controlling for time since release",
+                threshold=k,
+                row="difference (upgrade - comparison), controls: log days since release, log reviews before",
                 est=b[1],
                 se=float(np.sqrt(V[1, 1])),
                 n=len(m),
             )
         )
+    out = pd.DataFrame(out)
+    out.to_csv(OUT / "labels.csv", index=False)
     print(f"  C done  [{(time.time() - t0) / 60:.0f} min]", flush=True)
+    pd.set_option("display.width", 200)
+    print(out.round(3).to_string(index=False))
     return out
 
 
 def main():
     t0 = time.time()
     OUT.mkdir(parents=True, exist_ok=True)
-    rows = part_c(t0)
-    pd.DataFrame(rows).to_csv(OUT / "visibility.csv", index=False)
+    part_c(t0)
+    rows = []
     ev = pd.read_parquet(config.EVENTS_PARQUET)
     rv = pd.read_parquet(
         COMPACT / "reviews_compact.parquet", columns=["app_id", "day", "sampled"]

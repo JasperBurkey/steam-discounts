@@ -14,6 +14,7 @@ Writes data/for_claude.zip. Contents, all derived from public data:
   price_history.parquet     IsThereAnyDeal price histories (03b)
   news.parquet              news and patch notes for the study games (03g)
   rd_review_counts.parquet  review window counts near the release cutoff (03h), if pulled
+  milestone_counts.parquet  purchaser reviews up to each sales-milestone date (03i), if pulled
   study_sample.csv          the sampled games and their size bands
 No API keys, no raw Steam IDs, nothing from .env.
 """
@@ -158,11 +159,12 @@ def main():
     else:
         print("news: not found; run 03g_pull_news.py")
 
-    rd = config.RAW / "rd_review_counts.parquet"
-    if rd.exists():
-        pd.read_parquet(rd).to_parquet(OUT / "rd_review_counts.parquet", index=False)
-        written.append("rd_review_counts.parquet")
-        print("rd_review_counts: included")
+    for name in ("rd_review_counts.parquet", "milestone_counts.parquet"):
+        f = config.RAW / name
+        if f.exists():
+            pd.read_parquet(f).to_parquet(OUT / name, index=False)
+            written.append(name)
+            print(f"{name}: included")
 
     (OUT / "manifest.json").write_text(json.dumps({"files": written}, indent=2))
     with zipfile.ZipFile(ZIP, "w", zipfile.ZIP_STORED) as z:
