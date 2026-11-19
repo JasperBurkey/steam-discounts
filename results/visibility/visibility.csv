@@ -1,0 +1,8 @@
+test,sample,outcome,est,se,n
+C,under 70%,log reviews 28d after - 28d before crossing 50,2.6043327368157208,0.28940522906044813,140
+C,70-79% (no label change),log reviews 28d after - 28d before crossing 50,1.9484526655401897,0.2950879543352402,130
+C,80%+ (Positive -> Very Positive),log reviews 28d after - 28d before crossing 50,2.342506068969053,0.10653116707489022,869
+C,label upgrade vs none (all),"difference, controlling for time since release",-0.13198372332380717,0.2464083748244618,999
+C,label upgrade vs none (near 80%),"difference, controlling for time since release",0.07968226267797858,0.40736734170717553,201
+B,games discounting in the next sale,"this sale, during",0.2726239587332535,0.020830592080542235,27237
+B,games discounting in the next sale,"next sale, during (vs this sale's baseline)",-0.012942774257125039,0.021048620873773148,27237
