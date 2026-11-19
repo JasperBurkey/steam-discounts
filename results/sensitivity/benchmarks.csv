@@ -1,19 +1,23 @@
 sample,outcome,hidden confounder as strong as,C_Y^2,C_D^2,bias bound,ATT bounds,95% CI bounds,estimate when dropped
-all game-events,"Reviews, during",1x review history,0.097,0.005,0.07642738806150967,"[+0.179, +0.331]","[+0.135, +0.375]",
+all game-events,"Reviews, during",1x review history,0.097,0.005,0.0764273880615096,"[+0.179, +0.331]","[+0.135, +0.375]",
 all game-events,"Reviews, during",2x review history,0.194,0.01,0.1532402868894465,"[+0.102, +0.408]","[+0.059, +0.451]",
-all game-events,"Reviews, during",1x discount history,0.025,0.251,0.31685141061803673,"[-0.062, +0.572]","[-0.105, +0.615]",
+all game-events,"Reviews, during",1x discount history,0.025,0.251,0.3168514106180367,"[-0.062, +0.572]","[-0.105, +0.615]",
 all game-events,"Reviews, during",2x discount history,0.05,0.502,0.777162574111073,"[-0.522, +1.032]","[-0.565, +1.075]",
 all game-events,"Reviews, during",1x earlier sales,0.006,0.0,0.0,"[+0.255, +0.255]","[+0.212, +0.298]",
 all game-events,"Reviews, during",2x earlier sales,0.012,0.0,0.0,"[+0.255, +0.255]","[+0.212, +0.298]",
-all game-events,"Reviews, during",1x game and publisher,0.027,0.027,0.09475388658001004,"[+0.160, +0.350]","[+0.117, +0.393]",
-all game-events,"Reviews, during",2x game and publisher,0.054,0.054,0.19219313916408676,"[+0.063, +0.447]","[+0.020, +0.490]",
-all game-events,"Reviews, net",1x review history,0.144,0.054,0.23136536719987905,"[-0.148, +0.314]","[-0.186, +0.352]",
-all game-events,"Reviews, net",2x review history,0.288,0.108,0.47653136086975084,"[-0.394, +0.560]","[-0.431, +0.597]",
-all game-events,"Reviews, net",1x discount history,0.033,0.222,0.24763353161978516,"[-0.165, +0.331]","[-0.202, +0.368]",
+all game-events,"Reviews, during",1x game and publisher,0.027,0.027,0.09475388658001,"[+0.160, +0.350]","[+0.117, +0.393]",
+all game-events,"Reviews, during",2x game and publisher,0.054,0.054,0.1921931391640867,"[+0.063, +0.447]","[+0.020, +0.490]",
+all game-events,"Reviews, net",1x review history,0.144,0.054,0.231365367199879,"[-0.148, +0.314]","[-0.186, +0.352]",
+all game-events,"Reviews, net",2x review history,0.288,0.108,0.4765313608697508,"[-0.394, +0.560]","[-0.431, +0.597]",
+all game-events,"Reviews, net",1x discount history,0.033,0.222,0.2476335316197851,"[-0.165, +0.331]","[-0.202, +0.368]",
 all game-events,"Reviews, net",2x discount history,0.066,0.444,0.585857305375371,"[-0.503, +0.669]","[-0.540, +0.706]",
-all game-events,"Reviews, net",1x earlier sales,0.007,0.057,0.05249239572447123,"[+0.031, +0.135]","[-0.007, +0.173]",
-all game-events,"Reviews, net",2x earlier sales,0.014,0.114,0.10830920679352025,"[-0.025, +0.191]","[-0.063, +0.229]",
+all game-events,"Reviews, net",1x earlier sales,0.007,0.057,0.0524923957244712,"[+0.031, +0.135]","[-0.007, +0.173]",
+all game-events,"Reviews, net",2x earlier sales,0.014,0.114,0.1083092067935202,"[-0.025, +0.191]","[-0.063, +0.229]",
 all game-events,"Reviews, net",1x game and publisher,0.015,0.0,0.0,"[+0.083, +0.083]","[+0.046, +0.120]",
 all game-events,"Reviews, net",2x game and publisher,0.03,0.0,0.0,"[+0.083, +0.083]","[+0.046, +0.120]",
 all game-events,"Revenue proxy, net (headline)",1x review history,0.146,0.0,0.0,"[-0.061, -0.061]","[-0.096, -0.026]",
 all game-events,"Revenue proxy, net (headline)",2x review history,0.292,0.0,0.0,"[-0.061, -0.061]","[-0.096, -0.026]",
+overlap-trimmed (0.1-0.9),"Reviews, during",1x review history,0.09746612526053755,0.0,0.0,"[+0.299, +0.299]","[+0.244, +0.354]",0.3150052966297759
+overlap-trimmed (0.1-0.9),"Reviews, during",2x review history,0.1949322505210751,0.0,0.0,"[+0.299, +0.299]","[+0.244, +0.354]",0.3150052966297759
+overlap-trimmed (0.1-0.9),"Reviews, during",1x discount history,0.016099646088433728,0.12064789286875499,0.09814299893266082,"[+0.200, +0.397]","[+0.145, +0.452]",0.281581131755584
+overlap-trimmed (0.1-0.9),"Reviews, during",2x discount history,0.032199292176867456,0.24129578573750998,0.2113170193335882,"[+0.087, +0.510]","[+0.032, +0.565]",0.281581131755584

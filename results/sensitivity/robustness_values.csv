@@ -2,3 +2,4 @@ sample,outcome,ATT,se,n,S,E[alpha^2],RV (to zero),RV (to insignificant),note
 all game-events,"Reviews, during",0.255,0.022,,3.4617020775273017,,0.071,0.059,reconstructed from run log (3-decimal precision)
 all game-events,"Reviews, net",0.083,0.019,,2.551912579321635,,0.032,0.018,reconstructed from run log (3-decimal precision)
 all game-events,"Revenue proxy, net (headline)",-0.061,0.018,,2.4093069542920427,,0.025,0.011,reconstructed from run log (3-decimal precision)
+overlap-trimmed (0.1-0.9),"Reviews, during",0.2985767296184683,0.02802750533948204,6689.0,2.0882028949986746,11.379517445634509,0.13312553567304963,0.11006758445693471,
