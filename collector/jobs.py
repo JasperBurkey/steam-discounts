@@ -347,6 +347,100 @@ def job_regional(http, run_id):
     return {"rows": write_table("regional_prices", rows, P.REGIONAL, run_id)}
 
 
+# ---------------------------------------------------------------- price-change watcher
+def _app_list(http):
+    """Every game in the store catalog: appid -> (last_modified, price_change_number)."""
+    out, last = {}, 0
+    while True:
+        body, status = http.get(
+            f"{API}/IStoreService/GetAppList/v1/",
+            _key(
+                {
+                    "max_results": 50000,
+                    "last_appid": last,
+                    "include_games": "true",
+                    "include_dlc": "false",
+                    "include_software": "false",
+                    "include_videos": "false",
+                    "include_hardware": "false",
+                }
+            ),
+        )
+        if status != 200:
+            raise RuntimeError(f"GetAppList failed with HTTP {status}")
+        r = (body or {}).get("response") or {}
+        apps = r.get("apps") or []
+        for a in apps:
+            out[int(a["appid"])] = a.get("price_change_number")
+        if not r.get("have_more_results") or not apps:
+            return out
+        last = r.get("last_appid") or apps[-1]["appid"]
+
+
+def job_prices_watch(http, run_id):
+    """Hourly: find games whose store price changed since the last check (Steam's
+    price-change counter) and record the study games' new prices right away, so every
+    discount's start and end is timed to the hour. Once a day (and on the first run) it
+    also records all study games' prices as a full snapshot."""
+    _need_key()
+    now = utcnow()
+    state_path = S.STATE / "price_change_numbers.parquet"
+    current = _app_list(http)
+    cur = pd.DataFrame({"appid": list(current), "pcn": list(current.values())})
+    cur["pcn"] = pd.to_numeric(cur["pcn"], errors="coerce").fillna(-1).astype("int64")
+    study = set(_study_ids())
+    if state_path.exists():
+        prev = pd.read_parquet(state_path)
+        m = cur.merge(prev, on="appid", how="inner", suffixes=("", "_prev"))
+        changed = m[m["pcn"] != m["pcn_prev"]]
+    else:
+        changed = cur.iloc[0:0].assign(pcn_prev=None)
+    full = (not state_path.exists()) or now.hour == S.PRICE_SNAPSHOT_HOUR
+    events = [
+        {
+            "captured_at": now,
+            "appid": int(r.appid),
+            "old_number": r.pcn_prev,
+            "new_number": r.pcn,
+            "in_study": int(r.appid) in study,
+        }
+        for r in changed.itertuples(index=False)
+    ]
+    n_events = write_table("price_changes", events, P.PRICE_CHANGES, run_id, now)
+    targets = sorted(study) if full else sorted(set(changed["appid"]) & study)
+    rows = []
+    for batch in chunks(targets, S.ITEMS_BATCH):
+        t = utcnow()
+        items, failed = get_items(http, batch, S.PRICE_WATCH_COUNTRY, PRICE_REQUEST)
+        for it in items:
+            row = P.regional_row(it, t, S.PRICE_WATCH_COUNTRY)
+            row["http_status"] = "200"
+            row["reason"] = "snapshot" if full else "changed"
+            rows.append(row)
+        rows += [
+            {
+                "captured_at": t,
+                "country": S.PRICE_WATCH_COUNTRY,
+                "appid": x,
+                "http_status": "failed",
+                "reason": "snapshot" if full else "changed",
+            }
+            for x in failed
+        ]
+    n_prices = write_table("study_prices", rows, P.STUDY_PRICES, run_id, now)
+    cur.to_parquet(state_path, index=False)  # only after both tables are written
+    stats = {
+        "rows": n_events + n_prices,
+        "changed_games": len(changed),
+        "changed_study_games": int(changed["appid"].isin(study).sum()),
+        "prices_recorded": n_prices,
+        "full_snapshot": full,
+    }
+    if not stats["rows"]:
+        stats["note"] = "no price changes this hour"
+    return stats
+
+
 # ---------------------------------------------------------------- player counts
 def _ccu(http, run_id, appids, tier):
     rows = []
@@ -768,6 +862,7 @@ JOBS = {
     "ccu_b": job_ccu_b,
     "ccu_c": job_ccu_c,
     "ccu_study": job_ccu_study,
+    "prices_watch": job_prices_watch,
     "ccu_study_sale": job_ccu_study,
     "charts": job_charts,
     "topsellers": job_topsellers,

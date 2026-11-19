@@ -131,6 +131,20 @@ for fields not parsed today; after a year you can decide whether to keep it. Set
 Steam's store endpoints are undocumented and occasionally change. If an alert fires, run
 `python collect.py selftest` to see which endpoint broke.
 
+**Set up the heartbeat.** The checks above run inside the collector, so they can't report
+a collector that doesn't start at all (a typo in `settings.py`, the PC off, tasks
+disabled). That happened on Nov 16-18, 2026, and went unnoticed for almost three days.
+An outside monitor catches it:
+
+1. Make a free check at healthchecks.io: period 1 hour, grace 3 hours, and add your email
+   (and the phone app or Discord, if you like) under Integrations.
+2. Copy its ping URL into `.env`: `HEARTBEAT_URL=https://hc-ping.com/...`
+3. Run `python collect.py status`, then wait for the next hourly run; the check turns green.
+
+The collector pings after every scheduled run. If the pings stop for over 4 hours, you get
+an email. **After editing `settings.py`, always run `python collect.py status` once**: an
+error in the file shows up immediately instead of silently stopping every run.
+
 ## Reading the data
 
 ```python

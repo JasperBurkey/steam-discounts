@@ -62,6 +62,10 @@ CCU_C_ROTATION = 7
 # Thesis study panel: the 3,850 sampled games, at fixed UTC hours every day so time of day
 # never changes between days. Every 4 hours always; every 2 hours during seasonal sales.
 STUDY_APPS = HERE / "study_apps.csv"
+# Price-change watcher: hourly check of Steam's price-change counters; study games' prices
+# are recorded when their counter changes, plus a full snapshot once a day at this UTC hour.
+PRICE_WATCH_COUNTRY = "US"
+PRICE_SNAPSHOT_HOUR = 9
 
 # ---------- Budget and politeness ----------
 DAILY_STEAM_API_BUDGET = 90_000  # Steam's terms allow 100,000 calls/day; keep headroom
@@ -116,6 +120,8 @@ SLOTS = {
     "ccu_c": {"hours": [6]},
     # thesis study panel (see STUDY_APPS); about 32 minutes per pass
     "ccu_study": {"hours": [0, 4, 8, 12, 16, 20]},
+    # hourly price-change check (about 3 calls, plus prices of changed study games)
+    "prices_watch": {"hours": list(range(24))},
     "ccu_study_sale": {"hours": [2, 6, 10, 14, 18, 22], "periods": RANKS_SALE_PERIODS},
 }
 # A job whose slot passed while the machine was off runs at the next hourly check, and its
@@ -128,6 +134,7 @@ GROUPS = {
         "charts",
         "topsellers",
         "ranks_sale",
+        "prices_watch",
         "ccu_study",
         "ccu_study_sale",
     ],

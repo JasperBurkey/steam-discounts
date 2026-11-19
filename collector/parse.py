@@ -224,6 +224,16 @@ REGIONAL = {
 }
 
 
+PRICE_CHANGES = {
+    "captured_at": T_,
+    "appid": I_,
+    "old_number": I_,
+    "new_number": I_,
+    "in_study": B_,
+}
+STUDY_PRICES = {**REGIONAL, "reason": S_}
+
+
 def regional_row(item, captured_at, country):
     po = _purchase(item)
     return {
