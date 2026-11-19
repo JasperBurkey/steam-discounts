@@ -118,7 +118,7 @@ def main():
         r = M.aipw(d.reset_index(drop=True), list(OUTCOMES))[0]
         for y, lab in OUTCOMES.items():
             est, se = r[y]["ATT"]
-            raw = d.groupby("discounted")[y].mean()
+            raw = d.groupby(d["discounted"].astype(int))[y].mean()
             res.append(
                 {
                     "sample": sname,
