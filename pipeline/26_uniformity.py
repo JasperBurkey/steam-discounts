@@ -21,7 +21,7 @@ the publisher.
 
 By catalog size (the publisher's games on Steam): 2-4, 5-19, 20+.
 
-Link to policy learning (study games, needs results/policy/event_gains.parquet from
+Link to policy learning (study games, needs output/policy/event_gains.parquet from
 13_policy.py): in publisher-sales where all games got the same depth, does the learned
 rule recommend different depths for those games, and how large are the gains it finds
 there compared with elsewhere?
@@ -40,7 +40,7 @@ from prices import price_arrays, sale_times
 
 OUT = config.ROOT.parent / "results" / "uniformity"
 COMPACT = config.DATA / "for_claude"
-POLICY_GAINS = config.ROOT.parent / "results" / "policy" / "event_gains.parquet"
+POLICY_GAINS = config.OUTPUT / "policy" / "event_gains.parquet"
 R = 200
 rng = np.random.default_rng(config.SEED)
 
@@ -137,6 +137,10 @@ def main():
     obs["band"] = size_band(
         obs.index.get_level_values("pub").map(gi.groupby("pub")["catalog"].first())
     )
+    d[["app_id", "sale", "pub"]].merge(
+        obs.reset_index()[["pub", "sale", "identical", "modal_share", "n"]],
+        on=["pub", "sale"],
+    ).to_parquet(config.OUTPUT / "uniform_groups.parquet", index=False)
     print(
         f"{len(obs):,} publisher-sales with 2+ discounted games, "
         f"{obs.index.get_level_values('pub').nunique():,} publishers  [{time.time() - t0:.0f}s]",

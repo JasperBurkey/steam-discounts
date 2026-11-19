@@ -15,6 +15,8 @@ Writes data/for_claude.zip. Contents, all derived from public data:
   news.parquet              news and patch notes for the study games (03g)
   rd_review_counts.parquet  review window counts near the release cutoff (03h), if pulled
   milestone_counts.parquet  purchaser reviews up to each sales-milestone date (03i), if pulled
+  dlc_info.parquet          DLC counts and in-app purchase flags for the study games (03k)
+  dlc_review_counts.parquet top DLC's reviews around each sale since 2024 (03k), if pulled
   study_sample.csv          the sampled games and their size bands
 No API keys, no raw Steam IDs, nothing from .env.
 """
@@ -96,6 +98,7 @@ def game_info(ids):
         "publishers",
         "tags",
         "tagids",
+        "categories",
     ]
     g = pd.read_parquet(files[-1])
     g = g[[c for c in cols if c in g.columns]]
@@ -159,7 +162,12 @@ def main():
     else:
         print("news: not found; run 03g_pull_news.py")
 
-    for name in ("rd_review_counts.parquet", "milestone_counts.parquet"):
+    for name in (
+        "rd_review_counts.parquet",
+        "milestone_counts.parquet",
+        "dlc_info.parquet",
+        "dlc_review_counts.parquet",
+    ):
         f = config.RAW / name
         if f.exists():
             pd.read_parquet(f).to_parquet(OUT / name, index=False)
