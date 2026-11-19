@@ -17,6 +17,7 @@ Writes data/for_claude.zip. Contents, all derived from public data:
   milestone_counts.parquet  purchaser reviews up to each sales-milestone date (03i), if pulled
   dlc_info.parquet          DLC counts and in-app purchase flags for the study games (03k)
   dlc_review_counts.parquet top DLC's reviews around each sale since 2024 (03k), if pulled
+  dlc_price_history.parquet top DLC's past Steam prices from IsThereAnyDeal (03l), if pulled
   study_sample.csv          the sampled games and their size bands
 No API keys, no raw Steam IDs, nothing from .env.
 """
@@ -167,6 +168,7 @@ def main():
         "milestone_counts.parquet",
         "dlc_info.parquet",
         "dlc_review_counts.parquet",
+        "dlc_price_history.parquet",
     ):
         f = config.RAW / name
         if f.exists():
