@@ -1,0 +1,23 @@
+outcome,spec,sample,term,coef,se,n
+joins next sale,spike vs net,all,r_during,-0.0024431249766729193,0.0019559326406040204,25373
+joins next sale,spike vs net,all,r_net,-0.004114026692032532,0.0016951663997301616,25373
+joins next sale,spike vs net,"all, game FE",r_during,-0.0006614079048916379,0.0020717711980669804,25373
+joins next sale,spike vs net,"all, game FE",r_net,-0.0028572076861367954,0.0016885875289863262,25373
+joins next sale,spike only,"all, game FE",r_during,-0.0032441695347583885,0.001455890140487027,25373
+joins next sale,net only,"all, game FE",r_net,-0.0032807079756293233,0.0011937071627848123,25373
+joins next sale,spike vs net,busier,r_during,4.444308939881876e-05,0.0038058993502690093,12181
+joins next sale,spike vs net,busier,r_net,-0.008492621365405397,0.0033962661421740197,12181
+joins next sale,spike vs net,"busier, game FE",r_during,0.00501663982054092,0.004165674000580446,12181
+joins next sale,spike vs net,"busier, game FE",r_net,-0.007213036198076354,0.003608283047021204,12181
+joins next sale,windows,all,y_pre_week,-0.0013541607397607612,0.0012044914357644521,25373
+joins next sale,windows,all,r_during,-0.004373356745575064,0.0016943170258535314,25373
+joins next sale,windows,all,r_after,-0.002761477090851949,0.0014368358845663028,25373
+joins next sale,windows,all,y_wk3_4,0.0019308628941848754,0.0013344110841678812,25373
+joins next sale,windows,"all, game FE",y_pre_week,0.00019422174826577344,0.0011530974345483,25373
+joins next sale,windows,"all, game FE",r_during,-0.002597517541508854,0.00176118577218112,25373
+joins next sale,windows,"all, game FE",r_after,-0.0020731704000945656,0.0014098599136488533,25373
+joins next sale,windows,"all, game FE",y_wk3_4,0.0013810407154128898,0.0012641670197662078,25373
+next sale's cut,spike vs net,rejoiners,r_during,-0.3686946904374523,0.08400494279919765,24576
+next sale's cut,spike vs net,rejoiners,r_net,-0.09388727087951487,0.07228080105592447,24576
+next sale's cut,spike vs net,"rejoiners, game FE",r_during,-0.4361733057359749,0.09364286051423273,24576
+next sale's cut,spike vs net,"rejoiners, game FE",r_net,0.09948811952712408,0.0728468477020045,24576
