@@ -37,3 +37,4 @@ pipeline/output/
 collector/data/
 *.tmp
 # data/ holds only the derived event files the notebook needs (see README)
+results/release_rd/rd_sample.parquet
