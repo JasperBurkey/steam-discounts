@@ -1,0 +1,13 @@
+3,204 games with full review histories  [32s]
+/home/claude/repo/pipeline/prices.py:128: RuntimeWarning: All-NaN slice encountered
+  "min_ratio_365": float(np.nanmin(self.ratio[max(i0, 0) : i1])),
+12,121 game-events (15,648 dropped: discount in force at the fake date)  [40s]
+  fake dates done  [12 min]
+  real dates done  [23 min]
+outcome                                                  Week before          During Weeks 1-2 after
+sample                     date                                                                     
+all games (full histories) placebo (6 weeks earlier)  +0.025 (0.036)  +0.013 (0.030)  +0.002 (0.031)
+                           real sale                  -0.109 (0.030)  +0.300 (0.032)  +0.138 (0.030)
+busier games               placebo (6 weeks earlier)  -0.049 (0.067)  -0.098 (0.094)  -0.081 (0.081)
+                           real sale                  -0.159 (0.090)  +0.253 (0.119)  +0.226 (0.123)
+Done in 23 minutes

@@ -1,0 +1,13 @@
+date,sample,outcome,ATT,se,n
+placebo (6 weeks earlier),all games (full histories),Week before,0.024800531425996135,0.03629486399984033,12121
+placebo (6 weeks earlier),all games (full histories),During,0.013043574683295998,0.02957111098841809,12121
+placebo (6 weeks earlier),all games (full histories),Weeks 1-2 after,0.0021540132664266375,0.03120183677426538,12121
+placebo (6 weeks earlier),busier games,Week before,-0.0492148325862327,0.06699991506244987,2813
+placebo (6 weeks earlier),busier games,During,-0.09841954709417694,0.09354039428830256,2813
+placebo (6 weeks earlier),busier games,Weeks 1-2 after,-0.08054835596281298,0.08110205827132827,2813
+real sale,all games (full histories),Week before,-0.10939982926189874,0.030083713335659994,12121
+real sale,all games (full histories),During,0.29956002764501205,0.032482454538962084,12121
+real sale,all games (full histories),Weeks 1-2 after,0.1377950888807588,0.029590325838438295,12121
+real sale,busier games,Week before,-0.15941875386894305,0.09008385214988775,2448
+real sale,busier games,During,0.2532150572199908,0.11850686851215043,2448
+real sale,busier games,Weeks 1-2 after,0.22554986101023242,0.1234350141373093,2448
