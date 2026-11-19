@@ -69,5 +69,26 @@ class Resume(unittest.TestCase):
             self.assertEqual(sorted(got["app_id"]), [1, 2])
 
 
+class Long(unittest.TestCase):
+    def test_long_windows_and_output(self):
+        with tempfile.TemporaryDirectory() as d:
+            uni = Path(d) / "universe.csv"
+            out = Path(d) / "long.parquet"
+            pd.DataFrame([ROW]).to_csv(uni, index=False)
+            with (
+                mock.patch.object(H, "UNIVERSE", uni),
+                mock.patch.object(H, "OUT_LONG", out),
+                mock.patch.object(H, "OUT", H.OUT),
+                mock.patch.object(H, "WINDOWS", H.WINDOWS),
+                mock.patch.object(H, "WITH_REL7", True),
+                mock.patch.object(H.P, "count", return_value=4) as c,
+                mock.patch.object(sys, "argv", ["x", "--long", "--workers", "1"]),
+            ):
+                H.main()
+                self.assertEqual(c.call_count, 2)
+            got = pd.read_parquet(out)
+            self.assertEqual(sorted(c for c in got.columns if len(c) == 1), ["H", "I"])
+
+
 if __name__ == "__main__":
     unittest.main()

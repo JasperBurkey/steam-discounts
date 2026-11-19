@@ -19,6 +19,13 @@ are skipped).
   python 03h_pull_rd_reviews.py --plan
   python 03h_pull_rd_reviews.py
 Output: data/raw/rd_review_counts.parquet (export_for_claude.py includes it)
+
+--long pulls two later windows for the same game-events instead (for 29_network.py, where
+effects through the player base build slowly), 2 requests per game-event:
+  H      d0+n+28 .. d0+n+41 (weeks 5-6 after)   I   d0+n+42 .. d0+n+83 (weeks 7-12 after)
+  python 03h_pull_rd_reviews.py --long --plan
+  python 03h_pull_rd_reviews.py --long
+Output: data/raw/rd_review_counts_long.parquet
 """
 
 import argparse
@@ -49,13 +56,23 @@ WINDOWS = {
     "F": lambda n: (n, n + 13),
     "G": lambda n: (n + 14, n + 27),
 }
+LONG_WINDOWS = {
+    "H": lambda n: (n + 28, n + 41),
+    "I": lambda n: (n + 42, n + 83),
+}
+OUT_LONG = config.RAW / "rd_review_counts_long.parquet"
+WITH_REL7 = True
 CHECKPOINT = 200
 
 
 def windows(r):
     """(name, start_ts, end_ts) for one game-event, skipping windows not yet over."""
     now = time.time()
-    out = [("rel7", *P.day_bounds(pd.Timestamp(r["release_date"]), 0, 6))]
+    out = (
+        [("rel7", *P.day_bounds(pd.Timestamp(r["release_date"]), 0, 6))]
+        if WITH_REL7
+        else []
+    )
     for w, f in WINDOWS.items():
         out.append(
             (w, *P.day_bounds(pd.Timestamp(r["sale_date"]), *f(int(r["sale_days"]))))
@@ -82,7 +99,11 @@ def main():
     ap.add_argument("--plan", action="store_true")
     ap.add_argument("--workers", type=int, default=config.REVIEW_WORKERS)
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--long", action="store_true", help="weeks 5-12 after instead")
     args = ap.parse_args()
+    if args.long:
+        global OUT, WINDOWS, WITH_REL7
+        OUT, WINDOWS, WITH_REL7 = OUT_LONG, LONG_WINDOWS, False
     u = pd.read_csv(UNIVERSE)
     done = load_done()
     if len(done):

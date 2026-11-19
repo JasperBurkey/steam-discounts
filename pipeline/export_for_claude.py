@@ -165,6 +165,7 @@ def main():
 
     for name in (
         "rd_review_counts.parquet",
+        "rd_review_counts_long.parquet",
         "milestone_counts.parquet",
         "dlc_info.parquet",
         "dlc_review_counts.parquet",
