@@ -1,49 +1,64 @@
 part,outcome,bw,group,est,se,n,first_stage
-A: release cutoff (fuzzy RD),during the sale,14,online,0.8457528494586505,0.26827978882067266,733.0,0.4591025322962485
-A: release cutoff (fuzzy RD),during the sale,14,"online, strong",0.6648577022198613,0.2868386844732795,333.0,0.5854076900399664
-A: release cutoff (fuzzy RD),during the sale,14,local only,-0.41657020836518505,0.5728524528157827,52.0,0.8752716725814391
-A: release cutoff (fuzzy RD),during the sale,14,single,0.3978179238149031,0.0967235564096807,3201.0,0.5894651779675257
-A: release cutoff (fuzzy RD),during the sale,14,online - single,0.4479349256437474,0.28518325942137873,,
-A: release cutoff (fuzzy RD),during the sale,14,"online, strong - single",0.2670397784049582,0.302707577167963,,
-A: release cutoff (fuzzy RD),during the sale,21,online,0.6483996785736598,0.17372428953392577,1135.0,0.5393969202413295
-A: release cutoff (fuzzy RD),during the sale,21,"online, strong",0.5157764491928228,0.21158802127443435,517.0,0.6408763562586677
-A: release cutoff (fuzzy RD),during the sale,21,local only,-0.3347758002992411,0.3874204983730802,86.0,0.9483943650102128
-A: release cutoff (fuzzy RD),during the sale,21,single,0.3050377725400432,0.06734173508304489,4812.0,0.6852620372799582
-A: release cutoff (fuzzy RD),during the sale,21,online - single,0.34336190603361655,0.18631971999244273,,
-A: release cutoff (fuzzy RD),during the sale,21,"online, strong - single",0.21073867665277962,0.22204594126177016,,
-A: release cutoff (fuzzy RD),weeks 1-2 after,14,online,-0.19894116659569344,0.2557404833766037,733.0,0.4591025322962485
-A: release cutoff (fuzzy RD),weeks 1-2 after,14,"online, strong",-0.1301300251178105,0.30167248645081235,333.0,0.5854076900399664
-A: release cutoff (fuzzy RD),weeks 1-2 after,14,local only,-0.7543304904652712,0.5887294353761673,52.0,0.8752716725814391
-A: release cutoff (fuzzy RD),weeks 1-2 after,14,single,0.06459591206693606,0.07827196722787594,3201.0,0.5894651779675257
-A: release cutoff (fuzzy RD),weeks 1-2 after,14,online - single,-0.2635370786626295,0.2674503611727242,,
-A: release cutoff (fuzzy RD),weeks 1-2 after,14,"online, strong - single",-0.19472593718474657,0.3116613385313251,,
-A: release cutoff (fuzzy RD),weeks 1-2 after,21,online,-0.21754473341303546,0.16066864732635885,1135.0,0.5393969202413295
-A: release cutoff (fuzzy RD),weeks 1-2 after,21,"online, strong",-0.14939450627082862,0.1914475931786097,517.0,0.6408763562586677
-A: release cutoff (fuzzy RD),weeks 1-2 after,21,local only,-0.6263167796868385,0.4289712999212784,86.0,0.9483943650102128
-A: release cutoff (fuzzy RD),weeks 1-2 after,21,single,0.043795252529291416,0.05607078173594432,4812.0,0.6852620372799582
-A: release cutoff (fuzzy RD),weeks 1-2 after,21,online - single,-0.2613399859423269,0.17017152170137573,,
-A: release cutoff (fuzzy RD),weeks 1-2 after,21,"online, strong - single",-0.19318975880012004,0.19948963255859276,,
-A: release cutoff (fuzzy RD),weeks 3-4 after,14,online,-0.18640334687818885,0.24911486923627973,733.0,0.4591025322962485
-A: release cutoff (fuzzy RD),weeks 3-4 after,14,"online, strong",-0.17733266839264583,0.3287825139081186,333.0,0.5854076900399664
-A: release cutoff (fuzzy RD),weeks 3-4 after,14,local only,-0.5483908931062135,0.6388862933497532,52.0,0.8752716725814391
-A: release cutoff (fuzzy RD),weeks 3-4 after,14,single,0.002736807211100988,0.08749497418315574,3201.0,0.5894651779675257
-A: release cutoff (fuzzy RD),weeks 3-4 after,14,online - single,-0.18914015408928983,0.2640333096067991,,
-A: release cutoff (fuzzy RD),weeks 3-4 after,14,"online, strong - single",-0.1800694756037468,0.3402253840604097,,
-A: release cutoff (fuzzy RD),weeks 3-4 after,21,online,-0.25185744597903037,0.18116257583430403,1135.0,0.5393969202413295
-A: release cutoff (fuzzy RD),weeks 3-4 after,21,"online, strong",-0.19716367775090968,0.23387433484521183,517.0,0.6408763562586677
-A: release cutoff (fuzzy RD),weeks 3-4 after,21,local only,-0.4326969181606658,0.46580779958860785,86.0,0.9483943650102128
-A: release cutoff (fuzzy RD),weeks 3-4 after,21,single,-0.08355134916177986,0.058746092158313126,4812.0,0.6852620372799582
-A: release cutoff (fuzzy RD),weeks 3-4 after,21,online - single,-0.1683060968172505,0.19044942170243778,,
-A: release cutoff (fuzzy RD),weeks 3-4 after,21,"online, strong - single",-0.11361232858912981,0.24113960239488513,,
-A: release cutoff (fuzzy RD),"net revenue, sale to week 4",14,online,0.09485570545709093,0.20038515007874805,733.0,0.4591025322962485
-A: release cutoff (fuzzy RD),"net revenue, sale to week 4",14,"online, strong",0.03788128502508317,0.24208308931176525,333.0,0.5854076900399664
-A: release cutoff (fuzzy RD),"net revenue, sale to week 4",14,local only,-0.6642465584239148,0.5680070062865344,52.0,0.8752716725814391
-A: release cutoff (fuzzy RD),"net revenue, sale to week 4",14,single,0.08718585340425337,0.07415387219606771,3201.0,0.5894651779675257
-A: release cutoff (fuzzy RD),"net revenue, sale to week 4",14,online - single,0.0076698520528375586,0.21366563863605473,,
-A: release cutoff (fuzzy RD),"net revenue, sale to week 4",14,"online, strong - single",-0.0493045683791702,0.253185739907284,,
-A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21,online,-0.010395804831196705,0.14080065181676313,1135.0,0.5393969202413295
-A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21,"online, strong",-0.029274377865567407,0.17819982845286092,517.0,0.6408763562586677
-A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21,local only,-0.5477545891002565,0.4252946263908731,86.0,0.9483943650102128
-A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21,single,0.019538418568721478,0.05286865440211502,4812.0,0.6852620372799582
-A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21,online - single,-0.029934223399918185,0.15039919604278354,,
-A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21,"online, strong - single",-0.04881279643428889,0.18587703860057417,,
+A: release cutoff (fuzzy RD),during the sale,14.0,online,0.8457528494586505,0.26827978882067266,733.0,0.4591025322962485
+A: release cutoff (fuzzy RD),during the sale,14.0,"online, strong",0.6648577022198613,0.2868386844732795,333.0,0.5854076900399664
+A: release cutoff (fuzzy RD),during the sale,14.0,local only,-0.41657020836518505,0.5728524528157827,52.0,0.8752716725814391
+A: release cutoff (fuzzy RD),during the sale,14.0,single,0.3978179238149031,0.0967235564096807,3201.0,0.5894651779675257
+A: release cutoff (fuzzy RD),during the sale,14.0,online - single,0.4479349256437474,0.28518325942137873,,
+A: release cutoff (fuzzy RD),during the sale,14.0,"online, strong - single",0.2670397784049582,0.302707577167963,,
+A: release cutoff (fuzzy RD),during the sale,21.0,online,0.6483996785736598,0.17372428953392577,1135.0,0.5393969202413295
+A: release cutoff (fuzzy RD),during the sale,21.0,"online, strong",0.5157764491928228,0.21158802127443435,517.0,0.6408763562586677
+A: release cutoff (fuzzy RD),during the sale,21.0,local only,-0.3347758002992411,0.3874204983730802,86.0,0.9483943650102128
+A: release cutoff (fuzzy RD),during the sale,21.0,single,0.3050377725400432,0.06734173508304489,4812.0,0.6852620372799582
+A: release cutoff (fuzzy RD),during the sale,21.0,online - single,0.34336190603361655,0.18631971999244273,,
+A: release cutoff (fuzzy RD),during the sale,21.0,"online, strong - single",0.21073867665277962,0.22204594126177016,,
+A: release cutoff (fuzzy RD),weeks 1-2 after,14.0,online,-0.19894116659569344,0.2557404833766037,733.0,0.4591025322962485
+A: release cutoff (fuzzy RD),weeks 1-2 after,14.0,"online, strong",-0.1301300251178105,0.30167248645081235,333.0,0.5854076900399664
+A: release cutoff (fuzzy RD),weeks 1-2 after,14.0,local only,-0.7543304904652712,0.5887294353761673,52.0,0.8752716725814391
+A: release cutoff (fuzzy RD),weeks 1-2 after,14.0,single,0.06459591206693606,0.07827196722787594,3201.0,0.5894651779675257
+A: release cutoff (fuzzy RD),weeks 1-2 after,14.0,online - single,-0.2635370786626295,0.2674503611727242,,
+A: release cutoff (fuzzy RD),weeks 1-2 after,14.0,"online, strong - single",-0.19472593718474657,0.3116613385313251,,
+A: release cutoff (fuzzy RD),weeks 1-2 after,21.0,online,-0.21754473341303546,0.16066864732635885,1135.0,0.5393969202413295
+A: release cutoff (fuzzy RD),weeks 1-2 after,21.0,"online, strong",-0.14939450627082862,0.1914475931786097,517.0,0.6408763562586677
+A: release cutoff (fuzzy RD),weeks 1-2 after,21.0,local only,-0.6263167796868385,0.4289712999212784,86.0,0.9483943650102128
+A: release cutoff (fuzzy RD),weeks 1-2 after,21.0,single,0.043795252529291416,0.05607078173594432,4812.0,0.6852620372799582
+A: release cutoff (fuzzy RD),weeks 1-2 after,21.0,online - single,-0.2613399859423269,0.17017152170137573,,
+A: release cutoff (fuzzy RD),weeks 1-2 after,21.0,"online, strong - single",-0.19318975880012004,0.19948963255859276,,
+A: release cutoff (fuzzy RD),weeks 3-4 after,14.0,online,-0.18640334687818885,0.24911486923627973,733.0,0.4591025322962485
+A: release cutoff (fuzzy RD),weeks 3-4 after,14.0,"online, strong",-0.17733266839264583,0.3287825139081186,333.0,0.5854076900399664
+A: release cutoff (fuzzy RD),weeks 3-4 after,14.0,local only,-0.5483908931062135,0.6388862933497532,52.0,0.8752716725814391
+A: release cutoff (fuzzy RD),weeks 3-4 after,14.0,single,0.002736807211100988,0.08749497418315574,3201.0,0.5894651779675257
+A: release cutoff (fuzzy RD),weeks 3-4 after,14.0,online - single,-0.18914015408928983,0.2640333096067991,,
+A: release cutoff (fuzzy RD),weeks 3-4 after,14.0,"online, strong - single",-0.1800694756037468,0.3402253840604097,,
+A: release cutoff (fuzzy RD),weeks 3-4 after,21.0,online,-0.25185744597903037,0.18116257583430403,1135.0,0.5393969202413295
+A: release cutoff (fuzzy RD),weeks 3-4 after,21.0,"online, strong",-0.19716367775090968,0.23387433484521183,517.0,0.6408763562586677
+A: release cutoff (fuzzy RD),weeks 3-4 after,21.0,local only,-0.4326969181606658,0.46580779958860785,86.0,0.9483943650102128
+A: release cutoff (fuzzy RD),weeks 3-4 after,21.0,single,-0.08355134916177986,0.058746092158313126,4812.0,0.6852620372799582
+A: release cutoff (fuzzy RD),weeks 3-4 after,21.0,online - single,-0.1683060968172505,0.19044942170243778,,
+A: release cutoff (fuzzy RD),weeks 3-4 after,21.0,"online, strong - single",-0.11361232858912981,0.24113960239488513,,
+A: release cutoff (fuzzy RD),"net revenue, sale to week 4",14.0,online,0.09485570545709093,0.20038515007874805,733.0,0.4591025322962485
+A: release cutoff (fuzzy RD),"net revenue, sale to week 4",14.0,"online, strong",0.03788128502508317,0.24208308931176525,333.0,0.5854076900399664
+A: release cutoff (fuzzy RD),"net revenue, sale to week 4",14.0,local only,-0.6642465584239148,0.5680070062865344,52.0,0.8752716725814391
+A: release cutoff (fuzzy RD),"net revenue, sale to week 4",14.0,single,0.08718585340425337,0.07415387219606771,3201.0,0.5894651779675257
+A: release cutoff (fuzzy RD),"net revenue, sale to week 4",14.0,online - single,0.0076698520528375586,0.21366563863605473,,
+A: release cutoff (fuzzy RD),"net revenue, sale to week 4",14.0,"online, strong - single",-0.0493045683791702,0.253185739907284,,
+A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21.0,online,-0.010395804831196705,0.14080065181676313,1135.0,0.5393969202413295
+A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21.0,"online, strong",-0.029274377865567407,0.17819982845286092,517.0,0.6408763562586677
+A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21.0,local only,-0.5477545891002565,0.4252946263908731,86.0,0.9483943650102128
+A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21.0,single,0.019538418568721478,0.05286865440211502,4812.0,0.6852620372799582
+A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21.0,online - single,-0.029934223399918185,0.15039919604278354,,
+A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21.0,"online, strong - single",-0.04881279643428889,0.18587703860057417,,
+B: main sample (ATT),during,,online,0.36105291335713807,0.03400227395384193,10770.0,
+B: main sample (ATT),weeks 3-4 after,,online,0.0437617132666339,0.03644646404196576,10770.0,
+B: main sample (ATT),weeks 5-6 after,,online,0.07760580802790719,0.03611059135139043,10770.0,
+B: main sample (ATT),net revenue proxy,,online,-0.03138922142323982,0.02776430977876881,10770.0,
+B: main sample (ATT),weeks 7-12 after (Spring/Summer),,online,-0.006689086654516435,0.06741293934578152,4469.0,
+B: main sample (ATT),during,,local only,0.2840283741964521,0.2846936581801485,609.0,
+B: main sample (ATT),weeks 3-4 after,,local only,-0.551691395317011,0.3168947572538011,609.0,
+B: main sample (ATT),weeks 5-6 after,,local only,-0.23046737183483185,0.30719787065021337,609.0,
+B: main sample (ATT),net revenue proxy,,local only,-0.23701992697345464,0.19450375212787394,609.0,
+B: main sample (ATT),weeks 7-12 after (Spring/Summer),,local only,-0.38922597035984985,0.37080174514408215,329.0,
+B: main sample (ATT),during,,single,0.18659761392875265,0.025553615181411363,20423.0,
+B: main sample (ATT),weeks 3-4 after,,single,-0.013553601246061508,0.02655212270187059,20423.0,
+B: main sample (ATT),weeks 5-6 after,,single,-0.029141270915559066,0.025196847483073114,20423.0,
+B: main sample (ATT),net revenue proxy,,single,-0.08763066891128805,0.021135870892122884,20423.0,
+B: main sample (ATT),weeks 7-12 after (Spring/Summer),,single,-0.06624055783596364,0.038733236350019566,10385.0,
