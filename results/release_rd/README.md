@@ -47,3 +47,24 @@ before removes most of that.
   before (jump +0.23 to +0.35 log points), but the same test finds similar jumps where
   nothing happens; inconclusive.
 - The estimate applies to month-old games, not the main sample's established games.
+
+## Do buyers wait for eligible games? (27_rd_waiting.py, waiting.csv)
+
+Reviews in the week before the sale relative to the game's launch week (fixed before
+either group could discount); jump at the cutoff.
+
+| | bw 10 | bw 14 | bw 21 |
+|---|---|---|---|
+| Reduced form | -0.066 (0.074) | -0.057 (0.065) | -0.022 (0.053) |
+| Fuzzy RD | -0.12 (0.14) | -0.10 (0.12) | -0.03 (0.08) |
+| Same, dropping ages 29-30 (fuzzy) | -0.03 (0.17) | -0.04 (0.12) | +0.00 (0.08) |
+
+Placebo cutoffs (reduced form, bw 10): age 23 -0.05 (0.08), 26 +0.13 (0.10), 44 -0.09
+(0.08). The raw level of week-before reviews dips at narrow bandwidths (-0.22, SE 0.12,
+at bw 10) but not at wider ones, and that level is noisy.
+
+Reading: no reliable waiting dip for month-old games. The point estimates lean negative
+and the intervals allow a dip of up to about 0.15-0.25, so waiting is neither shown nor
+ruled out; buyers of a game this new may not expect a discount yet. For the main RD this
+is reassuring: the week before the sale works as a baseline, so the during-sale effect
+(+0.35 to +0.45) is not inflated by a dip.

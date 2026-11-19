@@ -1,0 +1,31 @@
+outcome,part,bw,donut,est,se,n
+week before the sale vs launch week,reduced form,10,False,-0.06632763750987468,0.0737977665144197,2775
+week before the sale vs launch week,fuzzy RD,10,False,-0.12278468747306562,0.14241588882835754,2775
+week before the sale vs launch week,reduced form,10,True,-0.016186567597191392,0.10766476750577203,2456
+week before the sale vs launch week,fuzzy RD,10,True,-0.026184411202054725,0.16971875874764156,2456
+week before the sale vs launch week,reduced form,14,False,-0.057057299311284004,0.064804068930865,3986
+week before the sale vs launch week,fuzzy RD,14,False,-0.1000451539486912,0.11793585733293362,3986
+week before the sale vs launch week,reduced form,14,True,-0.0251358685003426,0.07662371262521375,3667
+week before the sale vs launch week,fuzzy RD,14,True,-0.03979246326462667,0.12306330183343174,3667
+week before the sale vs launch week,reduced form,21,False,-0.022479385935313807,0.05315398933755662,6033
+week before the sale vs launch week,fuzzy RD,21,False,-0.033914789410447246,0.07931076597269404,6033
+week before the sale vs launch week,reduced form,21,True,0.0009022361506216903,0.0658482233687338,5714
+week before the sale vs launch week,fuzzy RD,21,True,0.0012457900630377004,0.08146369369084465,5714
+week before the sale vs launch week,placebo cutoff (age 23),10,False,-0.048024901499222776,0.07537977076925309,2602
+week before the sale vs launch week,placebo cutoff (age 26),10,False,0.1276512223093537,0.09587098369750342,2733
+week before the sale vs launch week,placebo cutoff (age 44),10,False,-0.08690138949648114,0.0828353638886877,2840
+week before the sale (level),reduced form,10,False,-0.22097031055052865,0.11451709923415278,2775
+week before the sale (level),fuzzy RD,10,False,-0.40905679050808363,0.22636763070736607,2775
+week before the sale (level),reduced form,10,True,-0.26301042180661505,0.1525446588613286,2456
+week before the sale (level),fuzzy RD,10,True,-0.42546222314638377,0.23720809189218273,2456
+week before the sale (level),reduced form,14,False,-0.13923211054204873,0.10337218597883019,3986
+week before the sale (level),fuzzy RD,14,False,-0.24413174303582352,0.17457178158848566,3986
+week before the sale (level),reduced form,14,True,-0.11673110067077831,0.12461735878731077,3667
+week before the sale (level),fuzzy RD,14,True,-0.18479640101626377,0.17858348331946566,3667
+week before the sale (level),reduced form,21,False,-0.011202830140518965,0.0887994878254928,6033
+week before the sale (level),fuzzy RD,21,False,-0.01690177952858782,0.1290894009952991,6033
+week before the sale (level),reduced form,21,True,0.03366012370830486,0.09398113575462368,5714
+week before the sale (level),fuzzy RD,21,True,0.04647724169280011,0.1363930062913373,5714
+week before the sale (level),placebo cutoff (age 23),10,False,-0.060435262842211485,0.145940817529663,2602
+week before the sale (level),placebo cutoff (age 26),10,False,0.05293527409366476,0.170834799942652,2733
+week before the sale (level),placebo cutoff (age 44),10,False,0.02773841479980996,0.11692572276685548,2840
