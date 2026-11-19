@@ -244,6 +244,18 @@ def main():
                 "r_E": np.log1p(c["E"] * ratio),
                 "r_DG": np.log1p(c["D"] + c["E"] * ratio + c["F"] + c["G"]),
                 "early7": np.log1p(c["rel7"]),
+                # per-week rates relative to the week before the sale (ages 23-29 at the
+                # cutoff, before any game is eligible): removes each game's scale and most
+                # of the launch decay
+                "y_D": np.log1p(c["D"]),
+                "dE": np.log1p(c["E"] * 7 / c["sale_days"]) - np.log1p(c["D"]),
+                "dF": np.log1p(c["F"] / 2) - np.log1p(c["D"]),
+                "dG": np.log1p(c["G"] / 2) - np.log1p(c["D"]),
+                "drE": np.log1p(c["E"] * ratio * 7 / c["sale_days"]) - np.log1p(c["D"]),
+                "drEFG": np.log1p(
+                    (c["E"] * ratio + c["F"] + c["G"]) * 7 / (c["sale_days"] + 28)
+                )
+                - np.log1p(c["D"]),
             }
         )
 
@@ -285,6 +297,16 @@ def main():
         "r_E": "revenue proxy during",
         "r_DG": "revenue proxy week before to week 4",
     }
+    if "dE" in o:
+        labels.update(
+            {
+                "dE": "vs week before: reviews during sale",
+                "dF": "vs week before: reviews weeks 1-2 after",
+                "dG": "vs week before: reviews weeks 3-4 after",
+                "drE": "vs week before: revenue proxy during",
+                "drEFG": "vs week before: revenue proxy sale to week 4",
+            }
+        )
     for y, lab in labels.items():
         for h in BWS:
             for donut in (False, True):
@@ -306,6 +328,7 @@ def main():
     # balance
     for y, lab, d in [
         ("early7", "reviews in first 7 days", o),
+        *([("y_D", "reviews in the week before the sale", o)] if "y_D" in o else []),
         ("log_price", "log regular price", u),
         ("log_catalog", "log publisher catalog", u),
     ]:
@@ -325,7 +348,8 @@ def main():
             )
     # placebo cutoffs (first stage and reduced form at ages 20 and 40)
     for c in (-10, 10):
-        for y, d in [("discounted", u), ("y_E", o), ("r_DG", o)]:
+        extra = [("dE", o), ("drEFG", o)] if "dE" in o else []
+        for y, d in [("discounted", u), ("y_E", o), ("r_DG", o), *extra]:
             j, se, n = rd(d, y, 10, c=c, fuzzy=False)
             res.append(
                 dict(

@@ -5,96 +5,163 @@ first stage,universe,discounted,14,False,0.5661938207178622,0.02882922773474359,
 first stage,universe,discounted,14,True,0.6242043329851398,0.030533286221445726,3786
 first stage,universe,discounted,21,False,0.6657224819965031,0.02241250755080856,6277
 first stage,universe,discounted,21,True,0.7281025134292067,0.02172211035369431,5958
-first stage,outcome sample,discounted,10,False,0.3016220663668568,0.10324573874766307,267
-first stage,outcome sample,discounted,10,True,0.3955387272942499,0.15348761099818178,235
-first stage,outcome sample,discounted,14,False,0.3763311723241954,0.1037531656046407,365
-first stage,outcome sample,discounted,14,True,0.474629910270158,0.10669637515100608,333
-first stage,outcome sample,discounted,21,False,0.5176388160039598,0.07578828968026946,541
-first stage,outcome sample,discounted,21,True,0.6228156683863326,0.0840323466079196,509
-reduced form,outcome sample,reviews during sale,10,False,-0.17509062716214605,0.4192367853799459,267
-fuzzy RD,outcome sample,reviews during sale,10,False,-0.5804967430638409,2.826076365959291,267
-reduced form,outcome sample,reviews during sale,10,True,0.021887406432338035,0.5203490307858312,235
-fuzzy RD,outcome sample,reviews during sale,10,True,0.05533568503408648,2.9573725279568515,235
-reduced form,outcome sample,reviews during sale,14,False,-0.024196154097622394,0.36771613772573614,365
-fuzzy RD,outcome sample,reviews during sale,14,False,-0.0642948442144418,1.1346750206544056,365
-reduced form,outcome sample,reviews during sale,14,True,0.22967189191885598,0.4334289690204108,333
-fuzzy RD,outcome sample,reviews during sale,14,True,0.48389679400551766,1.0639542527903472,333
-reduced form,outcome sample,reviews during sale,21,False,0.0867721294128284,0.27750149789754996,541
-fuzzy RD,outcome sample,reviews during sale,21,False,0.1676306465629591,0.580551297521742,541
-reduced form,outcome sample,reviews during sale,21,True,0.283003065436293,0.35034289266024926,509
-fuzzy RD,outcome sample,reviews during sale,21,True,0.45439297660820277,0.5528641281535566,509
-reduced form,outcome sample,reviews weeks 1-2 after,10,False,-0.5169323177306089,0.43297873659375796,267
-fuzzy RD,outcome sample,reviews weeks 1-2 after,10,False,-1.7138411786552599,8.020560819924007,267
-reduced form,outcome sample,reviews weeks 1-2 after,10,True,-0.17035363325549244,0.5288563044717378,235
-fuzzy RD,outcome sample,reviews weeks 1-2 after,10,True,-0.43068762045331316,2.375974401160954,235
-reduced form,outcome sample,reviews weeks 1-2 after,14,False,-0.360987368424677,0.31997927310398966,365
-fuzzy RD,outcome sample,reviews weeks 1-2 after,14,False,-0.9592279220327242,1.215768822958804,365
-reduced form,outcome sample,reviews weeks 1-2 after,14,True,-0.043225814173478795,0.4107853585865447,333
-fuzzy RD,outcome sample,reviews weeks 1-2 after,14,True,-0.0910726720717512,0.9407584049628193,333
-reduced form,outcome sample,reviews weeks 1-2 after,21,False,-0.23657389788305655,0.29808147161379234,541
-fuzzy RD,outcome sample,reviews weeks 1-2 after,21,False,-0.4570250347710532,0.5356254924208712,541
-reduced form,outcome sample,reviews weeks 1-2 after,21,True,-0.00878112215730381,0.30932926187498655,509
-fuzzy RD,outcome sample,reviews weeks 1-2 after,21,True,-0.014099070725139301,0.5391856082286001,509
-reduced form,outcome sample,reviews weeks 3-4 after,10,False,-0.6097703749158276,0.40940452168825,267
-fuzzy RD,outcome sample,reviews weeks 3-4 after,10,False,-2.0216371509575706,16.520869266739634,267
-reduced form,outcome sample,reviews weeks 3-4 after,10,True,-0.49881103627743745,0.5312129233851542,235
-fuzzy RD,outcome sample,reviews weeks 3-4 after,10,True,-1.2610927877774178,4.140037368347624,235
-reduced form,outcome sample,reviews weeks 3-4 after,14,False,-0.5374152018272255,0.34160378147720466,365
-fuzzy RD,outcome sample,reviews weeks 3-4 after,14,False,-1.4280379658910163,5.1566114051485705,365
-reduced form,outcome sample,reviews weeks 3-4 after,14,True,-0.4057693643814337,0.37786615316302286,333
-fuzzy RD,outcome sample,reviews weeks 3-4 after,14,True,-0.8549173905843206,0.982763760719702,333
-reduced form,outcome sample,reviews weeks 3-4 after,21,False,-0.44105646662012715,0.27677239071166526,541
-fuzzy RD,outcome sample,reviews weeks 3-4 after,21,False,-0.8520544692242578,0.5628603270909566,541
-reduced form,outcome sample,reviews weeks 3-4 after,21,True,-0.32592658192530943,0.29642507491402414,509
-fuzzy RD,outcome sample,reviews weeks 3-4 after,21,True,-0.5233114683350213,0.4960022800904147,509
-reduced form,outcome sample,reviews week before to week 4,10,False,-0.5096480936015396,0.43444301529590057,267
-fuzzy RD,outcome sample,reviews week before to week 4,10,False,-1.689691008819179,24.498109481758817,267
-reduced form,outcome sample,reviews week before to week 4,10,True,-0.2116690264919231,0.5819371175445153,235
-fuzzy RD,outcome sample,reviews week before to week 4,10,True,-0.5351410920995807,2.1396261253761755,235
-reduced form,outcome sample,reviews week before to week 4,14,False,-0.36182232598044567,0.3740678040808544,365
-fuzzy RD,outcome sample,reviews week before to week 4,14,False,-0.961446599668733,1.0719920267012817,365
-reduced form,outcome sample,reviews week before to week 4,14,True,-0.061563703402169795,0.44851510447895326,333
-fuzzy RD,outcome sample,reviews week before to week 4,14,True,-0.12970885751200953,1.0070321486488811,333
-reduced form,outcome sample,reviews week before to week 4,21,False,-0.2193320934301415,0.2844363684070533,541
-fuzzy RD,outcome sample,reviews week before to week 4,21,False,-0.4237164730483884,0.6002285970895684,541
-reduced form,outcome sample,reviews week before to week 4,21,True,0.010495622016001089,0.3436403312074501,509
-fuzzy RD,outcome sample,reviews week before to week 4,21,True,0.016851891416274797,0.6145960029779699,509
-reduced form,outcome sample,revenue proxy during,10,False,-0.21559407379549902,0.40635443080238726,267
-fuzzy RD,outcome sample,revenue proxy during,10,False,-0.7147821656167435,2.9368101787226704,267
-reduced form,outcome sample,revenue proxy during,10,True,-0.03914403642190227,0.5764532592909114,235
-fuzzy RD,outcome sample,revenue proxy during,10,True,-0.09896385289418745,1.817655542780549,235
-reduced form,outcome sample,revenue proxy during,14,False,-0.08803384551553614,0.36529836189782666,365
-fuzzy RD,outcome sample,revenue proxy during,14,False,-0.23392653064545565,1.074044958221814,365
-reduced form,outcome sample,revenue proxy during,14,True,0.13866559284005758,0.4263754843285379,333
-fuzzy RD,outcome sample,revenue proxy during,14,True,0.29215519258179395,1.1943571549529748,333
-reduced form,outcome sample,revenue proxy during,21,False,-0.00768786346946578,0.2987358333234974,541
-fuzzy RD,outcome sample,revenue proxy during,21,False,-0.014851790924054215,0.5999357845523872,541
-reduced form,outcome sample,revenue proxy during,21,True,0.16181513692642183,0.3482829066648219,509
-fuzzy RD,outcome sample,revenue proxy during,21,True,0.2598122448423181,0.5550247808641324,509
-reduced form,outcome sample,revenue proxy week before to week 4,10,False,-0.5235856104885636,0.4047573779892035,267
-fuzzy RD,outcome sample,revenue proxy week before to week 4,10,False,-1.735899554019158,43.17439554266984,267
-reduced form,outcome sample,revenue proxy week before to week 4,10,True,-0.22252630079544256,0.5088453288338284,235
-fuzzy RD,outcome sample,revenue proxy week before to week 4,10,True,-0.5625904252604332,2.7459338387307697,235
-reduced form,outcome sample,revenue proxy week before to week 4,14,False,-0.38455746857669515,0.3588440219067115,365
-fuzzy RD,outcome sample,revenue proxy week before to week 4,14,False,-1.0218591943943807,1.0569057545610536,365
-reduced form,outcome sample,revenue proxy week before to week 4,14,True,-0.08903526164519925,0.4495811714191992,333
-fuzzy RD,outcome sample,revenue proxy week before to week 4,14,True,-0.18758881334410768,1.0463217206724855,333
-reduced form,outcome sample,revenue proxy week before to week 4,21,False,-0.25450074049401655,0.28437415235242947,541
-fuzzy RD,outcome sample,revenue proxy week before to week 4,21,False,-0.49165698673584346,0.5983797844740404,541
-reduced form,outcome sample,revenue proxy week before to week 4,21,True,-0.03233275994470134,0.3383192783159199,509
-fuzzy RD,outcome sample,revenue proxy week before to week 4,21,True,-0.05191385121776565,0.5580789548573903,509
-balance,outcome sample,reviews in first 7 days,10,False,-0.38142063177850427,0.3685043584757034,267
-balance,outcome sample,reviews in first 7 days,14,False,-0.29643287709733024,0.33341853011569533,365
-balance,outcome sample,reviews in first 7 days,21,False,-0.26323284403345326,0.25904862011065266,541
-balance,universe,log regular price,10,False,-0.08423387877247834,0.0697334047093653,2817
-balance,universe,log regular price,14,False,-0.02662411304594573,0.05449789759870222,4105
-balance,universe,log regular price,21,False,-0.02563863385752419,0.04559282072898425,6277
-balance,universe,log publisher catalog,10,False,0.054865480776986594,0.11515483342376066,2810
-balance,universe,log publisher catalog,14,False,0.11148767972309918,0.10238743913661691,4093
-balance,universe,log publisher catalog,21,False,0.09769165420420567,0.08627245259393176,6264
-placebo cutoff (age 20),universe,discounted,10,False,0.08668111389823956,0.029816416214469572,2659
-placebo cutoff (age 20),outcome sample,reviews during sale,10,False,0.8370923618323406,0.4588610903964532,239
-placebo cutoff (age 20),outcome sample,revenue proxy week before to week 4,10,False,0.8582805786640023,0.4977107826374026,239
-placebo cutoff (age 40),universe,discounted,10,False,-0.09477767962671667,0.0260396072927804,3137
-placebo cutoff (age 40),outcome sample,reviews during sale,10,False,0.06452076349976497,0.4676807766640679,264
-placebo cutoff (age 40),outcome sample,revenue proxy week before to week 4,10,False,0.0003484228982460761,0.48033871614294715,264
+first stage,outcome sample,discounted,10,False,0.5401947007799689,0.031680018239948995,2775
+first stage,outcome sample,discounted,10,True,0.6181757333508883,0.03800581910953191,2456
+first stage,outcome sample,discounted,14,False,0.5703154731567128,0.028773629399720908,3986
+first stage,outcome sample,discounted,14,True,0.6316741020324574,0.02863404169454126,3667
+first stage,outcome sample,discounted,21,False,0.6628195641512421,0.021836228796027368,6033
+first stage,outcome sample,discounted,21,True,0.724228084161871,0.023469159851114932,5714
+reduced form,outcome sample,reviews during sale,10,False,-0.03449760594813529,0.12372978806869143,2775
+fuzzy RD,outcome sample,reviews during sale,10,False,-0.06386142977397846,0.23725561148686075,2775
+reduced form,outcome sample,reviews during sale,10,True,0.033483083556200395,0.16277577985789174,2456
+fuzzy RD,outcome sample,reviews during sale,10,True,0.05416434478057191,0.2664561115983291,2456
+reduced form,outcome sample,reviews during sale,14,False,0.0859402299318085,0.11362099153069248,3986
+fuzzy RD,outcome sample,reviews during sale,14,False,0.15068893266410396,0.21196552840294258,3986
+reduced form,outcome sample,reviews during sale,14,True,0.1990739806499468,0.12827094390134125,3667
+fuzzy RD,outcome sample,reviews during sale,14,True,0.3151529879243296,0.19688242565163927,3667
+reduced form,outcome sample,reviews during sale,21,False,0.21054941466672006,0.10146452467424644,6033
+fuzzy RD,outcome sample,reviews during sale,21,False,0.3176572117878478,0.1486750624847321,6033
+reduced form,outcome sample,reviews during sale,21,True,0.3119385899454839,0.10577238087287895,5714
+fuzzy RD,outcome sample,reviews during sale,21,True,0.43071871523248334,0.13898818140831734,5714
+reduced form,outcome sample,reviews weeks 1-2 after,10,False,-0.24490560599141747,0.13008679283970354,2775
+fuzzy RD,outcome sample,reviews weeks 1-2 after,10,False,-0.4533654359026598,0.23165500835192931,2775
+reduced form,outcome sample,reviews weeks 1-2 after,10,True,-0.21526628766064518,0.1541509367949837,2456
+fuzzy RD,outcome sample,reviews weeks 1-2 after,10,True,-0.3482283047472133,0.2653988670089084,2456
+reduced form,outcome sample,reviews weeks 1-2 after,14,False,-0.1400912013303495,0.10056823680985819,3986
+fuzzy RD,outcome sample,reviews weeks 1-2 after,14,False,-0.2456380861542132,0.174894061075195,3986
+reduced form,outcome sample,reviews weeks 1-2 after,14,True,-0.061913129887632715,0.12597291466540037,3667
+fuzzy RD,outcome sample,reviews weeks 1-2 after,14,True,-0.09801435532725294,0.1939887471022656,3667
+reduced form,outcome sample,reviews weeks 1-2 after,21,False,-0.007225900022867863,0.08488554524171249,6033
+fuzzy RD,outcome sample,reviews weeks 1-2 after,21,False,-0.010901760318618264,0.13119483687878658,6033
+reduced form,outcome sample,reviews weeks 1-2 after,21,True,0.07733027507643764,0.08953171825704176,5714
+fuzzy RD,outcome sample,reviews weeks 1-2 after,21,True,0.10677613415935093,0.12977308981227237,5714
+reduced form,outcome sample,reviews weeks 3-4 after,10,False,-0.24599572804851097,0.12374167304059623,2775
+fuzzy RD,outcome sample,reviews weeks 3-4 after,10,False,-0.4553834528426992,0.23522006446495236,2775
+reduced form,outcome sample,reviews weeks 3-4 after,10,True,-0.2756367686330907,0.14320183176451917,2456
+fuzzy RD,outcome sample,reviews weeks 3-4 after,10,True,-0.4458873970011276,0.24978653680293808,2456
+reduced form,outcome sample,reviews weeks 3-4 after,14,False,-0.17072770602385237,0.09817951881028142,3986
+fuzzy RD,outcome sample,reviews weeks 3-4 after,14,False,-0.29935660885872434,0.18668692260011377,3986
+reduced form,outcome sample,reviews weeks 3-4 after,14,True,-0.14555903202031295,0.11852981013841332,3667
+fuzzy RD,outcome sample,reviews weeks 3-4 after,14,True,-0.2304337498592489,0.182114800055365,3667
+reduced form,outcome sample,reviews weeks 3-4 after,21,False,-0.09426425521964064,0.08316871806595359,6033
+fuzzy RD,outcome sample,reviews weeks 3-4 after,21,False,-0.14221706829120004,0.1267876821568962,6033
+reduced form,outcome sample,reviews weeks 3-4 after,21,True,-0.06037167464568234,0.09013780720940094,5714
+fuzzy RD,outcome sample,reviews weeks 3-4 after,21,True,-0.08336002975574856,0.12317552855006797,5714
+reduced form,outcome sample,reviews week before to week 4,10,False,-0.17434450362985143,0.12936817283040797,2775
+fuzzy RD,outcome sample,reviews week before to week 4,10,False,-0.3227438243620704,0.2499804125105819,2775
+reduced form,outcome sample,reviews week before to week 4,10,True,-0.12334549868102859,0.17347418355979616,2456
+fuzzy RD,outcome sample,reviews week before to week 4,10,True,-0.19953144717024238,0.2714766846085895,2456
+reduced form,outcome sample,reviews week before to week 4,14,False,-0.06553461129625214,0.10552516218440296,3986
+fuzzy RD,outcome sample,reviews week before to week 4,14,False,-0.11490940432234137,0.2059895987270345,3986
+reduced form,outcome sample,reviews week before to week 4,14,True,0.027118250211742204,0.12324195511552165,3667
+fuzzy RD,outcome sample,reviews week before to week 4,14,True,0.04293076148679716,0.19846182490755934,3667
+reduced form,outcome sample,reviews week before to week 4,21,False,0.06065034916970167,0.08868055384122546,6033
+fuzzy RD,outcome sample,reviews week before to week 4,21,False,0.09150355911320457,0.13128617183647293,6033
+reduced form,outcome sample,reviews week before to week 4,21,True,0.1491753768063619,0.10580572058312102,5714
+fuzzy RD,outcome sample,reviews week before to week 4,21,True,0.20597844804513263,0.13662156586580387,5714
+reduced form,outcome sample,revenue proxy during,10,False,-0.15021101770101808,0.129450030992601,2775
+fuzzy RD,outcome sample,revenue proxy during,10,False,-0.27806829182910064,0.25038973790721836,2775
+reduced form,outcome sample,revenue proxy during,10,True,-0.10748893130236514,0.16473890157436677,2456
+fuzzy RD,outcome sample,revenue proxy during,10,True,-0.1738808651056388,0.26332491285924686,2456
+reduced form,outcome sample,revenue proxy during,14,False,-0.035801734847753286,0.10922015015513989,3986
+fuzzy RD,outcome sample,revenue proxy during,14,False,-0.0627753174038741,0.19253137172914214,3986
+reduced form,outcome sample,revenue proxy during,14,True,0.06015526082160165,0.12771677077290838,3667
+fuzzy RD,outcome sample,revenue proxy during,14,True,0.09523148191139658,0.19306435434738126,3667
+reduced form,outcome sample,revenue proxy during,21,False,0.07941710297970803,0.08630960616537302,6033
+fuzzy RD,outcome sample,revenue proxy during,21,False,0.11981707733899453,0.14557060313525427,6033
+reduced form,outcome sample,revenue proxy during,21,True,0.16811671468517206,0.09939408764671684,5714
+fuzzy RD,outcome sample,revenue proxy during,21,True,0.23213227760937888,0.1497572311204216,5714
+reduced form,outcome sample,revenue proxy week before to week 4,10,False,-0.2156494837539084,0.12871525925316987,2775
+fuzzy RD,outcome sample,revenue proxy week before to week 4,10,False,-0.39920695897708625,0.23219734112354043,2775
+reduced form,outcome sample,revenue proxy week before to week 4,10,True,-0.1769573530145808,0.15909168491590764,2456
+fuzzy RD,outcome sample,revenue proxy week before to week 4,10,True,-0.2862573593035824,0.26591136028727236,2456
+reduced form,outcome sample,revenue proxy week before to week 4,14,False,-0.11003170836028497,0.10838942971443961,3986
+fuzzy RD,outcome sample,revenue proxy week before to week 4,14,False,-0.1929313047588491,0.21498649782081708,3986
+reduced form,outcome sample,revenue proxy week before to week 4,14,True,-0.02625939032192841,0.12772286167208177,3667
+fuzzy RD,outcome sample,revenue proxy week before to week 4,14,True,-0.041571104842571364,0.19578884679821618,3667
+reduced form,outcome sample,revenue proxy week before to week 4,21,False,0.012178310121870236,0.0923852961823539,6033
+fuzzy RD,outcome sample,revenue proxy week before to week 4,21,False,0.01837349224515556,0.13723575816422867,6033
+reduced form,outcome sample,revenue proxy week before to week 4,21,True,0.09428255334457442,0.10113291089973075,5714
+fuzzy RD,outcome sample,revenue proxy week before to week 4,21,True,0.13018350904423293,0.14304197305352181,5714
+reduced form,outcome sample,vs week before: reviews during sale,10,False,0.22602305656272315,0.057148473257639706,2775
+fuzzy RD,outcome sample,vs week before: reviews during sale,10,False,0.41841035507452423,0.10598860443314646,2775
+reduced form,outcome sample,vs week before: reviews during sale,10,True,0.3470023226160059,0.0765686701538617,2456
+fuzzy RD,outcome sample,vs week before: reviews during sale,10,True,0.5613328118446875,0.12418971490678896,2456
+reduced form,outcome sample,vs week before: reviews during sale,14,False,0.2569341381358168,0.04966460931611812,3986
+fuzzy RD,outcome sample,vs week before: reviews during sale,14,False,0.45051230455607105,0.08120619898133326,3986
+reduced form,outcome sample,vs week before: reviews during sale,14,True,0.34753221182115923,0.05853544666934324,3667
+fuzzy RD,outcome sample,vs week before: reviews during sale,14,True,0.5501764449467677,0.08861816914228117,3667
+reduced form,outcome sample,vs week before: reviews during sale,21,False,0.2295891038987936,0.04003425750123026,6033
+fuzzy RD,outcome sample,vs week before: reviews during sale,21,False,0.3463825093829095,0.06109342135859692,6033
+reduced form,outcome sample,vs week before: reviews during sale,21,True,0.2773109277500815,0.04419194902630098,5714
+fuzzy RD,outcome sample,vs week before: reviews during sale,21,True,0.3829055152852926,0.06309361165528743,5714
+reduced form,outcome sample,vs week before: reviews weeks 1-2 after,10,False,-0.00022018247979143943,0.051717329098132994,2775
+fuzzy RD,outcome sample,vs week before: reviews weeks 1-2 after,10,False,-0.00040759837050146063,0.10170899528402166,2775
+reduced form,outcome sample,vs week before: reviews weeks 1-2 after,10,True,0.060816775092666885,0.0718872579774986,2456
+fuzzy RD,outcome sample,vs week before: reviews weeks 1-2 after,10,True,0.09838104573112728,0.12211118159148507,2456
+reduced form,outcome sample,vs week before: reviews weeks 1-2 after,14,False,0.008908926293977677,0.04554346767057456,3986
+fuzzy RD,outcome sample,vs week before: reviews weeks 1-2 after,14,False,0.015621049600261604,0.07214385513470928,3986
+reduced form,outcome sample,vs week before: reviews weeks 1-2 after,14,True,0.05053258841753452,0.053811674901186816,3667
+fuzzy RD,outcome sample,vs week before: reviews weeks 1-2 after,14,True,0.07999787905652968,0.08841212130193732,3667
+reduced form,outcome sample,vs week before: reviews weeks 1-2 after,21,False,-0.0024463871961087134,0.03379824257891268,6033
+fuzzy RD,outcome sample,vs week before: reviews weeks 1-2 after,21,False,-0.0036908795823511584,0.056151347786526876,6033
+reduced form,outcome sample,vs week before: reviews weeks 1-2 after,21,True,0.02408901432265389,0.04098565740671043,5714
+fuzzy RD,outcome sample,vs week before: reviews weeks 1-2 after,21,True,0.03326164070333096,0.05911732556151048,5714
+reduced form,outcome sample,vs week before: reviews weeks 3-4 after,10,False,-0.008978733935359359,0.052024279565484804,2775
+fuzzy RD,outcome sample,vs week before: reviews weeks 3-4 after,10,False,-0.01662129214225032,0.09578587992127184,2775
+reduced form,outcome sample,vs week before: reviews weeks 3-4 after,10,True,0.012136356275479803,0.07702213510471602,2456
+fuzzy RD,outcome sample,vs week before: reviews weeks 3-4 after,10,True,0.01963253427903644,0.12967116795113773,2456
+reduced form,outcome sample,vs week before: reviews weeks 3-4 after,14,False,-0.01988686656629045,0.04480124988345555,3986
+fuzzy RD,outcome sample,vs week before: reviews weeks 3-4 after,14,False,-0.03486994041423436,0.08070104343216149,3986
+reduced form,outcome sample,vs week before: reviews weeks 3-4 after,14,True,-0.013647641464925921,0.053688801168934416,3667
+fuzzy RD,outcome sample,vs week before: reviews weeks 3-4 after,14,True,-0.02160551053306387,0.09245152984473828,3667
+reduced form,outcome sample,vs week before: reviews weeks 3-4 after,21,False,-0.07636667398673697,0.03815325010863743,6033
+fuzzy RD,outcome sample,vs week before: reviews weeks 3-4 after,21,False,-0.11521487613982322,0.05971931193749265,6033
+reduced form,outcome sample,vs week before: reviews weeks 3-4 after,21,True,-0.08589968037612301,0.0432111287761749,5714
+fuzzy RD,outcome sample,vs week before: reviews weeks 3-4 after,21,True,-0.11860860170250415,0.061495613169433985,5714
+reduced form,outcome sample,vs week before: revenue proxy during,10,False,0.11723891843162469,0.05444859337612046,2775
+fuzzy RD,outcome sample,vs week before: revenue proxy during,10,False,0.21703085621230156,0.0949479094324465,2775
+reduced form,outcome sample,vs week before: revenue proxy during,10,True,0.2146239908557698,0.0711467892314245,2456
+fuzzy RD,outcome sample,vs week before: revenue proxy during,10,True,0.3471892849827302,0.1211178331150306,2456
+reduced form,outcome sample,vs week before: revenue proxy during,14,False,0.1423313521112047,0.04656752986226429,3986
+fuzzy RD,outcome sample,vs week before: revenue proxy during,14,False,0.24956600129292741,0.07910092996816898,3986
+reduced form,outcome sample,vs week before: revenue proxy during,14,True,0.21684198649616027,0.05493488344292998,3667
+fuzzy RD,outcome sample,vs week before: revenue proxy during,14,True,0.34328142597338623,0.09456532138936116,3667
+reduced form,outcome sample,vs week before: revenue proxy during,21,False,0.10655219884907699,0.038366535859835744,6033
+fuzzy RD,outcome sample,vs week before: revenue proxy during,21,False,0.16075596529127786,0.056019464184790896,6033
+reduced form,outcome sample,vs week before: revenue proxy during,21,True,0.14257788556410597,0.041766327696350074,5714
+fuzzy RD,outcome sample,vs week before: revenue proxy during,21,True,0.1968687609361454,0.06244306584148273,5714
+reduced form,outcome sample,vs week before: revenue proxy sale to week 4,10,False,0.03400077127526007,0.04746057765586693,2775
+fuzzy RD,outcome sample,vs week before: revenue proxy sale to week 4,10,False,0.06294169718097475,0.08389403627297065,2775
+reduced form,outcome sample,vs week before: revenue proxy sale to week 4,10,True,0.11428513929578724,0.06127795018017017,2456
+fuzzy RD,outcome sample,vs week before: revenue proxy sale to week 4,10,True,0.1848748391922347,0.09880168331012064,2456
+reduced form,outcome sample,vs week before: revenue proxy sale to week 4,14,False,0.043881373289488754,0.03871904206586422,3986
+fuzzy RD,outcome sample,vs week before: revenue proxy sale to week 4,14,False,0.07694228081627186,0.0667874112876205,3986
+reduced form,outcome sample,vs week before: revenue proxy sale to week 4,14,True,0.09745552061063259,0.04456922695997284,3667
+fuzzy RD,outcome sample,vs week before: revenue proxy sale to week 4,14,True,0.15428133003563443,0.07260509880972622,3667
+reduced form,outcome sample,vs week before: revenue proxy sale to week 4,21,False,0.004402176568149073,0.030490386291922328,6033
+fuzzy RD,outcome sample,vs week before: revenue proxy sale to week 4,21,False,0.006641591175399561,0.04889053464587435,6033
+reduced form,outcome sample,vs week before: revenue proxy sale to week 4,21,True,0.028387288404033345,0.036183540291615864,5714
+fuzzy RD,outcome sample,vs week before: revenue proxy sale to week 4,21,True,0.03919661364262774,0.05237938976779318,5714
+balance,outcome sample,reviews in first 7 days,10,False,-0.154642673040654,0.1262127195521247,2775
+balance,outcome sample,reviews in first 7 days,14,False,-0.08217481123076432,0.09586615133725711,3986
+balance,outcome sample,reviews in first 7 days,21,False,0.011276555794794087,0.08488100583775444,6033
+balance,outcome sample,reviews in the week before the sale,10,False,-0.22097031055052865,0.12736893628841478,2775
+balance,outcome sample,reviews in the week before the sale,14,False,-0.13923211054204873,0.10162546653215558,3986
+balance,outcome sample,reviews in the week before the sale,21,False,-0.011202830140518965,0.08220040263832937,6033
+balance,universe,log regular price,10,False,-0.08423387877247834,0.06896195736544967,2817
+balance,universe,log regular price,14,False,-0.02662411304594573,0.054812891327381014,4105
+balance,universe,log regular price,21,False,-0.02563863385752419,0.04472232801862936,6277
+balance,universe,log publisher catalog,10,False,0.054865480776986594,0.12855251211149765,2810
+balance,universe,log publisher catalog,14,False,0.11148767972309918,0.10649375604066388,4093
+balance,universe,log publisher catalog,21,False,0.09769165420420567,0.07693161742480498,6264
+placebo cutoff (age 20),universe,discounted,10,False,0.08668111389823956,0.029106436108865767,2659
+placebo cutoff (age 20),outcome sample,reviews during sale,10,False,0.23771666583217818,0.1454795263451932,2659
+placebo cutoff (age 20),outcome sample,revenue proxy week before to week 4,10,False,0.36476531662223366,0.16484982487414188,2659
+placebo cutoff (age 20),outcome sample,vs week before: reviews during sale,10,False,-0.2129150015097154,0.06581017218750058,2659
+placebo cutoff (age 20),outcome sample,vs week before: revenue proxy sale to week 4,10,False,-0.13951982421931017,0.05714399856160256,2659
+placebo cutoff (age 40),universe,discounted,10,False,-0.09477767962671667,0.02750982414318179,3137
+placebo cutoff (age 40),outcome sample,reviews during sale,10,False,-0.1417717352361628,0.14824004288399628,2913
+placebo cutoff (age 40),outcome sample,revenue proxy week before to week 4,10,False,-0.051535637716932814,0.1380116598846254,2913
+placebo cutoff (age 40),outcome sample,vs week before: reviews during sale,10,False,-0.12682126521016085,0.06546639608165264,2913
+placebo cutoff (age 40),outcome sample,vs week before: revenue proxy sale to week 4,10,False,-0.07165301694911519,0.056069079261520605,2913
