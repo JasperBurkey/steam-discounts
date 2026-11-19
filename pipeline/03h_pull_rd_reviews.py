@@ -30,7 +30,18 @@ import config
 import pandas as pd
 
 P = importlib.import_module("03_pull_reviews")
-UNIVERSE = config.ROOT.parent / "results" / "release_rd" / "universe.csv"
+# from the repo's results folder, or a copy next to this script (as on the analysis PC)
+UNIVERSE = next(
+    (
+        f
+        for f in (
+            config.ROOT / "universe.csv",
+            config.ROOT.parent / "results" / "release_rd" / "universe.csv",
+        )
+        if f.exists()
+    ),
+    config.ROOT.parent / "results" / "release_rd" / "universe.csv",
+)
 OUT = config.RAW / "rd_review_counts.parquet"
 WINDOWS = {
     "D": lambda n: (-7, -1),

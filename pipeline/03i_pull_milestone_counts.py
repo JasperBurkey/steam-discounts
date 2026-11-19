@@ -17,7 +17,18 @@ import config
 import pandas as pd
 
 P = importlib.import_module("03_pull_reviews")
-CLAIMS = config.ROOT.parent / "results" / "milestones" / "claims.csv"
+# from the repo's results folder, or a copy next to this script (as on the analysis PC)
+CLAIMS = next(
+    (
+        f
+        for f in (
+            config.ROOT / "claims.csv",
+            config.ROOT.parent / "results" / "milestones" / "claims.csv",
+        )
+        if f.exists()
+    ),
+    config.ROOT.parent / "results" / "milestones" / "claims.csv",
+)
 OUT = config.RAW / "milestone_counts.parquet"
 EPOCH_2000 = 946684800
 
