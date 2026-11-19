@@ -119,6 +119,45 @@ def density(cnt, h):
     return b[1], float(np.sqrt(V[1, 1]))
 
 
+def study_outcomes(u, rv):
+    """Outcomes for study games with full (unsampled) review histories."""
+    samp = rv.groupby("app_id")["sampled"].any()
+    rv = rv[rv["app_id"].isin(samp[~samp].index) & (rv["day"] >= 0)]
+    last_day = int(rv["day"].max()) - 2
+    days = {a: np.sort(g["day"].to_numpy()) for a, g in rv.groupby("app_id")}
+    day0 = pd.Timestamp(config.REVIEW_HISTORY_START, tz="UTC")
+    out = []
+    for r in u[u["app_id"].isin(days)].itertuples(index=False):
+        d0 = (r.sale_start.normalize() - day0).days
+        n = int(r.sale_days)
+        rel0 = (r.rel - day0).days
+        if rel0 < 0 or d0 + n + 27 > last_day:
+            continue
+        dd = days[r.app_id]
+        cnt = lambda lo, hi: int(  # noqa: E731
+            np.searchsorted(dd, hi, "right") - np.searchsorted(dd, lo, "left")
+        )
+        D = cnt(d0 - 7, d0 - 1)
+        E = cnt(d0, d0 + n - 1)
+        F = cnt(d0 + n, d0 + n + 13)
+        G = cnt(d0 + n + 14, d0 + n + 27)
+        ratio = r.ratio_sale if np.isfinite(r.ratio_sale) else 1.0
+        out.append(
+            {
+                "app_id": r.app_id,
+                "sale": r.sale,
+                "y_E": np.log1p(E),
+                "y_F": np.log1p(F),
+                "y_G": np.log1p(G),
+                "y_DG": np.log1p(D + E + F + G),
+                "r_E": np.log1p(E * ratio),
+                "r_DG": np.log1p(D + E * ratio + F + G),
+                "early7": np.log1p(cnt(rel0, rel0 + 6)),
+            }
+        )
+    return u.merge(pd.DataFrame(out), on=["app_id", "sale"])
+
+
 def main():
     t0 = time.time()
     OUT.mkdir(parents=True, exist_ok=True)
@@ -177,49 +216,48 @@ def main():
         f"universe: {len(u):,} game-events, {u['app_id'].nunique():,} games  [{time.time() - t0:.0f}s]"
     )
 
-    # outcomes for study games with full review histories
-    rv = pd.read_parquet(
-        COMPACT / "reviews_compact.parquet", columns=["app_id", "day", "sampled"]
-    )
-    samp = rv.groupby("app_id")["sampled"].any()
-    rv = rv[rv["app_id"].isin(samp[~samp].index) & (rv["day"] >= 0)]
-    last_day = int(rv["day"].max()) - 2
-    days = {a: np.sort(g["day"].to_numpy()) for a, g in rv.groupby("app_id")}
-    day0 = pd.Timestamp(config.REVIEW_HISTORY_START, tz="UTC")
-    out = []
-    for r in u[u["app_id"].isin(days)].itertuples(index=False):
-        d0 = (r.sale_start.normalize() - day0).days
-        n = int(r.sale_days)
-        rel0 = (r.rel - day0).days
-        if rel0 < 0 or d0 + n + 27 > last_day:
-            continue
-        dd = days[r.app_id]
-        cnt = lambda lo, hi: int(  # noqa: E731
-            np.searchsorted(dd, hi, "right") - np.searchsorted(dd, lo, "left")
-        )
-        D = cnt(d0 - 7, d0 - 1)
-        E = cnt(d0, d0 + n - 1)
-        F = cnt(d0 + n, d0 + n + 13)
-        G = cnt(d0 + n + 14, d0 + n + 27)
-        ratio = r.ratio_sale if np.isfinite(r.ratio_sale) else 1.0
-        out.append(
+    # list of near-cutoff game-events for 03h_pull_rd_reviews.py
+    near = u[np.abs(u["a"]) < HMAX + 5]
+    pd.DataFrame(
+        {
+            "app_id": near["app_id"],
+            "sale": near["sale"],
+            "sale_date": near["sale_start"].dt.tz_convert(config.TZ).dt.date,
+            "sale_days": near["sale_days"],
+            "release_date": near["rel"].dt.tz_convert(config.TZ).dt.date,
+            "a": near["a"],
+        }
+    ).to_csv(OUT / "universe.csv", index=False)
+
+    def from_counts(c):
+        """Outcomes from 03h window counts (the whole universe)."""
+        c = u.merge(c, on=["app_id", "sale"]).dropna(subset=["D", "E", "F", "G"])
+        ratio = c["ratio_sale"].fillna(1.0)
+        return pd.DataFrame(
             {
-                "app_id": r.app_id,
-                "sale": r.sale,
-                "y_E": np.log1p(E),
-                "y_F": np.log1p(F),
-                "y_G": np.log1p(G),
-                "y_DG": np.log1p(D + E + F + G),
-                "r_E": np.log1p(E * ratio),
-                "r_DG": np.log1p(D + E * ratio + F + G),
-                "early7": np.log1p(cnt(rel0, rel0 + 6)),
+                "app_id": c["app_id"],
+                "sale": c["sale"],
+                "y_E": np.log1p(c["E"]),
+                "y_F": np.log1p(c["F"]),
+                "y_G": np.log1p(c["G"]),
+                "y_DG": np.log1p(c["D"] + c["E"] + c["F"] + c["G"]),
+                "r_E": np.log1p(c["E"] * ratio),
+                "r_DG": np.log1p(c["D"] + c["E"] * ratio + c["F"] + c["G"]),
+                "early7": np.log1p(c["rel7"]),
             }
         )
-    o = u.merge(pd.DataFrame(out), on=["app_id", "sale"])
+
+    counts_file = COMPACT / "rd_review_counts.parquet"
+    if counts_file.exists():
+        o = u.merge(from_counts(pd.read_parquet(counts_file)), on=["app_id", "sale"])
+        print(f"outcomes from {counts_file.name} (whole universe)")
+    else:
+        cols = ["app_id", "day", "sampled"]
+        rv = pd.read_parquet(COMPACT / "reviews_compact.parquet", columns=cols)
+        o = study_outcomes(u, rv)
     print(
         f"outcome sample: {len(o):,} game-events, {o['app_id'].nunique():,} games  [{time.time() - t0:.0f}s]"
     )
-
     res = []
     # first stage (universe and outcome sample)
     for sname, d in [("universe", u), ("outcome sample", o)]:
