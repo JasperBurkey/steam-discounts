@@ -47,18 +47,42 @@ A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21.0,local only,-0.54
 A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21.0,single,0.019538418568721478,0.05286865440211502,4812.0,0.6852620372799582
 A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21.0,online - single,-0.029934223399918185,0.15039919604278354,,
 A: release cutoff (fuzzy RD),"net revenue, sale to week 4",21.0,"online, strong - single",-0.04881279643428889,0.18587703860057417,,
-B: main sample (ATT),during,,online,0.36105291335713807,0.03400227395384193,10770.0,
-B: main sample (ATT),weeks 3-4 after,,online,0.0437617132666339,0.03644646404196576,10770.0,
-B: main sample (ATT),weeks 5-6 after,,online,0.07760580802790719,0.03611059135139043,10770.0,
-B: main sample (ATT),net revenue proxy,,online,-0.03138922142323982,0.02776430977876881,10770.0,
-B: main sample (ATT),weeks 7-12 after (Spring/Summer),,online,-0.006689086654516435,0.06741293934578152,4469.0,
+A: release cutoff (fuzzy RD),weeks 5-6 after,14.0,online,-0.0070366321399553695,0.45948789346013197,347.0,0.44300571741447653
+A: release cutoff (fuzzy RD),weeks 5-6 after,14.0,"online, strong",0.21348383010362662,0.45516750880935775,150.0,0.6892873527586285
+A: release cutoff (fuzzy RD),weeks 5-6 after,14.0,local only,-1.5680405307260459,0.9867921158207639,21.0,1.0000000000000002
+A: release cutoff (fuzzy RD),weeks 5-6 after,14.0,single,-0.0612524824221769,0.12374076103049461,1547.0,0.6588596892650576
+A: release cutoff (fuzzy RD),weeks 5-6 after,14.0,online - single,0.054215850282221534,0.47585806726043384,,
+A: release cutoff (fuzzy RD),weeks 5-6 after,14.0,"online, strong - single",0.27473631252580355,0.4716876477247658,,
+A: release cutoff (fuzzy RD),weeks 5-6 after,21.0,online,-0.1683664920426369,0.30655765234653337,519.0,0.5118009928885238
+A: release cutoff (fuzzy RD),weeks 5-6 after,21.0,"online, strong",0.0992440907805463,0.36751460287328697,228.0,0.6657128220660062
+A: release cutoff (fuzzy RD),weeks 5-6 after,21.0,local only,-1.063372907494533,0.4336954573578791,38.0,1.0897528874219367
+A: release cutoff (fuzzy RD),weeks 5-6 after,21.0,single,-0.08039100562091411,0.08586147396053295,2293.0,0.7245590116390972
+A: release cutoff (fuzzy RD),weeks 5-6 after,21.0,online - single,-0.08797548642172279,0.318354812941305,,
+A: release cutoff (fuzzy RD),weeks 5-6 after,21.0,"online, strong - single",0.17963509640146041,0.377411149856208,,
+A: release cutoff (fuzzy RD),weeks 7-12 after,14.0,online,-0.21014647351618312,0.42211556216055945,347.0,0.44300571741447653
+A: release cutoff (fuzzy RD),weeks 7-12 after,14.0,"online, strong",0.11029215644551654,0.4695941396317378,150.0,0.6892873527586285
+A: release cutoff (fuzzy RD),weeks 7-12 after,14.0,local only,-1.170622252280856,0.6690041986195947,21.0,1.0000000000000002
+A: release cutoff (fuzzy RD),weeks 7-12 after,14.0,single,-0.06492733815609411,0.12719331959837546,1547.0,0.6588596892650576
+A: release cutoff (fuzzy RD),weeks 7-12 after,14.0,online - single,-0.145219135360089,0.4408624370124763,,
+A: release cutoff (fuzzy RD),weeks 7-12 after,14.0,"online, strong - single",0.17521949460161065,0.48651494995213307,,
+A: release cutoff (fuzzy RD),weeks 7-12 after,21.0,online,-0.3634829357892827,0.3240233649519285,519.0,0.5118009928885238
+A: release cutoff (fuzzy RD),weeks 7-12 after,21.0,"online, strong",0.0469486129104418,0.37817291965524114,228.0,0.6657128220660062
+A: release cutoff (fuzzy RD),weeks 7-12 after,21.0,local only,-0.8947087582869974,0.34875261342943653,38.0,1.0897528874219367
+A: release cutoff (fuzzy RD),weeks 7-12 after,21.0,single,-0.06492620482254126,0.08807625650313522,2293.0,0.7245590116390972
+A: release cutoff (fuzzy RD),weeks 7-12 after,21.0,online - single,-0.29855673096674146,0.33578053546085235,,
+A: release cutoff (fuzzy RD),weeks 7-12 after,21.0,"online, strong - single",0.11187481773298305,0.3882939403598459,,
+B: main sample (ATT),during,,online,0.361052913357138,0.0340022739538419,10770.0,
+B: main sample (ATT),weeks 3-4 after,,online,0.0437617132666339,0.0364464640419657,10770.0,
+B: main sample (ATT),weeks 5-6 after,,online,0.0776058080279071,0.0361105913513904,10770.0,
+B: main sample (ATT),net revenue proxy,,online,-0.0313892214232398,0.0277643097787688,10770.0,
+B: main sample (ATT),weeks 7-12 after (Spring/Summer),,online,-0.0066890866545164,0.0674129393457815,4469.0,
 B: main sample (ATT),during,,local only,0.2840283741964521,0.2846936581801485,609.0,
 B: main sample (ATT),weeks 3-4 after,,local only,-0.551691395317011,0.3168947572538011,609.0,
-B: main sample (ATT),weeks 5-6 after,,local only,-0.23046737183483185,0.30719787065021337,609.0,
-B: main sample (ATT),net revenue proxy,,local only,-0.23701992697345464,0.19450375212787394,609.0,
-B: main sample (ATT),weeks 7-12 after (Spring/Summer),,local only,-0.38922597035984985,0.37080174514408215,329.0,
-B: main sample (ATT),during,,single,0.18659761392875265,0.025553615181411363,20423.0,
-B: main sample (ATT),weeks 3-4 after,,single,-0.013553601246061508,0.02655212270187059,20423.0,
-B: main sample (ATT),weeks 5-6 after,,single,-0.029141270915559066,0.025196847483073114,20423.0,
-B: main sample (ATT),net revenue proxy,,single,-0.08763066891128805,0.021135870892122884,20423.0,
-B: main sample (ATT),weeks 7-12 after (Spring/Summer),,single,-0.06624055783596364,0.038733236350019566,10385.0,
+B: main sample (ATT),weeks 5-6 after,,local only,-0.2304673718348318,0.3071978706502133,609.0,
+B: main sample (ATT),net revenue proxy,,local only,-0.2370199269734546,0.1945037521278739,609.0,
+B: main sample (ATT),weeks 7-12 after (Spring/Summer),,local only,-0.3892259703598498,0.3708017451440821,329.0,
+B: main sample (ATT),during,,single,0.1865976139287526,0.0255536151814113,20423.0,
+B: main sample (ATT),weeks 3-4 after,,single,-0.0135536012460615,0.0265521227018705,20423.0,
+B: main sample (ATT),weeks 5-6 after,,single,-0.029141270915559,0.0251968474830731,20423.0,
+B: main sample (ATT),net revenue proxy,,single,-0.087630668911288,0.0211358708921228,20423.0,
+B: main sample (ATT),weeks 7-12 after (Spring/Summer),,single,-0.0662405578359636,0.0387332363500195,10385.0,

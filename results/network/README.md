@@ -13,10 +13,20 @@ multiplayer (genre control: no online network), single. Quick settings for part 
 | Weeks 3-4 after | -0.19 (0.25) / -0.25 (0.18) | +0.00 (0.09) / -0.08 (0.06) | -0.19 (0.26) / -0.17 (0.19) |
 | Net revenue, sale to week 4 | +0.10 (0.20) / -0.01 (0.14) | +0.09 (0.07) / +0.02 (0.05) | +0.01 (0.21) / -0.03 (0.15) |
 
-Online games get a bigger spike from an essentially random discount, but nothing lasts
-through week 4 (point estimates lean negative) and net revenue is the same as for
-single-player games. "Online, strong" (online tag in the top 5) looks the same. Local-only
-has 86 game-events, too few to read. Weeks 5-12 need 03h_pull_rd_reviews.py --long.
+| Weeks 5-6 after, bw 14 / 21 | -0.01 (0.46) / -0.17 (0.31) | -0.06 (0.12) / -0.08 (0.09) | +0.05 (0.48) / -0.09 (0.32) |
+| Weeks 7-12 after, bw 14 / 21 | -0.21 (0.42) / -0.36 (0.32) | -0.07 (0.13) / -0.07 (0.09) | -0.15 (0.44) / -0.30 (0.34) |
+
+Weeks 5-12 come from 03h_pull_rd_reviews.py --long and use Spring and Summer sales only
+(otherwise the next seasonal sale falls in the window): 519 online and 2,293 single-player
+game-events within 21 days of the cutoff.
+
+Online games get a bigger spike from an essentially random discount, but nothing lasts:
+weeks 1-4 lean negative, and weeks 5-12 show no gain over single-player games (point
+estimates negative). "Online, strong" (online tag in the top 5) has positive point
+estimates at weeks 5-12 (+0.18 to +0.28 over single-player) with SEs near 0.4-0.5.
+Local-only is too small to read (38-86 game-events). The long-horizon estimates are
+imprecise (SEs 0.3-0.5), so they find no sign of network effects but cannot rule out
+moderate ones.
 
 ## B. Main sample (ATT, observational)
 
@@ -33,7 +43,8 @@ In established games, online titles keep a little more after the sale (weeks 5-6
 weeks 7-12. That pattern fits a modest network effect, but online games also get more
 updates, DLC and live-service events, so it is suggestive only.
 
-Reading: no causal evidence of network effects yet. The cutoff design, the clean test,
-shows a bigger spike for online games and no persistence to week 4; the main sample shows
-modest persistence to week 6 that could have other causes. The long windows will decide
-whether the cutoff effect for online games reappears at weeks 5-12.
+Reading: no causal evidence of network effects. The cutoff design shows a bigger spike for
+online games and no persistence through week 12 (imprecise at the long horizon); the main
+sample shows modest persistence to week 6 that could have other causes (updates, DLC, live
+events). Network effects do not explain why habitual discounting loses money, though a
+moderate long-run effect for the most online games cannot be excluded.
